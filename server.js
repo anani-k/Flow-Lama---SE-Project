@@ -28,3 +28,23 @@ app.get("/startseite", function(req, res){
     req.session.destroy();
     res.sendFile(__dirname + "/views/startseite.html");
 });
+
+app.get("/summary", function(req, res){
+    res.sendFile(__dirname + "/views/summary.html");
+});
+
+app.get("/board", function(req, res){
+    res.sendFile(__dirname + "/views/board.html");
+});
+app.get("/contacts", function(req, res){
+    res.sendFile(__dirname + "/views/contacts.html");
+});
+app.get("/projectOverview", function(req, res){
+    res.sendFile(__dirname + "/views/projectsOverview.html");
+});
+app.get("/navTest", function(req, res){
+    res.sendFile(__dirname + "/views/navTest.html");
+});
+
+
+
