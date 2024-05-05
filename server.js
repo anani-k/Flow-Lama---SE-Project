@@ -40,7 +40,7 @@ app.get("/contacts", function (req, res) {
     res.sendFile(__dirname + "/views/contacts.html");
 });
 app.get("/projectOverview", function (req, res) {
-    res.sendFile(__dirname + "/views/projectsOverview.html");
+    res.sendFile(__dirname + "/views/projectOverview.html");
 });
 app.get("/navTest", function (req, res) {
     res.sendFile(__dirname + "/views/navTest.html");
