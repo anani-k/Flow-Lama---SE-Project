@@ -1,8 +1,8 @@
 -- Beispieldatensätze für die Benutzer-Tabelle
 
-INSERT INTO Users(username, email, pass) VALUES ('Alex','test@gmail.com','admin1234!'); --Password is 'admin1234!'
-INSERT INTO Users(username, email, pass) VALUES ('John','john@gmail.com','ICHBINJOHN'); --Password is 'ICHBINJOHN'
-INSERT INTO Users(username, email, pass) VALUES ('Claire','claire@fromthewoods.com','IlikeTrees'); --Password is 'IlikeTrees'
+INSERT INTO Users(username, email, password) VALUES ('Alex','test@gmail.com','admin1234!'); --Password is 'admin1234!'
+INSERT INTO Users(username, email, password) VALUES ('John','john@gmail.com','ICHBINJOHN'); --Password is 'ICHBINJOHN'
+INSERT INTO Users(username, email, password) VALUES ('Claire','claire@fromthewoods.com','IlikeTrees'); --Password is 'IlikeTrees'
 
 -- Beispieldatensätze für die Projekte-Tabelle
 

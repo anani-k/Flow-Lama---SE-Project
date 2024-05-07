@@ -2,6 +2,10 @@
 const express = require('express');
 const app = express();
 
+//Initialisierung der Datenbank
+const DATABASE = "database.db";
+let db = require("better-sqlite3")(DATABASE);
+
 //Server starten
 app.listen(3000, function () {
     console.log("listening on port 3000");
