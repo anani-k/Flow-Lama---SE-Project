@@ -1,0 +1,209 @@
+body {
+    background-color: #d4d4d4;
+}
+
+.logo {
+    height: 200px;
+}
+
+h2 {
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 700;
+
+    margin: 0;
+}
+
+.ContentHeader {
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+
+.boardHeaderControll {
+    display: flex;
+    gap: 2rem;
+    height: 47px;
+}
+
+.sortTasks {
+    display: flex;
+    width: 21rem;
+    padding: 7.5px 15px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.625rem;
+    border: 1px solid var(--icon, #a8a8a8);
+    background: #fff;
+}
+
+.sortTasks input {
+    border: none;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    outline: none;
+}
+
+.sortTasksButton {
+    display: flex;
+    gap: 1rem;
+}
+
+.sortTasks button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 30px;
+    width: 30px;
+    background-color: white;
+}
+
+.sortTasksSpacer {
+    background: #d1d1d1;
+    height: 1.9375rem;
+    width: 1px;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+
+.addTaskButton {
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 0.625rem;
+    border: 1px solid #2a3647;
+    background: #2a3647;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stateFields p {
+
+    color: #42526e;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+.stateFields {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+}
+
+.noTaskFound p {
+    color: var(--icon, #a8a8a8);
+    font-family: Open Sans;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.2rem;
+    text-align: center;
+}
+
+.noTaskFound {
+    display: flex;
+    height: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.625rem;
+    border: 1px dashed var(--icon, #a8a8a8);
+    background: #e7e7e7;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    padding: 12px;
+    width: 300px;
+    gap: 25px;
+}
+
+.technicalTask {
+    background-color: #76885B;
+    border-radius: 10px;
+    padding: 2px 10px;
+    text-align: center;
+    color: white;
+
+}
+
+.cardFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.projectName {
+    font-weight: bold;
+}
+
+.commentSection {
+    color: grey;
+}
+
+.assignedUser {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.assignedUser div {
+    color: white;
+    display: flex;
+    border-radius: 100%;
+    width: 29px;
+    height: 29px;
+    align-items: center;
+    justify-content: center;
+    margin-left: -10px;
+    border: white 2px solid;
+}
+
+.bc1 {
+    background-color: violet;
+}
+
+.bc2 {
+    background-color: purple;
+}
+
+.bc3 {
+    background-color: pink;
+}
+
+.bc4 {
+    background-color: grey;
+}

@@ -128,3 +128,7 @@ button:hover {
 .logoContainer svg {
     color: #627254;
 }
+
+.logo {
+    height: 200px;
+}

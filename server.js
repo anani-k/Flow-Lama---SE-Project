@@ -26,6 +26,8 @@ app.use(session({
 //Public Zugriff
 app.use(express.static(__dirname + "/images"));
 app.use(express.static(__dirname + "/css"));
+app.use(express.static(__dirname + "/javascript"));
+
 
 //Get Request
 app.get("/index", function (req, res) {
