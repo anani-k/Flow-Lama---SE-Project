@@ -6,6 +6,14 @@ body {
     height: 200px;
 }
 
+.d-none {
+    display: none !important;
+}
+
+h1 {
+    margin: 0;
+}
+
 h2 {
     font-size: 4rem;
     font-style: normal;
@@ -206,4 +214,190 @@ p {
 
 .bc4 {
     background-color: grey;
+}
+
+
+
+
+.popupContainer {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupCardContainer {
+    position: absolute;
+    z-index: 3;
+}
+
+.popupCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 61.75rem;
+    height: 48.375rem;
+    background-color: white;
+    padding: 4rem;
+    border-radius: 50px;
+    gap: 0rem;
+    justify-content: space-between;
+    overflow-y: hidden;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+}
+
+.popupWrapper {
+    display: flex;
+    gap: 5rem;
+    flex-direction: column;
+}
+
+.popupHeadline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.leftSide {
+    display: flex;
+    height: 23.5rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 45%;
+
+}
+
+.rightSide {
+    width: 45%;
+}
+
+.popupContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.seperator-vertical {
+    width: 1px;
+    height: 26.5rem;
+    flex-shrink: 0;
+    margin: 0 5%;
+    background-color: grey;
+
+}
+
+.contentTitle {
+    color: black;
+    font-size: 3.8125rem;
+    line-height: 120%;
+}
+
+#closeAddTaskButton {
+    background-color: white;
+    border: none;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+#closeAddTaskButton:hover {
+    background-color: lightgrey;
+}
+
+
+.p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.task-title-input {
+    padding: 10px 10px;
+    font-size: 1.25rem;
+    align-self: stretch;
+    border-radius: 0.625rem;
+    box-sizing: border-box;
+    width: 100%;
+
+}
+
+.descriptionTextArea {
+    font-size: 1.25rem;
+    align-self: stretch;
+    border-radius: 0.625rem;
+    box-sizing: border-box;
+    width: 100%;
+    height: 114px;
+    padding: 10px 10px;
+    resize: none;
+
+}
+
+
+.footerPopupCard {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+#clearButton {
+    background-color: transparent;
+    color: black;
+}
+
+#createTaskButton {
+    background-color: black;
+    color: white;
+    font-weight: 600;
+}
+
+#createTaskButton svg path {
+    stroke: white;
+}
+
+.popupWarpper {
+    width: 100%;
+}
+
+.popupContent input {
+    border: solid 1px lightgrey;
+}
+
+.popupContent input:hover {
+    border: solid 1px red;
+}
+
+.popupContent input:focus {
+    outline: none;
+    border: 1px solid green;
+}
+
+.placeholder {
+    display: flex;
+    height: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.625rem;
+    border: 1px dashed var(--icon, #a8a8a8);
+    background: #e7e7e7;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    width: 300px;
 }
