@@ -48,10 +48,6 @@ app.get("/contacts", function (req, res) {
 app.get("/projectOverview", function (req, res) {
     res.sendFile(__dirname + "/views/projectOverview.html");
 });
-app.get("/navTest", function (req, res) {
-    res.sendFile(__dirname + "/views/navTest.html");
-});
-
 app.get("/signUp", function (req, res) {
     res.sendFile(__dirname + "/views/signUp.html");
 });
