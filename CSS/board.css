@@ -401,3 +401,71 @@ p {
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     width: 300px;
 }
+
+.prioButtons {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.prioButton {
+    display: flex;
+    padding: 1rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    border-radius: 0.625rem;
+    border: none;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    font-size: 1.25rem;
+    color: black;
+    font-weight: 400;
+    width: 8.5rem;
+}
+
+
+.prioButton:hover {
+    background-color: none;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3)
+}
+
+#urgentButton svg {
+    width: 1.25rem;
+}
+
+#mediumButton svg {
+    width: 1.25rem;
+}
+
+#lowButton svg {
+    width: 1.25rem;
+}
+
+.urgentButtonActive {
+    background-color: red;
+    color: white;
+}
+
+.mediumButtonActive {
+    background-color: orange;
+    color: white;
+}
+
+.lowButtonActive {
+    background-color: blue;
+    color: white;
+}
+
+.urgentBtnActive svg path {
+    fill: white !important;
+}
+
+.mediumButtonActive svg path {
+    fill: white !important;
+}
+
+.lowButtonActive svg path {
+    fill: white !important;
+}

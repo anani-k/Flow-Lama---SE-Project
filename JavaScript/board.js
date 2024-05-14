@@ -21,6 +21,8 @@ let inProgress = false;
 let awaitFeedback = false;
 let done = false;
 
+let activeButton = 'mediumButton';
+
 function init() {
     this.generateCard();
 }
@@ -119,4 +121,10 @@ function closePopup() {
 
 function openPopup() {
     document.getElementById('popupContainer').classList.remove('d-none');
+}
+
+function buttonSelect(id) {
+    document.getElementById(activeButton).classList.remove(activeButton + "Active")
+    activeButton = id;
+    document.getElementById(id).classList.add(id + "Active");
 }
