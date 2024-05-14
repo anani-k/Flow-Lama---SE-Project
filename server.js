@@ -10,6 +10,23 @@ const app = express();
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");
 
+//bcrypt nochmal online machen
+const bcrypt = require('bcrypt');
+
+//init body-parser
+const bodyParser= require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+
+//init cookies
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+//init datenbank
+const DATABASE = "database.db";
+const db = require("better-sqlite3")(DATABASE);
+
+
+
 //init sessions
 const session = require('express-session');
 app.use(session({
@@ -18,9 +35,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//init datenbank
-const DATABASE = "math.db";
-const db = require("better-sqlite3")(DATABASE);
 
 
 /*
@@ -31,14 +45,11 @@ app.use(session({
     resave: false
 }));*/
 
-//init cookies
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
 
 //Public Zugriff
 app.use(express.static(__dirname + "/images"));
 app.use(express.static(__dirname + "/css"));
-
+app.use(express.static('views'));
 
 //*****SERVERSTART*****
 
@@ -68,43 +79,95 @@ app.get("/index", function (req, res) {
 
 //logintry
 app.post("/logintry",function(req,res){
-    const username = req.body["userName"];
-    const userpassword=req.body["userPassword"];
-    const rows = db.prepare('SELECT userpassword FROM users WHERE username = ?').all(username);
-    const sessionName = req.body["userName"]
+    const username = req.body["username"];
+    const userpassword=req.body["password"];
+    const rows = db.prepare('SELECT password FROM Users WHERE username = ?').all(username);
+    const sessionName = req.body["username"];
 
     if (rows.length === 0) {
-        res.render("loginFail")
+        res.render("loginFail");
+        console.log("1");
     }
     else {
-        const hash = rows[0].userpassword;
+        const hash = rows[0].password;
         const check = bcrypt.compareSync(userpassword,hash)
-        if(check==true){
+        if(check===true){
             req.session.sessionValue = sessionName;
 
             //session lesen
             if (!req.session.sessionValue){
                 //session nicht gesetzt
                 res.render("sessionFail")
+                console.log("2")
             }
             else{
                 //sesion gesetzt
                 console.log(req.session)
-                res.render("userHome")
+                res.render("summary")
+                console.log("3")
             }
 
         }
-        if(check==false){
+        if(check===false){
 
             res.render("loginFail")
+            console.log("4")
         }
     }
+});
+
+//Sign Up
+app.get("/signUp", function (req, res) {
+    res.sendFile(__dirname + "/views/signUp.html");
+});
+
+//add new user
+app.post("/newUser", function(req, res) {
+    const userName = req.body["name"];
+    const userEmail =req.body["email"];
+    const userPassword = req.body["password"];
+    const confirmPassword = req.body["confirmPassword"];
+
+
+    console.log(userName, userPassword, confirmPassword);
+
+    // Überprüfung, ob der Benutzername bereits in der Datenbank existiert
+
+    const params = [userName];
+
+    const row = db.prepare('SELECT * FROM users WHERE username = ?').all(userName);
+    console.log("ROW", row)
+
+    if (row.length > 0) {
+        res.render("userFail");
+    } else {
+        if (userPassword === confirmPassword) {
+            const saltRounds = 10;
+            bcrypt.hash(userPassword, saltRounds, function(err, hash) {
+                const info = db.prepare(`INSERT INTO users(username,email, password)
+              VALUES (?,?,?)`).run(userName,userEmail, hash);
+
+                res.sendFile(__dirname + "/views/index.html");
+            });
+        } else {
+            res.render("passwordFail");
+        }
+    }
+
+});
+
+//Logout
+app.post("/logout",function(req,res){
+
+    req.session.destroy();
+
+    res.redirect("/index");
 });
 
 
 
 app.get("/summary", function (req, res) {
-    res.sendFile(__dirname + "/views/summary.html");
+    res.sendFile(__dirname + "/views/summary.ejs");
 });
 
 app.get("/board", function (req, res) {
@@ -120,8 +183,6 @@ app.get("/navTest", function (req, res) {
     res.sendFile(__dirname + "/views/navTest.html");
 });
 
-app.get("/signUp", function (req, res) {
-    res.sendFile(__dirname + "/views/signUp.html");
-});
+
 
 

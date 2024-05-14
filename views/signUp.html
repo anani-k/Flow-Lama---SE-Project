@@ -42,7 +42,7 @@
 
 
 
-            <form id="loginForm">
+            <form action="/newUser" method="post" id="loginForm">
                 <div class="inputGroup">
                     <input type="name" id="name" name="name" placeholder="Name" required>
                 </div>
@@ -56,10 +56,11 @@
                     <input type="confirmPassword" id="confirmPassword" name="confirmPassword"
                         placeholder="Confirm Password" required>
                 </div>
-
                 <div class="buttonContainer">
-                    <a class="signUp" href="navTest" type="submit">Sign Up</a>
+                <button type="submit" id="main-buttons">Registrieren</button>
                 </div>
+
+
             </form>
         </div>
 
