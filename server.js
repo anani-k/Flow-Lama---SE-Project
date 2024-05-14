@@ -69,12 +69,12 @@ app.get("/index", function (req, res) {
     let counter = parseInt(req.cookies['counter']) || 0;
     const maxAge = 3600*1000; // one hour
     res.cookie('counter' , counter + 1, {'maxAge': maxAge});
-    res.sendFile(__dirname + "/views/index.html");
+    res.sendFile(__dirname + "/views/index.ejs");
 
 
     //
    /* req.session.destroy();
-    res.sendFile(__dirname + "/views/index.html");*/
+    res.sendFile(__dirname + "/views/index.ejs");*/
 });
 
 //logintry
@@ -118,7 +118,7 @@ app.post("/logintry",function(req,res){
 
 //Sign Up
 app.get("/signUp", function (req, res) {
-    res.sendFile(__dirname + "/views/signUp.html");
+    res.sendFile(__dirname + "/views/signUp.ejs");
 });
 
 //add new user
@@ -147,7 +147,7 @@ app.post("/newUser", function(req, res) {
                 const info = db.prepare(`INSERT INTO users(username,email, password)
               VALUES (?,?,?)`).run(userName,userEmail, hash);
 
-                res.sendFile(__dirname + "/views/index.html");
+                res.sendFile(__dirname + "/views/index.ejs");
             });
         } else {
             res.render("passwordFail");
@@ -165,23 +165,62 @@ app.post("/logout",function(req,res){
 });
 
 
+app.post("/summary",function(req,res){
 
+    req.session.destroy();
+
+    res.redirect("/summary");
+});
+
+/*
 app.get("/summary", function (req, res) {
     res.sendFile(__dirname + "/views/summary.ejs");
 });
+*/
 
+app.post("/board",function(req,res){
+
+    req.session.destroy();
+
+    res.redirect("/board");
+});
+/*
 app.get("/board", function (req, res) {
-    res.sendFile(__dirname + "/views/board.html");
+    res.sendFile(__dirname + "/views/board.ejs");
+});*/
+
+app.post("/contacts",function(req,res){
+
+    req.session.destroy();
+
+    res.redirect("/contacts");
 });
+/*
 app.get("/contacts", function (req, res) {
-    res.sendFile(__dirname + "/views/contacts.html");
+    res.sendFile(__dirname + "/views/contacts.ejs");
+});*/
+
+app.post("/projectOverview",function(req,res){
+
+    req.session.destroy();
+
+    res.redirect("/projectOverview");
 });
+/*
 app.get("/projectOverview", function (req, res) {
-    res.sendFile(__dirname + "/views/projectOverview.html");
+    res.sendFile(__dirname + "/views/projectOverview.ejs");
+});*/
+
+app.post("/navTest",function(req,res){
+
+    req.session.destroy();
+
+    res.redirect("/navTest");
 });
+/*
 app.get("/navTest", function (req, res) {
-    res.sendFile(__dirname + "/views/navTest.html");
-});
+    res.sendFile(__dirname + "/views/navTest.ejs");
+});*/
 
 
 
