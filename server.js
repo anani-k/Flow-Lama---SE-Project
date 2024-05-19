@@ -52,4 +52,6 @@ app.get("/signUp", function (req, res) {
     res.sendFile(__dirname + "/views/signUp.html");
 });
 
-
+app.get("/Test", function (req, res) {
+    res.sendFile(__dirname + "/views/Test.html");
+});
