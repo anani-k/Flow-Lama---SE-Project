@@ -1,154 +1,164 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Contacts | projectName</title>
-        <link rel="stylesheet" href="styles.css" type="text/css">
-        <link rel="stylesheet" href="contacts.css" type="text/css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      </head>
-    <body>
-<!--Sidebar-->
-<div class="sidebar">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacts | projectName</title>
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <link rel="stylesheet" href="contacts.css" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <div class="logoContainer">
-    <img class="logo" src="./lama.png" alt="Logo Lama">
-  </div>
+</head>
 
-  <ul class="sidebarnav">
-    <li>
-      <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list-check"
-          viewBox="0 0 16 16">
-          <path fill-rule="evenodd"
-            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
-        </svg> Summary
-      </a>
-    </li>
-    <li>
-      <a href="/board" class="sidebarbutton sidebar-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-kanban"
-          viewBox="0 0 16 16">
-          <path
-            d="M13.5 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm-11-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-          <path
-            d="M6.5 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm-4 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm8 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1z" />
-        </svg> Board
-      </a>
-    </li>
-    <li>
-      <a href="/contacts" class="sidebar-link active">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-          class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-          <path
-            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
-        </svg> Contacts
-      </a>
-    </li>
+<body>
+  <!--Sidebar-->
+  <div class="sidebar">
 
-  </ul>
+    <div class="logoContainer">
+      <img class="logo" src="./lama.png" alt="Logo Lama">
+    </div>
 
-</div>
-<!--Sidebar-->
-
-
-<!--Header-->
-<div class="header">
-  <hr class="dropdown-divider">
-  <div class="dropdown" style="right: 1rem;">
-    <a onclick="myFunction()" href="#"
-      class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" aria-expanded="false">
-      <img src="" alt="" width="50" height="50" class="rounded-circle me-2">
-      <strong>User</strong>
-    </a>
-    <ul id="Demo" class="dropdown-menu text-small shadow">
-      <li><a class="dropdown-item" href="/projectOverview">Switch project</a></li>
+    <ul class="sidebarnav">
       <li>
-        <hr class="dropdown-divider">
+        <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list-check"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0" />
+          </svg> Summary
+        </a>
       </li>
-      <li><a class="dropdown-item" href="/index">Sign out</a></li>
+      <li>
+        <a href="/board" class="sidebarbutton sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-kanban"
+            viewBox="0 0 16 16">
+            <path
+              d="M13.5 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm-11-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+            <path
+              d="M6.5 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm-4 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm8 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1z" />
+          </svg> Board
+        </a>
+      </li>
+      <li>
+        <a href="/contacts" class="sidebar-link active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+            class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+            <path
+              d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
+          </svg> Contacts
+        </a>
+      </li>
+
     </ul>
 
+  </div>
+  <!--Sidebar-->
+
+
+  <!--Header-->
+  <div class="header">
+    <hr class="dropdown-divider">
+    <div class="dropdown" style="right: 1rem;">
+      <a onclick="myFunction()" href="#"
+        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" aria-expanded="false">
+        <img src="" alt="" width="50" height="50" class="rounded-circle me-2">
+        <strong>User</strong>
+      </a>
+      <ul id="Demo" class="dropdown-menu text-small shadow">
+        <li><a class="dropdown-item" href="/projectOverview">Switch project</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="/index">Sign out</a></li>
+      </ul>
+
+
+    </div>
+  </div>
+  <!--Header-->
+
+
+  <!--Modal add contacts-->
+  <div id="id01" class="modal">
+    <div class="modal-content">
+      <div class="popup-title">
+        <h1 class="contentTitle">Add contact</h1>
+        <span class="contentTitleSpan">Tasks are better with a team!</span>
+      </div>
+      <div class="popup-fields">
+        <form class="popup-input noselect" onsubmit="return addNewContact()">
+          <input pattern="[a-zA-Z ]+" type="name" placeholder="Name" id="popUpName" required=""
+            class="task-title-input">
+          <input type="email" placeholder="Email" id="popUpEmail" required="" class="task-title-input">
+          <input title="Only +, numbers &amp; spaces are allowed" pattern="[+]?[\d ]*" type="phone" placeholder="Phone"
+            id="popUpPhone" required="" class="task-title-input">
+          <div id="popup-buttons" class="popup-buttons"><br>
+            <button class="buttonCancel" onclick="document.getElementById('id01').style.display='none'"
+              type="button">Cancel <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path
+                  d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+              </svg></button>
+            <button class="buttonInput" id="popUpSubmit" type="submit">Create contact<img src="" alt=""></button>
+          </div>
+        </form>
+
+      </div>
+    </div>
 
   </div>
-</div>
-<!--Header-->
+  <!--MODAL LOGIN ENDE-->
 
-
-<!--Modal add contacts-->
-<div id="id01" class="modal">
-    <div class="modal-content">
-        <div class="popup-title">
-            <h1 class="contentTitle">Add contact</h1>
-            <span class="contentTitleSpan">Tasks are better with a team!</span>
-        </div>
-        <div class="popup-fields">
-            <form class="popup-input noselect" onsubmit="return addNewContact()">
-                <input pattern="[a-zA-Z ]+" type="name" placeholder="Name" id="popUpName" required="" class="task-title-input">
-                <input type="email" placeholder="Email" id="popUpEmail" required="" class="task-title-input">
-                <input title="Only +, numbers &amp; spaces are allowed" pattern="[+]?[\d ]*" type="phone" placeholder="Phone" id="popUpPhone" required="" class="task-title-input">
-                <div id="popup-buttons" class="popup-buttons"><br>
-                  <button class="buttonCancel" onclick="document.getElementById('id01').style.display='none'" type="button">Cancel <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                  </svg></button>
-                  <button class="buttonInput" id="popUpSubmit" type="submit">Create contact<img src="" alt=""></button>
-                </div>
-              </form>
-
-        </div>
-    </div>
-
-</div>
-    </div>
-</div><!--MODAL LOGIN ENDE-->
-
-<!-- Page Content -->
-<div class="content">
+  <!-- Page Content -->
+  <div class="content">
     <div class="add-new noselect">
-        <div class="add-new-button" onclick="document.getElementById('id01').style.display='block'">
-            <span>Add new contact</span><svg xmlns="http://www.w3.org/2000/svg" color="white" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-              <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
-            </svg>
-        </div>
+      <div class="add-new-button" onclick="document.getElementById('id01').style.display='block'">
+        <span>Add new contact</span><svg xmlns="http://www.w3.org/2000/svg" color="white" width="25" height="25"
+          fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+          <path
+            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+          <path fill-rule="evenodd"
+            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+        </svg>
+      </div>
     </div>
-    <div id="contactList" class="contact-list noselect"><div class="contact-list-padding"></div>
+    <div id="contactList" class="contact-list noselect">
+      <div class="contact-list-padding"></div>
       <div class="letter">
         <span>Anfangsbuchstabe</span>
       </div>
       <hr>
       <div id="contact0" class="user" onclick="openContact(0)">
         <div class="user-icon" style="background-color: #9327FF;">Initialen</div>
-          <div class="username">
-            <span>Vorname name</span>
-            <a>Email</a>
-          </div>
+        <div class="username">
+          <span>Vorname name</span>
+          <a>Email</a>
         </div>
       </div>
     </div>
-</div>
+  </div>
 
-<script>
-  function myFunction() {
-    var x = document.getElementById("Demo");
-    if (x.className.indexOf("dd-show") == -1) {
-      x.className += " dd-show";
-    } else {
-      x.className = x.className.replace(" dd-show", "");
+  <script>
+    function myFunction() {
+      var x = document.getElementById("Demo");
+      if (x.className.indexOf("dd-show") == -1) {
+        x.className += " dd-show";
+      } else {
+        x.className = x.className.replace(" dd-show", "");
+      }
     }
-  }
 
-  var modal = document.getElementById('id02');
-          var modal = document.getElementById('id01');
-          
-          // Wenn User ausserhalb des Modals klickt, wird es geschlossen
-          window.onclick = function(event) {
-              if (event.target == modal) {
-                  modal.style.display = "none";
-              }
-          }
-</script>
+    var modal = document.getElementById('id02');
+    var modal = document.getElementById('id01');
 
-    </body>
+    // Wenn User ausserhalb des Modals klickt, wird es geschlossen
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+
 </html>

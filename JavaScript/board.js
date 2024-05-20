@@ -14,6 +14,37 @@ let tasks = [{
     priority: 'low'
 }];
 
+let contacts = [{
+    id: 0,
+    firstName: 'Michelle',
+    lastName: 'Reimers'
+},
+{
+    id: 1,
+    firstName: 'Joost',
+    lastName: 'Heidrich'
+}, {
+    id: 1,
+    firstName: 'Joost',
+    lastName: 'Heidrich'
+}, {
+    id: 1,
+    firstName: 'Joost',
+    lastName: 'Heidrich'
+}, {
+    id: 1,
+    firstName: 'Joost',
+    lastName: 'Heidrich'
+}, {
+    id: 1,
+    firstName: 'Joost',
+    lastName: 'Heidrich'
+}, {
+    id: 1,
+    firstName: 'Joost',
+    lastName: 'Heidrich'
+},]
+
 let subtasks = [];
 
 let currentDraggedElement = false;
@@ -78,7 +109,7 @@ function generatePlaceholder() {
 
 function generatePlaceholderHTML(status) {
     document.getElementById(status).innerHTML += `
-    <div class="placeholder">No tasks in progress</div>
+    <div id="${status + 'Placeholder'}" class="placeholder">No tasks in progress</div>
 `;
 }
 
@@ -121,11 +152,12 @@ function startDraggin(index) {
 
 function generateDropzone(containerId) {
     let hoverMap = {
-        "todo": ["InProgress"],
-        "inProgress": ["ToDo", "AwaitFeedback"],
-        "awaitFeedback": ["InProgress", "Done"],
-        "done": ["AwaitFeedback"]
+        "todo": ["inProgressDropZone"],
+        "inProgress": ["toDoDropZone", "awaitFeedbackDropZone"],
+        "awaitFeedback": ["inProgressDropZone", "doneDropZone"],
+        "done": ["awaitFeedbackDropZone"]
     };
+    removePlaceholder(containerId);
 
     let id = tasks[containerId].progress;
     for (let i = 0; i < hoverMap[id].length; i++) {
@@ -134,8 +166,28 @@ function generateDropzone(containerId) {
     }
 }
 
+function removePlaceholder(containerId) {
+    let hoverMap = {
+        "todo": ["inProgressPlaceholder"],
+        "inProgress": ["todoPlaceholder", "awaitFeedbackPlaceholder"],
+        "awaitFeedback": ["inProgressPlaceholder", "donePlaceholder"],
+        "done": ["awaitFeedbackPlaceholder"]
+    };
+
+    let id = tasks[containerId].progress;
+
+    for (let i = 0; i < hoverMap[id].length; i++) {
+        const element = hoverMap[id][i];
+
+        let elementid = document.getElementById(element);
+        if (elementid) {
+            elementid.classList.add('d-none');
+        }
+    }
+}
+
 function hideAllHoverContainers() {
-    const hoverContainers = ["ToDo", "InProgress", "AwaitFeedback", "Done"];
+    const hoverContainers = ["toDoDropZone", "inProgressDropZone", "awaitFeedbackDropZone", "doneDropZone"];
     for (let i = 0; i < hoverContainers.length; i++) {
         document.getElementById(hoverContainers[i]).classList.add('d-none');
     };
@@ -155,21 +207,6 @@ function buttonSelect(id) {
     activeButton = id;
     document.getElementById(id).classList.add(id + "Active");
 }
-//Assigned to
-function toggleDropdownAssignedTo() {
-    document.getElementById("assignedToDropdown").classList.toggle("show");
-    document.getElementById("assignedToClosed").classList.toggle("d-none");
-    document.getElementById("assignedToOpen").classList.toggle("d-none");
-}
-
-function selectOptionAssignedTo(option) {
-    document.getElementById("assignedTo").value = option;
-    document.getElementById("assignedToDropdown").classList.remove("show");
-    document.getElementById("assignedToClosed").classList.remove("d-none");
-    document.getElementById("assignedToOpen").classList.add("d-none");
-}
-
-
 
 //Category
 // Umschalten der Anzeige des Dropdown-Menüs
@@ -236,4 +273,75 @@ function addSubTask() {
 function removeSubstask(i) {
     subtasks.splice(i, 1);
     addSubTask();
+}
+
+function checkboxExchange(i) {
+    document.getElementById('CkeckboxChecked' + i).classList.toggle("d-none");
+    document.getElementById('checkboxUnchecked' + i).classList.toggle("d-none");
+
+}
+
+//Assigned to
+function toggleDropdownAssignedTo() {
+    document.getElementById("assignedToDropdown").classList.toggle("show");
+    document.getElementById("assignedToClosed").classList.toggle("d-none");
+    document.getElementById("assignedToOpen").classList.toggle("d-none");
+    renderContacts()
+}
+
+
+function renderContacts() {
+    document.getElementById('assignedToDropdown').innerHTML = '';
+    for (let i = 0; i < contacts.length; i++) {
+        const element = contacts[i];
+
+
+        document.getElementById('assignedToDropdown').innerHTML += `
+    <a href="#" onclick="checkboxExchange(${i})">
+    <div class="contactInformation">
+      <div class="ContactName">
+        <div class="contactIcon">${initials(element.firstName, element.lastName)}</div>
+        <div class="contactFullName">${element.firstName} ${element.lastName}</div>
+      </div>
+      <div class="contactInfoCheckbox"><input type="checkbox" class="hidden-checkbox">
+        <svg xmlns="http://www.w3.org/2000/svg" id="checkboxUnchecked${i}" x="0px" y="0px" width="30"
+          height="30" viewBox="0 0 48 48">
+          <path fill="#a5d6a7"
+            d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
+          </path>
+          <polyline fill="none" stroke="#transparent" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked${i}" class="d-none" x="0px" y="0px"
+          width="30" height="30" viewBox="0 0 48 48">
+          <path fill="#a5d6a7"
+            d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
+          </path>
+          <polyline fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
+        </svg>
+      </div>
+    </div>
+    `;
+    }
+}
+
+
+function initials(firstName, lastName) {
+    const firstInitial = firstName.charAt(0).toUpperCase();
+    const lastInitial = lastName.charAt(0).toUpperCase();
+
+    return firstInitial + lastInitial;
 }
