@@ -1,5 +1,5 @@
 body {
-    background-color: #d4d4d4;
+    background-color: #F6F7F8;
 }
 
 .logo {
@@ -10,6 +10,10 @@ body {
     display: none !important;
 }
 
+.cursorPointer:hover {
+    cursor: pointer;
+}
+
 h1 {
     margin: 0;
 }
@@ -18,9 +22,9 @@ h2 {
     font-size: 4rem;
     font-style: normal;
     font-weight: 700;
-
     margin: 0;
 }
+
 
 .ContentHeader {
     padding-left: 50px;
@@ -72,6 +76,13 @@ h2 {
     height: 30px;
     width: 30px;
     background-color: white;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.sortTasks button:hover {
+    background-color: lightgrey;
+    cursor: pointer;
 }
 
 .sortTasksSpacer {
@@ -97,9 +108,9 @@ p {
     align-items: center;
     gap: 0.25rem;
     border-radius: 0.625rem;
-    border: 1px solid #2a3647;
-    background: #2a3647;
-    color: white;
+    border: 1px solid #627254;
+    background: #627254;
+    color: #ffffff;
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
@@ -107,7 +118,7 @@ p {
 
 .stateFields p {
 
-    color: #42526e;
+    color: #627254;
     font-size: 1.25rem;
     font-weight: 700;
     text-align: center;
@@ -155,10 +166,11 @@ p {
     padding: 12px;
     width: 300px;
     gap: 25px;
+    margin-top: 20px;
 }
 
 .technicalTask {
-    background-color: #76885B;
+    background-color: #627254;
     border-radius: 10px;
     padding: 2px 10px;
     text-align: center;
@@ -275,8 +287,48 @@ p {
 
 }
 
+.leftSide p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 100%;
+    margin-bottom: 10px;
+}
+
+.leftsideTitle p::after {
+    content: "*";
+    color: red;
+}
+
+.descriptionArea p::after {
+    content: "*";
+    color: red;
+}
+
 .rightSide {
     width: 45%;
+}
+
+.rightSide p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 100%;
+    margin-bottom: 10px;
+}
+
+.dateArea p::after {
+    content: "*";
+    color: red;
+}
+
+/* Hintergrundfarbe des Kalender-Symbols */
+::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23627254" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+
+.category p::after {
+    content: "*";
+    color: red;
 }
 
 .popupContent {
@@ -285,7 +337,7 @@ p {
     justify-content: space-between;
 }
 
-.seperator-vertical {
+.seperatorVertical {
     width: 1px;
     height: 26.5rem;
     flex-shrink: 0;
@@ -295,7 +347,7 @@ p {
 }
 
 .contentTitle {
-    color: black;
+    color: #627254;
     font-size: 3.8125rem;
     line-height: 120%;
 }
@@ -327,8 +379,9 @@ p {
     border-radius: 0.625rem;
     box-sizing: border-box;
     width: 100%;
-
+    font-family: Arial, Helvetica, sans-serif;
 }
+
 
 .descriptionTextArea {
     font-size: 1.25rem;
@@ -339,7 +392,17 @@ p {
     height: 114px;
     padding: 10px 10px;
     resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+    border: solid 1px lightgray;
+}
 
+.descriptionTextArea:hover {
+    border: 1px solid gray;
+}
+
+.descriptionTextArea:focus {
+    border: 1px solid green;
+    outline: none;
 }
 
 
@@ -348,6 +411,16 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
+}
+
+.footerPopupCard span {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footerPopupCard span::before {
+    content: "*";
+    color: red;
 }
 
 .footerButtons {
@@ -357,11 +430,12 @@ p {
 
 #clearButton {
     background-color: transparent;
-    color: black;
+    color: #FFAB91;
+    border: 1px solid #FFAB91;
 }
 
 #createTaskButton {
-    background-color: black;
+    background-color: #627254;
     color: white;
     font-weight: 600;
 }
@@ -375,11 +449,11 @@ p {
 }
 
 .popupContent input {
-    border: solid 1px lightgrey;
+    border: solid 1px lightgray;
 }
 
 .popupContent input:hover {
-    border: solid 1px red;
+    border: solid 1px gray;
 }
 
 .popupContent input:focus {
@@ -388,6 +462,7 @@ p {
 }
 
 .placeholder {
+    color: #a8a8a8;
     display: flex;
     height: 3rem;
     flex-direction: column;
@@ -444,17 +519,17 @@ p {
 }
 
 .urgentButtonActive {
-    background-color: red;
+    background-color: #FFAB91;
     color: white;
 }
 
 .mediumButtonActive {
-    background-color: orange;
+    background-color: #FFBB82;
     color: white;
 }
 
 .lowButtonActive {
-    background-color: blue;
+    background-color: #90CAF9;
     color: white;
 }
 
@@ -468,4 +543,173 @@ p {
 
 .lowButtonActive svg path {
     fill: white !important;
+}
+
+
+.input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icon-container {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon-container svg {
+    cursor: pointer;
+}
+
+.subtaskPlusBtn {
+    background-color: white;
+    border: none;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.subtaskPlusBtn:hover {
+    background-color: lightgrey;
+}
+
+
+.subtaskCloseBtn {
+    background-color: white;
+    border: none;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.subtaskCloseBtn:hover {
+    background-color: lightgrey;
+}
+
+.subtaskAddBtn {
+    background-color: white;
+    border: none;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.subtaskAddBtn:hover {
+    background-color: lightgrey;
+}
+
+.dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: calc(95% + 20px);
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on button click */
+.show {
+    display: block;
+}
+
+.subTasks {
+    width: 100%;
+    max-height: 5rem;
+    overflow: auto;
+}
+
+.subTaskWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.subTaskWrapper:hover .trashbin {
+    display: block;
+}
+
+.subTaskDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 0.625rem;
+    transition: 0.3s ease-in-out;
+    word-wrap: break-word;
+    min-height: 2rem;
+    width: 98%;
+}
+
+.trashbin {
+    cursor: pointer;
+    padding: 1px;
+    border-radius: 50%;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    padding: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: lightgreen;
+}
+
+.dropZone {
+    width: 100%;
+    background-color: transparent;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: 1.875rem;
+    border: 1px dashed var(--icon, #A8A8A8);
+    margin-top: 20px;
 }
