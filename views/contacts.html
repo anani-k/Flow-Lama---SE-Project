@@ -104,7 +104,10 @@
 </div><!--MODAL LOGIN ENDE-->
 
 <!-- Page Content -->
-<div class="content">
+<div class="contentContacts d-flex">
+  <div id="contactList">
+
+
     <div class="add-new noselect">
         <div class="add-new-button" onclick="document.getElementById('id01').style.display='block'">
             <span>Add new contact</span><svg xmlns="http://www.w3.org/2000/svg" color="white" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -113,7 +116,7 @@
             </svg>
         </div>
     </div>
-    <div id="contactList" class="contact-list noselect"><div class="contact-list-padding"></div>
+    <div  class="contact-list noselect"><div class="contact-list-padding"></div>
       <div class="letter">
         <span>Anfangsbuchstabe</span>
       </div>
@@ -125,9 +128,18 @@
             <a>Email</a>
           </div>
         </div>
-      </div>
-    </div>
-</div>
+      </div></div>
+
+
+
+<!-- MainContent -->
+  <div id="mainContent" class="mainContent">
+    <section>
+      <h1 class="contentTitle" style="color:black;">Contacts</h1>
+    </section>
+  </div><!-- MainContent End -->
+
+</div><!-- Page Content ENDE -->
 
 <script>
   function myFunction() {
@@ -148,6 +160,16 @@
                   modal.style.display = "none";
               }
           }
+
+          function openContactMenu(i) {
+    let contactMenu = document.getElementById('contact-menu');
+
+    contactMenu.classList.remove('d-none')
+
+    contactMenu.innerHTML = returnContactMenuHTML(i);
+
+    contactMenu.firstElementChild.style = 'animation: slideInContactMenu 300ms ease-out';
+}
 </script>
 
     </body>
