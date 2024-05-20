@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Summary | projectName</title>
         <link rel="stylesheet" href="styles.css" type="text/css">
+        <link rel="stylesheet" href="summary.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
       </head>
@@ -73,16 +74,93 @@
 </div>
 
 <!-- Page Content -->
-<div class="content">
-  <div>
-    <p> blaaa</p>
-
-
-
-
-
+  <div class="contentSummary">
+    <section class="summary">
+        <div class="summary-title">
+            <h1>Flow Lama</h1>
+            <h1>|</h1>
+            <span>Go with the floooooooooooooow</span>
+            <img class="mobile-vector" src="./assets/img/Mobile/contacts_mobile/Vector 5.svg" alt="">
+        </div>
+        <div class="summary-main">
+            <div class="summary-board noselect">
+                <div class="summary-todos">
+                    <a href="./board">
+                        <div class="summary-todos-badge">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                          </svg>
+                            <div><br>
+                                <span id="toDoNum">0</span>
+                                <p>To-do</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/board">
+                        <div class="summary-todos-badge">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                          </svg>
+                            <div><br>
+                                <span id="doneNum">0</span>
+                                <p>Done</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <a href="/board">
+                    <div class="summary-urgent">
+                        <div class="summary-urgent-badge">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"width="30" height="30" fill="currentColor" class="bi bi-check-circle-fill">
+                            <path
+                              d="M3.47876 7.9c-.5.3-1.1.1-1.4-.4s-.1-1 .4-1.3l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.2.4-.8.6-1.3.3l-4.5-2.7-4.5 2.7z"
+                              fill="#ff5630" />
+                            <path
+                              d="M3.47876 12.2c-.5.3-1.1.2-1.4-.3s-.1-1.1.4-1.4l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.3.5-.9.6-1.4.3l-4.4-2.7-4.5 2.7z"
+                              fill="#ff7452" />
+                          </svg>
+                            <div>
+                                <span id="urgentNum">0</span>
+                                <p>Urgent</p>
+                            </div>
+                        </div>
+                        <img src="./assets/img/Desktop/general_elements/bar/vector_gray.svg">
+                        <div>
+                            <h6 id="deadlineDate">-</h6>
+                            <p>Upcoming Deadline</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="summary-overview">
+                    <a href="/board">
+                        <div class="summary-overview-badge"><br>
+                            <span id="tasksNum">0</span>
+                            <p>Tasks in<br>Board</p>
+                        </div>
+                    </a>
+                    <a href="/board">
+                        <div class="summary-overview-badge"><br>
+                            <span id="inProgressNum">0</span>
+                            <p>Tasks in<br>Progress</p>
+                        </div>
+                    </a>
+                    <a href="/board">
+                        <div class="summary-overview-badge"><br>
+                            <span id="awaitFeedbackNum">0</span>
+                            <p>Awaiting Feedback</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="summary-greeting">
+                <div id="greeting">
+                    <h2></h2>
+                    <h1></h1>
+                </div>
+            </div>
+        </div>
+    </section>
   </div>
-</div>
 
 
 
