@@ -109,8 +109,44 @@
   </div>
   <!--MODAL LOGIN ENDE-->
 
+<<<<<<< HEAD
   <!-- Page Content -->
   <div class="content">
+=======
+
+<!--Modal add contacts-->
+<div id="id01" class="modal">
+    <div class="modal-content">
+        <div class="popup-title">
+            <h1 class="contentTitle">Add contact</h1>
+            <span class="contentTitleSpan">Tasks are better with a team!</span>
+        </div>
+        <div class="popup-fields">
+            <form class="popup-input noselect" onsubmit="return addNewContact()">
+                <input pattern="[a-zA-Z ]+" type="name" placeholder="Name" id="popUpName" required="" class="task-title-input">
+                <input type="email" placeholder="Email" id="popUpEmail" required="" class="task-title-input">
+                <input title="Only +, numbers &amp; spaces are allowed" pattern="[+]?[\d ]*" type="phone" placeholder="Phone" id="popUpPhone" required="" class="task-title-input">
+                <div id="popup-buttons" class="popup-buttons"><br>
+                  <button class="buttonCancel" onclick="document.getElementById('id01').style.display='none'" type="button">Cancel <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                  </svg></button>
+                  <button class="buttonInput" id="popUpSubmit" type="submit">Create contact<img src="" alt=""></button>
+                </div>
+              </form>
+
+        </div>
+    </div>
+
+</div>
+    </div>
+</div><!--MODAL LOGIN ENDE-->
+
+<!-- Page Content -->
+<div class="contentContacts d-flex">
+  <div id="contactList">
+
+
+>>>>>>> e8c91fd20069f64a4f8c04f718d114acd2015193
     <div class="add-new noselect">
       <div class="add-new-button" onclick="document.getElementById('id01').style.display='block'">
         <span>Add new contact</span><svg xmlns="http://www.w3.org/2000/svg" color="white" width="25" height="25"
@@ -122,14 +158,19 @@
         </svg>
       </div>
     </div>
+<<<<<<< HEAD
     <div id="contactList" class="contact-list noselect">
       <div class="contact-list-padding"></div>
+=======
+    <div  class="contact-list noselect"><div class="contact-list-padding"></div>
+>>>>>>> e8c91fd20069f64a4f8c04f718d114acd2015193
       <div class="letter">
         <span>Anfangsbuchstabe</span>
       </div>
       <hr>
       <div id="contact0" class="user" onclick="openContact(0)">
         <div class="user-icon" style="background-color: #9327FF;">Initialen</div>
+<<<<<<< HEAD
         <div class="username">
           <span>Vorname name</span>
           <a>Email</a>
@@ -137,6 +178,26 @@
       </div>
     </div>
   </div>
+=======
+          <div class="username">
+            <span>Name</span>
+            <a>Email</a>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+
+
+<!-- MainContent -->
+  <div id="mainContent" class="mainContent">
+    <section>
+      <h1 class="contentTitle" style="color:black;">Contacts</h1>
+    </section>
+  </div><!-- MainContent End -->
+
+</div><!-- Page Content ENDE -->
+>>>>>>> e8c91fd20069f64a4f8c04f718d114acd2015193
 
   <script>
     function myFunction() {
@@ -148,6 +209,7 @@
       }
     }
 
+<<<<<<< HEAD
     var modal = document.getElementById('id02');
     var modal = document.getElementById('id01');
 
@@ -160,5 +222,27 @@
   </script>
 
 </body>
+=======
+  var modal = document.getElementById('id02');
+          var modal = document.getElementById('id01');
+          
+          // Wenn User ausserhalb des Modals klickt, wird es geschlossen
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+          }
+
+          function openContactMenu(i) {
+    let contactMenu = document.getElementById('contact-menu');
+
+    contactMenu.classList.remove('d-none')
+
+    contactMenu.innerHTML = returnContactMenuHTML(i);
+
+    contactMenu.firstElementChild.style = 'animation: slideInContactMenu 300ms ease-out';
+}
+</script>
+>>>>>>> e8c91fd20069f64a4f8c04f718d114acd2015193
 
 </html>
