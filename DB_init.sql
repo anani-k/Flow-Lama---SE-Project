@@ -1,3 +1,7 @@
+DROP TABLE Projects;
+DROP TABLE Users;
+DROP TABLE Tasks;
+
 -- Erstelle die Projekte-Tabelle
 CREATE TABLE Projects (
     project_id INTEGER PRIMARY KEY AUTOINCREMENT,
