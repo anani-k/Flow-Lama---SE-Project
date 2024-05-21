@@ -6,6 +6,7 @@
 const express = require('express');
 const app = express();
 
+<<<<<<< HEAD
 //Init. EJS - müssen im Ordner views sein
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");
@@ -52,6 +53,11 @@ app.use(express.static(__dirname + "/css"));
 app.use(express.static('views'));
 
 //*****SERVERSTART*****
+=======
+//Initialisierung der Datenbank
+const DATABASE = "database.db";
+let db = require("better-sqlite3")(DATABASE);
+>>>>>>> main
 
 //Server starten
 app.listen(3000, function () {
@@ -60,7 +66,15 @@ app.listen(3000, function () {
 
 
 
+<<<<<<< HEAD
 //*****ROUTING*****
+=======
+//Public Zugriff
+app.use(express.static(__dirname + "/images"));
+app.use(express.static(__dirname + "/css"));
+app.use(express.static(__dirname + "/javascript"));
+
+>>>>>>> main
 
 //Home/ index
 app.get("/index", function (req, res) {
@@ -77,6 +91,7 @@ app.get("/index", function (req, res) {
      res.sendFile(__dirname + "/views/index.ejs");*/
 });
 
+<<<<<<< HEAD
 //logintry
 app.post("/logintry", function (req, res) {
     const username = req.body["username"];
@@ -117,6 +132,21 @@ app.post("/logintry", function (req, res) {
 });
 
 //Sign Up
+=======
+app.get("/summary", function (req, res) {
+    res.sendFile(__dirname + "/views/summary.html");
+});
+
+app.get("/board", function (req, res) {
+    res.sendFile(__dirname + "/views/board.html");
+});
+app.get("/contacts", function (req, res) {
+    res.sendFile(__dirname + "/views/contacts.html");
+});
+app.get("/projectOverview", function (req, res) {
+    res.sendFile(__dirname + "/views/projectOverview.html");
+});
+>>>>>>> main
 app.get("/signUp", function (req, res) {
     res.render(__dirname + "/views/signUp.ejs");
 });
@@ -164,6 +194,7 @@ app.post("/logout", function (req, res) {
     res.redirect("/index");
 });
 
+<<<<<<< HEAD
 
 app.post("/summary", function (req, res) {
 
@@ -225,3 +256,8 @@ app.get("/navTest", function (req, res) {
 
 
 
+=======
+app.get("/Test", function (req, res) {
+    res.sendFile(__dirname + "/views/Test.html");
+});
+>>>>>>> main
