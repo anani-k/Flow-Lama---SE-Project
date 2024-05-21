@@ -7,7 +7,8 @@ let tasks = [{
     openSubtasks: ['test1', 'test2'],
     closedSubtasks: ['test3', 'test4'],
     contacts: ['AS', 'S', 'M'],
-    priority: 'low'
+    priority: 'low',
+    assigedToId: ['0']
 }, {
     progress: 'awaitFeedback',
     category: 'Technical Task',
@@ -17,39 +18,22 @@ let tasks = [{
     contacts: ['AS', 'S', 'M'],
     openSubtasks: ['test1', 'test2'],
     closedSubtasks: ['test3', 'test4'],
-    priority: 'low'
+    priority: 'low',
+    assigedToId: ['1', '0']
 }];
 
 let contacts = [{
     id: 0,
     firstName: 'Michelle',
-    lastName: 'Reimers'
+    lastName: 'Reimers',
+    initials: 'MR'
 },
 {
     id: 1,
     firstName: 'Joost',
-    lastName: 'Heidrich'
-}, {
-    id: 1,
-    firstName: 'Joost',
-    lastName: 'Heidrich'
-}, {
-    id: 1,
-    firstName: 'Joost',
-    lastName: 'Heidrich'
-}, {
-    id: 1,
-    firstName: 'Joost',
-    lastName: 'Heidrich'
-}, {
-    id: 1,
-    firstName: 'Joost',
-    lastName: 'Heidrich'
-}, {
-    id: 1,
-    firstName: 'Joost',
-    lastName: 'Heidrich'
-},]
+    lastName: 'Heidrich',
+    initials: 'JH'
+}]
 
 let subtasks = [];
 
@@ -342,6 +326,8 @@ function renderContacts() {
     </div>
     `;
     }
+
+
 }
 
 
@@ -402,26 +388,7 @@ function popupCardContentopenButton(i) {
       <div class="popupCardAssignedTo">
         <p class="popupCardAssignedToTitle">Assigned To:</p>
         <div id="popupCardAssignetToContent" class="openCardAssigned">
-
-          <div class="popupCardAssignetToContentContainer">
-            <div class="icon" style="background-color: #FF7A00;">AM</div>
-            <p>Anton Mayer</p>
-          </div>
-
-          <div class="popupCardAssignetToContentContainer">
-            <div class="icon" style="background-color: #9327FF;">AS</div>
-            <p>Anja Schulz</p>
-          </div>
-
-          <div class="popupCardAssignetToContentContainer">
-            <div class="icon" style="background-color: #FFA35E;">SG</div>
-            <p>SFS Group</p>
-          </div>
-
-          <div class="popupCardAssignetToContentContainer">
-            <div class="icon" style="background-color: #FFBB2B;">S</div>
-            <p>Stiched</p>
-          </div>
+            <div id="popupCardAssignedToList"></div>
         </div>
       </div>
       <div class="popupCardSubtasks">
@@ -479,27 +446,19 @@ function popupCardContentopenButton(i) {
         </svg>
         <p>Delete</p>
       </a>
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="2" height="24" viewBox="0 0 2 24" fill="none">
-          <path d="M1 0V24" stroke="#D1D1D1"></path>
-        </svg>
       </div>
-      <a>
-        <svg xmlns="http://www.w3.org/2000/svg" class="footerPencil" x="0px" y="0px" width="24" height="24"
-          viewBox="0 0 48 48">
-          <path fill="#a5d6a7"
-            d="M11,43.8l2.4-8.4c0.1-0.5,0.4-0.9,0.8-1.3l22-21.9c2.3-2.3,6-2.1,8.1,0.4c1.8,2.2,1.5,5.5-0.5,7.5L21.9,41.8	c-0.4,0.4-0.8,0.6-1.3,0.8L12.2,45C11.5,45.2,10.8,44.5,11,43.8z">
-          </path>
-          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-            d="M18.4,21.8L32.1,8.1c2.3-2.3,6-2.1,8.1,0.4c1.8,2.2,1.5,5.5-0.5,7.5l-2.8,2.8"></path>
-          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-            d="M32.5,23.3L17.9,37.8c-0.4,0.4-0.8,0.6-1.3,0.8L6.5,41.5l2.9-10.1c0.1-0.5,0.4-0.9,0.8-1.3l3.7-3.7">
-          </path>
-          <line x1="29.1" x2="36.9" y1="11.1" y2="18.9" fill="none" stroke="#18193f" stroke-linecap="round"
-            stroke-linejoin="round" stroke-width="3"></line>
-        </svg>
-        <p>Edit</p>
-      </a>
-    </div>
   </div>`;
+    generateOpenNames(i);
+}
+
+
+function generateOpenNames(i) {
+    for (let x = 0; x < tasks[i].assigedToId.length; x++) {
+        let userID = tasks[i].assigedToId[x];
+        document.getElementById('popupCardAssignedToList').innerHTML += `<div class="popupCardAssignetToContentContainer">
+        <div class="icon" style="background-color: #FF7A00;">${contacts[userID].initials}</div>
+        <p>${contacts[userID].firstName} ${contacts[userID].lastName}</p>
+    </div>`;
+    }
+
 }
