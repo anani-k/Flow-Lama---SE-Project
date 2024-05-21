@@ -103,6 +103,8 @@ app.post("/logintry", function (req, res) {
             else {
                 //sesion gesetzt
                 console.log(req.session)
+                console.log("aha")
+
                 res.render("summary")
                 console.log("3")
             }
