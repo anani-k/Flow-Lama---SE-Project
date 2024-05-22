@@ -1,943 +1,934 @@
 body {
-    background-color: #F6F7F8;
-    font-family: Arial, Helvetica, sans-serif !important;
+  background-color: #f6f7f8;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 .logo {
-    height: 200px;
+  height: 200px;
 }
 
 .d-none {
-    display: none !important;
+  display: none !important;
 }
 
 .cursorPointer:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 h1 {
-    margin: 0;
+  margin: 0;
 }
 
 h2 {
-    font-size: 4rem;
-    font-style: normal;
-    font-weight: 700;
-    margin: 0;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0;
 }
-
 
 .ContentHeader {
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-
 .boardHeaderControll {
-    display: flex;
-    gap: 2rem;
-    height: 47px;
+  display: flex;
+  gap: 2rem;
+  height: 47px;
 }
 
 .sortTasks {
-    display: flex;
-    width: 21rem;
-    padding: 7.5px 15px;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 0.625rem;
-    border: 1px solid var(--icon, #a8a8a8);
-    background: #fff;
+  display: flex;
+  width: 21rem;
+  padding: 7.5px 15px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.625rem;
+  border: 1px solid var(--icon, #a8a8a8);
+  background: #fff;
 }
 
 .sortTasks input {
-    border: none;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5rem;
-    outline: none;
+  border: none;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  outline: none;
 }
 
 .sortTasksButton {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .sortTasks button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    height: 30px;
-    width: 30px;
-    background-color: white;
-    padding: 0;
-    border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  padding: 0;
+  border-radius: 50%;
 }
 
 .sortTasks button:hover {
-    background-color: lightgrey;
-    cursor: pointer;
+  background-color: lightgrey;
+  cursor: pointer;
 }
 
 .sortTasksSpacer {
-    background: #d1d1d1;
-    height: 1.9375rem;
-    width: 1px;
+  background: #d1d1d1;
+  height: 1.9375rem;
+  width: 1px;
 }
 
 .addTaskButton {
-    display: flex;
-    padding: 0.5rem 1rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
-    border-radius: 0.625rem;
-    border: 1px solid #627254;
-    background: #627254;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.625rem;
+  border: 1px solid #627254;
+  background: #627254;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .stateFields p {
-
-    color: #627254;
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-align: center;
-    border-bottom: 1px solid gray;
-    padding-bottom: 10px;
+  color: #627254;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 1px solid gray;
+  padding-bottom: 10px;
 }
 
 .stateFields {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .noTaskFound p {
-    color: var(--icon, #a8a8a8);
-    font-family: Open Sans;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.2rem;
-    text-align: center;
+  color: var(--icon, #a8a8a8);
+  font-family: Open Sans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2rem;
+  text-align: center;
 }
 
 .noTaskFound {
-    display: flex;
-    height: 3rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    align-self: stretch;
-    border-radius: 0.625rem;
-    border: 1px dashed var(--icon, #a8a8a8);
-    background: #e7e7e7;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  display: flex;
+  height: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  border: 1px dashed var(--icon, #a8a8a8);
+  background: #e7e7e7;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
 }
 
 .cardContainer {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 15px;
-    padding: 12px;
-    width: 300px;
-    gap: 25px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 15px;
+  padding: 12px;
+  width: 300px;
+  gap: 25px;
+  margin-top: 20px;
 }
 
 .technicalTask {
-    background-color: #627254;
-    border-radius: 10px;
-    padding: 2px 10px;
-    text-align: center;
-    color: white;
-
+  background-color: #627254;
+  border-radius: 10px;
+  padding: 2px 10px;
+  text-align: center;
+  color: white;
 }
 
 .cardFooter {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .projectName {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .commentSection {
-    color: grey;
+  color: grey;
 }
 
 .assignedUser {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
 }
 
 .assignedUser div {
-    color: white;
-    display: flex;
-    border-radius: 100%;
-    width: 29px;
-    height: 29px;
-    align-items: center;
-    justify-content: center;
-    margin-left: -10px;
-    border: white 2px solid;
+  color: white;
+  display: flex;
+  border-radius: 100%;
+  width: 29px;
+  height: 29px;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10px;
+  border: white 2px solid;
 }
 
 .bc1 {
-    background-color: violet;
+  background-color: violet;
 }
 
 .bc2 {
-    background-color: purple;
+  background-color: purple;
 }
 
 .bc3 {
-    background-color: pink;
+  background-color: pink;
 }
 
 .bc4 {
-    background-color: grey;
+  background-color: grey;
 }
 
-
-
-
 .popupContainer {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popupCardContainer {
-    position: absolute;
-    z-index: 3;
+  position: absolute;
+  z-index: 3;
 }
 
 .popupCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    width: 61.75rem;
-    height: 48.375rem;
-    background-color: white;
-    padding: 4rem;
-    border-radius: 50px;
-    gap: 0rem;
-    justify-content: space-between;
-    overflow-y: hidden;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 61.75rem;
+  height: 48.375rem;
+  background-color: white;
+  padding: 4rem;
+  border-radius: 50px;
+  gap: 0rem;
+  justify-content: space-between;
+  overflow-y: hidden;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .popupCard p {
-    margin: 21px 0;
+  margin: 21px 0;
 }
 
 .popupWrapper {
-    display: flex;
-    gap: 5rem;
-    flex-direction: column;
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
 }
 
 .popupHeadline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30px;
 }
 
 .leftSide {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1rem;
-    width: 45%;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 45%;
 }
 
 .leftSide p {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 100%;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 10px;
 }
 
 .leftsideTitle p::after {
-    content: "*";
-    color: red;
+  content: "*";
+  color: red;
 }
 
 .descriptionArea p::after {
-    content: "*";
-    color: red;
+  content: "*";
+  color: red;
 }
 
 .rightSide {
-    width: 45%;
+  width: 45%;
 }
 
 .rightSide p {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 100%;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 10px;
 }
 
 .dateArea p::after {
-    content: "*";
-    color: red;
+  content: "*";
+  color: red;
 }
 
 /* Hintergrundfarbe des Kalender-Symbols */
 ::-webkit-calendar-picker-indicator {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23627254" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23627254" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
 }
 
-
 .category p::after {
-    content: "*";
-    color: red;
+  content: "*";
+  color: red;
 }
 
 .popupContent {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .seperatorVertical {
-    width: 1px;
-    height: 26.5rem;
-    flex-shrink: 0;
-    margin: 0 5%;
-    background-color: grey;
-
+  width: 1px;
+  height: 26.5rem;
+  flex-shrink: 0;
+  margin: 0 5%;
+  background-color: grey;
 }
 
 .contentTitle {
-    color: #627254;
-    font-size: 3.8125rem;
-    line-height: 120%;
+  color: #627254;
+  font-size: 3.8125rem;
+  line-height: 120%;
 }
 
 #closeAddTaskButton {
-    background-color: white;
-    border: none;
-    padding: 0;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
 }
 
 #closeAddTaskButton:hover {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
-
 .p {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 120%;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 120%;
 }
 
 .task-title-input {
-    padding: 10px 10px;
-    font-size: 1.25rem;
-    align-self: stretch;
-    border-radius: 0.625rem;
-    box-sizing: border-box;
-    width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+  padding: 10px 10px;
+  font-size: 1.25rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .descriptionTextArea {
-    font-size: 1.25rem;
-    align-self: stretch;
-    border-radius: 0.625rem;
-    box-sizing: border-box;
-    width: 100%;
-    height: 114px;
-    padding: 10px 10px;
-    resize: none;
-    font-family: Arial, Helvetica, sans-serif;
-    border: solid 1px lightgray;
+  font-size: 1.25rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 114px;
+  padding: 10px 10px;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+  border: solid 1px lightgray;
 }
 
 .descriptionTextArea:hover {
-    border: 1px solid gray;
+  border: 1px solid gray;
 }
 
 .descriptionTextArea:focus {
-    border: 1px solid green;
-    outline: none;
+  border: 1px solid green;
+  outline: none;
 }
 
-
 .footerPopupCard {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .footerPopupCard span {
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .footerPopupCard span::before {
-    content: "*";
-    color: red;
+  content: "*";
+  color: red;
 }
 
 .footerButtons {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 #clearButton {
-    background-color: transparent;
-    color: #FFAB91;
-    border: 1px solid #FFAB91;
+  background-color: transparent;
+  color: #ffab91;
+  border: 1px solid #ffab91;
 }
 
 #createTaskButton {
-    background-color: #627254;
-    color: white;
-    font-weight: 600;
+  background-color: #627254;
+  color: white;
+  font-weight: 600;
 }
 
 #createTaskButton svg path {
-    stroke: white;
+  stroke: white;
 }
 
 .popupWarpper {
-    width: 100%;
+  width: 100%;
 }
 
 .popupContent input {
-    border: solid 1px lightgray;
+  border: solid 1px lightgray;
 }
 
 .popupContent input:hover {
-    border: solid 1px gray;
+  border: solid 1px gray;
 }
 
 .popupContent input:focus {
-    outline: none;
-    border: 1px solid green;
+  outline: none;
+  border: 1px solid green;
 }
 
 .placeholder {
-    color: #a8a8a8;
-    display: flex;
-    height: 3rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    align-self: stretch;
-    border-radius: 0.625rem;
-    border: 1px dashed var(--icon, #a8a8a8);
-    background: #e7e7e7;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-    width: 300px;
-    margin-top: 20px;
+  color: #a8a8a8;
+  display: flex;
+  height: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  border: 1px dashed var(--icon, #a8a8a8);
+  background: #e7e7e7;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  width: 300px;
+  margin-top: 20px;
 }
 
 .prioButtons {
-    display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
 }
 
 .prioButton {
-    display: flex;
-    padding: 1rem 0.625rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    flex: 1 0 0;
-    border-radius: 0.625rem;
-    border: none;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    font-size: 1.25rem;
-    color: black;
-    font-weight: 400;
-    width: 8.5rem;
+  display: flex;
+  padding: 1rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 0.625rem;
+  border: none;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-size: 1.25rem;
+  color: black;
+  font-weight: 400;
+  width: 8.5rem;
 }
 
-
 .prioButton:hover {
-    background-color: none;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3)
+  background-color: none;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #urgentButton svg {
-    width: 1.25rem;
+  width: 1.25rem;
 }
 
 #mediumButton svg {
-    width: 1.25rem;
+  width: 1.25rem;
 }
 
 #lowButton svg {
-    width: 1.25rem;
+  width: 1.25rem;
 }
 
 .urgentButtonActive {
-    background-color: #FFAB91;
-    color: white;
+  background-color: #ffab91;
+  color: white;
 }
 
 .mediumButtonActive {
-    background-color: #FFBB82;
-    color: white;
+  background-color: #ffbb82;
+  color: white;
 }
 
 .lowButtonActive {
-    background-color: #90CAF9;
-    color: white;
+  background-color: #90caf9;
+  color: white;
 }
 
 .urgentButtonActive svg path {
-    fill: white !important;
+  fill: white !important;
 }
 
 .mediumButtonActive svg path {
-    fill: white !important;
+  fill: white !important;
 }
 
 .lowButtonActive svg path {
-    fill: white !important;
+  fill: white !important;
 }
 
-
 .input-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .icon-container {
-    position: absolute;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .icon-container svg {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .subtaskPlusBtn {
-    background-color: white;
-    border: none;
-    padding: 0;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
 }
 
 .subtaskPlusBtn:hover {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
-
 .subtaskCloseBtn {
-    background-color: white;
-    border: none;
-    padding: 0;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
 }
 
 .subtaskCloseBtn:hover {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
 .subtaskAddBtn {
-    background-color: white;
-    border: none;
-    padding: 0;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
 }
 
 .subtaskAddBtn:hover {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
 .dropdown-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0%;
-    width: calc(95% + 20px);
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  width: calc(95% + 20px);
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 /* Show the dropdown menu on button click */
 .show {
-    display: block;
+  display: block;
 }
 
 .subTasks {
-    width: 100%;
-    max-height: 5rem;
-    overflow: auto;
+  width: 100%;
+  max-height: 5rem;
+  overflow: auto;
 }
 
 .subTaskWrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .subTaskWrapper:hover .trashbin {
-    display: block;
+  display: block;
 }
 
 .subTaskDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    border-radius: 0.625rem;
-    transition: 0.3s ease-in-out;
-    word-wrap: break-word;
-    min-height: 2rem;
-    width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 0.625rem;
+  transition: 0.3s ease-in-out;
+  word-wrap: break-word;
+  min-height: 2rem;
+  width: 98%;
 }
 
 .trashbin {
-    cursor: pointer;
-    padding: 1px;
-    border-radius: 50%;
-    height: 1.5rem;
-    width: 1.5rem;
+  cursor: pointer;
+  padding: 1px;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
-    padding: 10px;
+  width: 10px;
+  padding: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 20px;
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 20px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: lightgray;
-    border-radius: 20px;
+  background: lightgray;
+  border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: lightgreen;
+  background: lightgreen;
 }
 
 .dropZone {
-    width: 100%;
-    background-color: transparent;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.625rem;
-    border-radius: 1.875rem;
-    border: 1px dashed var(--icon, #A8A8A8);
-    margin-top: 20px;
-    width: 300px;
+  width: 100%;
+  background-color: transparent;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 1.875rem;
+  border: 1px dashed var(--icon, #a8a8a8);
+  margin-top: 20px;
+  width: 300px;
 }
 
 .contactInformation {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .ContactName {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .contactFullName {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .contactIcon {
-    color: white;
-    background-color: #627254;
-    display: flex;
-    border-radius: 100%;
-    width: 35px;
-    height: 35px;
-    align-items: center;
-    justify-content: center;
-    margin-left: -10px;
-    border: white 2px solid;
+  color: white;
+  background-color: #627254;
+  display: flex;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10px;
+  border: white 2px solid;
 }
 
 .contactInfoCheckbox {
-    margin-top: 6px;
+  margin-top: 6px;
 }
 
 .hidden-checkbox {
-    display: none;
+  display: none;
 }
 
 #assignedToDropdown {
-    width: 100%;
-    max-height: 9rem;
-    overflow: auto;
+  width: 100%;
+  max-height: 9rem;
+  overflow: auto;
 }
 
 /* Popup Page Content */
 
 .popupCardPageContent {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    z-index: 2;
-    top: 0px;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .popupCardContent {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    position: absolute;
-    width: 30%;
-    background-color: white;
-    padding: 34px;
-    border-radius: 50px;
-    gap: 30px;
-    overflow-y: hidden;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  position: absolute;
+  width: 30%;
+  background-color: white;
+  padding: 34px;
+  border-radius: 50px;
+  gap: 30px;
+  overflow-y: hidden;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .popupCardContent p {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .popupCardContentHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .popupCardCategory {
-    font-size: 20px;
-    width: unset;
-    padding: 0.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 0.5rem;
-    background: #0038ff;
-    color: #fff;
+  font-size: 20px;
+  width: unset;
+  padding: 0.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  background: #0038ff;
+  color: #fff;
 }
 
 .popupCardContentHeader a {
-    height: 2rem;
-    cursor: pointer;
+  height: 2rem;
+  cursor: pointer;
 }
 
 .popupCardContentContainer {
-    overflow-y: auto;
-    scrollbar-width: none;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .PopupCardFirstContent {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 #popupCardTitle {
-    color: #000;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 50px !important;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 90%;
-    margin: 0;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px !important;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 90%;
+  margin: 0;
 }
 
 #popupCardDescription {
-    font-size: 20px;
-    font-weight: normal;
-    margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0;
 }
 
 .popupCardDateContainer {
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    gap: 1.5625rem;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  gap: 1.5625rem;
+  padding: 0;
+  margin: 0;
 }
 
 .popupCardDateContainer p {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .popupCardPriority {
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    gap: 1.5625rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  gap: 1.5625rem;
 }
 
 .popupCardPriority p {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .popupCardshowPriority {
-    display: flex;
-    padding: 0.25rem 1.125rem;
-    align-items: center;
-    gap: 0.625rem;
+  display: flex;
+  padding: 0.25rem 1.125rem;
+  align-items: center;
+  gap: 0.625rem;
 }
 
 .popupCardshowPriority svg {
-    width: 1.25rem;
+  width: 1.25rem;
 }
 
 .popupCardAssignedTo {
-    font-size: 20px;
-    font-weight: normal;
-    margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0;
 }
 
 #popupCardAssignetToContent {
-    max-height: 160px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  max-height: 160px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .popupCardAssignetToContentContainer {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .popupCardAssignetToContentContainer p {
-    margin: 0;
+  margin: 0;
 }
 
 .popupCardAssignedToTitle {
-    margin: 0;
-    margin-top: 24px;
-    margin-bottom: 10px;
+  margin: 0;
+  margin-top: 24px;
+  margin-bottom: 10px;
 }
 
 .icon {
-    color: white;
-    display: flex;
-    border-radius: 100%;
-    width: 35px;
-    height: 35px;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
+  color: white;
+  display: flex;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
 .popupCardSubtasks {
-    font-size: 20px;
-    font-weight: normal;
-    margin: 0;
-
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0;
 }
 
 .popupCardContentFooter {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: row;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .popupCardContentFooter a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .footerTrashbin {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+#popupCardAssignedToList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.testButton {
+  position: absolute;
+  z-index: 100;
 }
