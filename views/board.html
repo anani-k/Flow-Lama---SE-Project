@@ -6,6 +6,8 @@
   <title>Board | projectName</title>
   <link rel="stylesheet" href="styles.css" type="text/css">
   <link rel="stylesheet" href="board.css" type="text/css">
+  <link rel="stylesheet" href="boardPopup.css" type="text/css">
+  <link rel="stylesheet" href="boardPopupCard.css" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="board.js"></script>
 </head>
@@ -76,12 +78,12 @@
   </div>
 
   <!-- popup -->
-  <div  class="popupContainer d-none" id="popupContainer">
+  <div  class="popupContainer d-none" id="popupContainer"></div>
 
-</div>
   <!-- Page Content -->
   <div class="content" >
 
+    <!-- Page Content Header-->
     <div class="ContentHeader">
       <h2>Board</h2>
       <div class="boardHeaderControll">
@@ -124,47 +126,44 @@
       </div>
     </div>
 
-
+    <!-- Page Content Progress Felder -->
     <div class="stateFields">
+
+      <!-- To do Spalte + Inhalt  -->
         <div class="toDoField" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
           <p>To do</p>
-
           <div id="todo"></div>
           <div class="dropZone d-none" id="toDoDropZone"></div>
-
       </div>
+
+      <!-- In Progress Spalte + Inhalt  -->
       <div class="inProgressField" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
         <p>In progress</p>
-
         <div id="inProgress"></div>
         <div class="dropZone d-none" id="inProgressDropZone"></div>
       </div>
 
+      <!-- Await Feedback Spalte + Inhalt  -->
       <div class="feedbackfield" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)">
         <p>Await feedback</p>
-
         <div id="awaitFeedback"></div>
         <div class="dropZone d-none" id="awaitFeedbackDropZone"></div>
       </div>
 
+      <!-- Done Spalte + Inhalt  -->
       <div class="doneField" ondrop="moveTo('done')" ondrop="moveTo('done')" ondragover="allowDrop(event)">
         <p>Done</p>
         <div id="done"></div>
         <div class="dropZone d-none" id="doneDropZone"></div>
       </div>
+
+      </div>
     </div>
-  </div>
   </div>
 
   <!-- popup Page Content -->
+  <div class="popupCardPageContent d-none" id="TestCloseButton"></div>
 
-  <div class="popupCardPageContent d-none" id="TestCloseButton">
-
-  </div>
-
-
-
-</body>
-
+  </body>
 </html>
 

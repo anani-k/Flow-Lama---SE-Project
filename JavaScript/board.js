@@ -1,30 +1,33 @@
+// Array enthält infos über die daten die später im Board vom Benutzer eingetragen werden.
+//  Gerade sind im Array Test daten(Zum Stylen etc.), sollen später entfernt werden. Erst dann sind von anfangan keine Karten vorhanden.
 let tasks = [
-  // {
-  //   progress: "done",
-  //   category: "Technical Task",
-  //   title: "ich liebe dich",
-  //   description: "JOOST",
-  //   date: "21.10.2002",
-  //   openSubtasks: ["testa", "testb"],
-  //   closedSubtasks: ["test3", "test4aaa"],
-  //   contacts: ["AS", "S", "M"],
-  //   priority: "low",
-  //   assigedToId: ["0"],
-  // },
-  // {
-  //   progress: "awaitFeedback",
-  //   category: "Technical Task",
-  //   title: "aaaaaaaaaaa",
-  //   description: "do some cleancode",
-  //   date: "01.10.2002",
-  //   contacts: ["AS", "S", "M"],
-  //   openSubtasks: ["test1", "test2"],
-  //   closedSubtasks: ["test3", "test4"],
-  //   priority: "low",
-  //   assigedToId: ["1", "0", "2", "3", "4", "5"],
-  // },
+  {
+    progress: "done",
+    category: "Technical Task",
+    title: "ich liebe dich",
+    description: "JOOST",
+    date: "21.10.2002",
+    openSubtasks: ["testa", "testb"],
+    closedSubtasks: ["test3", "test4aaa"],
+    contacts: ["AS", "S", "M"],
+    priority: "low",
+    assigedToId: ["0"],
+  },
+  {
+    progress: "awaitFeedback",
+    category: "Technical Task",
+    title: "aaaaaaaaaaa",
+    description: "do some cleancode",
+    date: "01.10.2002",
+    contacts: ["AS", "S", "M"],
+    openSubtasks: ["test1", "test2"],
+    closedSubtasks: ["test3", "test4"],
+    priority: "low",
+    assigedToId: ["1", "0", "2", "3", "4", "5"],
+  },
 ];
 
+// Variable mit Beispiel Kontakten
 let contacts = [
   {
     id: "0",
@@ -123,6 +126,7 @@ let awaitFeedback = false;
 let done = false;
 let openContacs = true;
 
+//Variable um von Anfang an "Medium" im Add Task Popup ausgewählt zu haben
 let activeButton = "mediumButton";
 let selectedPriority = "medium";
 
@@ -139,7 +143,7 @@ function findIndexById(id) {
   }
 }
 
-function returnPrioritySimbol(priority) {
+function returnPrioritySymbol(priority) {
   if (priority == "low") {
     return `
     <svg
@@ -235,7 +239,7 @@ function generateCard() {
 <div class="cardFooter">
     <div class="assignedUser" id="assignedUser${i}">
     </div>
-    <div>${tasks[i].priority}${returnPrioritySimbol(tasks[i].priority)}</div>
+    <div>${returnPrioritySymbol(tasks[i].priority)}</div>
 </div>
 
 </div>`;
@@ -814,7 +818,7 @@ function popupCardContentopenButton(i) {
           <p>Priority:</p>
           <div class="popupCardshowPriority">
             <span id="priorityUrgent">${tasks[i].priority}</span>
-${returnPrioritySimbol(tasks[i].priority)}
+${returnPrioritySymbol(tasks[i].priority)}
           </div>
         </div>
       </div>
@@ -903,7 +907,7 @@ function generateClosedSubtasks(i) {
   for (let x = 0; x < tasks[i].closedSubtasks.length; x++) {
     let userID = tasks[i].closedSubtasks[x];
     document.getElementById("openCardSubtasks2").innerHTML += /*html*/ `
-    <div  onclick="popUpSubtaskCheckboxUncheck(${x},${i})">
+    <div class="checkboxCheckedContainer" onclick="popUpSubtaskCheckboxUncheck(${x},${i})">
     <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked0" class="" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
           <path fill="#a5d6a7" d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
           </path>
@@ -911,7 +915,7 @@ function generateClosedSubtasks(i) {
           <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
           <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
         </svg>
-    ${userID}
+        <p>${userID}</p>
   </div>
   `;
   }

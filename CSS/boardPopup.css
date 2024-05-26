@@ -1,0 +1,371 @@
+/* Alles vom Popup */
+
+.popupContainer {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupCardContainer {
+  position: absolute;
+  z-index: 3;
+}
+
+.popupCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 61.75rem;
+  height: 48.375rem;
+  background-color: white;
+  padding: 4rem;
+  border-radius: 50px;
+  gap: 0rem;
+  justify-content: space-between;
+  overflow-y: hidden;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.popupCard p {
+  margin: 21px 0;
+}
+
+.popupWrapper {
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+}
+
+.popupHeadline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 45%;
+}
+
+.leftSide p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 10px;
+}
+
+.leftsideTitle p::after {
+  content: "*";
+  color: red;
+}
+
+.descriptionArea p::after {
+  content: "*";
+  color: red;
+}
+
+.rightSide {
+  width: 45%;
+}
+
+.rightSide p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 10px;
+}
+
+.dateArea p::after {
+  content: "*";
+  color: red;
+}
+
+/* Hintergrundfarbe des Kalender-Symbols */
+::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23627254" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+.category p::after {
+  content: "*";
+  color: red;
+}
+
+.popupContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.seperatorVertical {
+  width: 1px;
+  height: 26.5rem;
+  flex-shrink: 0;
+  margin: 0 5%;
+  background-color: grey;
+}
+
+.contentTitle {
+  color: #627254;
+  font-size: 3.8125rem;
+  line-height: 120%;
+}
+
+#closeAddTaskButton {
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+#closeAddTaskButton:hover {
+  background-color: lightgrey;
+}
+
+.p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.task-title-input {
+  padding: 10px 10px;
+  font-size: 1.25rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.descriptionTextArea {
+  font-size: 1.25rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 114px;
+  padding: 10px 10px;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+  border: solid 1px lightgray;
+}
+
+.descriptionTextArea:hover {
+  border: 1px solid gray;
+}
+
+.descriptionTextArea:focus {
+  border: 1px solid green;
+  outline: none;
+}
+
+.footerPopupCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.footerPopupCard span {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.footerPopupCard span::before {
+  content: "*";
+  color: red;
+}
+
+.footerButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+#clearButton {
+  background-color: transparent;
+  color: #ffab91;
+  border: 1px solid #ffab91;
+}
+
+#createTaskButton {
+  background-color: #627254;
+  color: white;
+  font-weight: 600;
+}
+
+#createTaskButton svg path {
+  stroke: white;
+}
+
+.popupWarpper {
+  width: 100%;
+}
+
+.popupContent input {
+  border: solid 1px lightgray;
+}
+
+.popupContent input:hover {
+  border: solid 1px gray;
+}
+
+.popupContent input:focus {
+  outline: none;
+  border: 1px solid green;
+}
+
+.placeholder {
+  color: #a8a8a8;
+  display: flex;
+  height: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 0.625rem;
+  border: 1px dashed var(--icon, #a8a8a8);
+  background: #e7e7e7;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  width: 300px;
+  margin-top: 20px;
+}
+
+.prioButtons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.prioButton {
+  display: flex;
+  padding: 1rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 0.625rem;
+  border: none;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-size: 1.25rem;
+  color: black;
+  font-weight: 400;
+  width: 8.5rem;
+}
+
+.prioButton:hover {
+  background-color: none;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#urgentButton svg {
+  width: 1.25rem;
+}
+
+#mediumButton svg {
+  width: 1.25rem;
+}
+
+#lowButton svg {
+  width: 1.25rem;
+}
+
+.urgentButtonActive {
+  background-color: #ffab91;
+  color: white;
+}
+
+.mediumButtonActive {
+  background-color: #ffbb82;
+  color: white;
+}
+
+.lowButtonActive {
+  background-color: #90caf9;
+  color: white;
+}
+
+.urgentButtonActive svg path {
+  fill: white !important;
+}
+
+.mediumButtonActive svg path {
+  fill: white !important;
+}
+
+.lowButtonActive svg path {
+  fill: white !important;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icon-container {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon-container svg {
+  cursor: pointer;
+}
+
+.subtaskPlusBtn {
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.subtaskPlusBtn:hover {
+  background-color: lightgrey;
+}
+
+.subtaskCloseBtn {
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.subtaskCloseBtn:hover {
+  background-color: lightgrey;
+}
+
+.subtaskAddBtn {
+  background-color: white;
+  border: none;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.subtaskAddBtn:hover {
+  background-color: lightgrey;
+}
