@@ -159,6 +159,8 @@ h2 {
   width: 300px;
   gap: 25px;
   margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.08);
 }
 
 .technicalTask {
@@ -200,7 +202,6 @@ h2 {
   align-items: center;
   justify-content: center;
   margin-left: -10px;
-  border: white 2px solid;
 }
 
 .dropdown-icon {
