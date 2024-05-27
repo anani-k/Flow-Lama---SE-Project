@@ -1,17 +1,19 @@
 .contentSummary {
     margin-top: 5rem;
-    margin-left: 17rem;
-    flex: 1;
+    margin-left: 20rem;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 0.01em 16px
+    padding: 0.01em 16px;
+    height:100%;
+    width:80%;
+    position: fixed !important;
 }
 
 .summary-title {
     display: flex;
-    gap: 1.875rem;
+    gap: 1.5rem;
     align-items: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .summary-title h1 {
@@ -30,7 +32,7 @@ a {
 }
 .summary-main {
     display: flex;
-    justify-content: space-between;
+
 }
 .summary-board {
     display: flex;
@@ -53,6 +55,19 @@ a {
     background-color: #FFF;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
 }
+.summary-todos-badge:hover, .summary-urgent:hover, .summary-overview-badge:hover {
+    background-color: #627254;
+    color: #FFF;
+    transform: scale(1.075);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: 80ms ease-out;
+    fill: white;
+}
+.summary-todos-badge:hover svg, .summary-urgent:hover svg, .summary-overview-badge:hover svg {
+    color: white;
+}
+
+
 .summary-todos-badge div {
     display: flex;
     flex-direction: column;
@@ -128,15 +143,21 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    margin-left: 20rem;
 }
 .summary-greeting h2 {
     font-size: 2.9375rem;
     font-weight: 500;
+
 }
 .summary-greeting h1 {
     font-size: 4rem;
-    color: #29ABE2;
+    color: #899d6a;
+    line-height: 1px;
 }
 
 
+.summary-todos-badge svg {
+    color: #627254;
+    line-height:1px;
+}

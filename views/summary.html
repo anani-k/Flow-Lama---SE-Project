@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Summary | projectName</title>
+        <title>Summary | Flow Lama</title>
         <link rel="stylesheet" href="styles.css" type="text/css">
         <link rel="stylesheet" href="summary.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <script src="dropdown.js"></script>
       </head>
     <body>
 <!--Sidebar-->
@@ -48,7 +48,6 @@
     </li>
 
   </ul>
-
 </div>
 
 
@@ -57,28 +56,31 @@
   <hr class="dropdown-divider">
   <div class="dropdown" style="right: 1rem;">
     <a onclick="myFunction()" href="#"
-      class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" aria-expanded="false">
-      <img src="" alt="" width="50" height="50" class="rounded-circle me-2">
-      <strong>User</strong>
+      class="d-flex align-items-center text-user text-decoration-none dropdown-toggle" aria-expanded="false">
+      <svg width="60"viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM11.9999 6C9.79077 6 7.99991 7.79086 7.99991 10C7.99991 12.2091 9.79077 14 11.9999 14C14.209 14 15.9999 12.2091 15.9999 10C15.9999 7.79086 14.209 6 11.9999 6ZM17.1115 15.9974C17.8693 16.4854 17.8323 17.5491 17.1422 18.1288C15.7517 19.2966 13.9581 20 12.0001 20C10.0551 20 8.27215 19.3059 6.88556 18.1518C6.18931 17.5723 6.15242 16.5032 6.91351 16.012C7.15044 15.8591 7.40846 15.7251 7.68849 15.6097C8.81516 15.1452 10.2542 15 12 15C13.7546 15 15.2018 15.1359 16.3314 15.5954C16.6136 15.7102 16.8734 15.8441 17.1115 15.9974Z" fill="#627254"/>
+      </svg>
     </a>
     <ul id="Demo" class="dropdown-menu text-small shadow">
       <li><a class="dropdown-item" href="/projectOverview">Switch project</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item" href="/index">Sign out</a></li>
+      <li><a class="dropdown-item" href="/index">Sign out</a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
     </ul>
-
-
   </div>
 </div>
+<!--Header-->
+
 
 <!-- Page Content -->
   <div class="contentSummary">
     <section class="summary">
         <div class="summary-title">
             <h1>Flow Lama</h1>
-            <h1>|</h1>
+            <svg width="4" height="63" viewBox="0 0 4 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2V61" stroke="#899d6a" stroke-width="3" stroke-linecap="round"/>
+              </svg>
             <span>Go with the floooooooooooooow</span>
             <img class="mobile-vector" src="./assets/img/Mobile/contacts_mobile/Vector 5.svg" alt="">
         </div>
@@ -87,22 +89,20 @@
                 <div class="summary-todos">
                     <a href="./board">
                         <div class="summary-todos-badge">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                          </svg>
+                          <svg fill="currentColor" width="70" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><path d="M 27.9999 51.9062 C 41.0546 51.9062 51.9063 41.0547 51.9063 28.0000 C 51.9063 14.9219 41.0312 4.0938 27.9765 4.0938 C 14.8983 4.0938 4.0937 14.9219 4.0937 28.0000 C 4.0937 41.0547 14.9218 51.9062 27.9999 51.9062 Z M 36.9765 21.5781 L 34.2812 18.8828 L 35.9452 17.2422 C 36.6952 16.5156 37.5390 16.4453 38.2187 17.125 L 38.7343 17.6406 C 39.4140 18.3203 39.3436 19.1406 38.6171 19.9140 Z M 20.6874 37.7969 L 17.5702 38.9687 C 17.0546 39.1562 16.5155 38.6875 16.7499 38.125 L 18.0390 35.1016 L 32.9218 20.2422 L 35.6171 22.9140 Z"/></svg>
                             <div><br>
-                                <span id="toDoNum">0</span>
+                                <span id="toDoNum">0</span><!--HIER COUNTER FÜR TODO AUFGABEN-->
                                 <p>To-do</p>
                             </div>
                         </div>
                     </a>
                     <a href="/board">
                         <div class="summary-todos-badge">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                          </svg>
+                          <svg width="70" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="bi bi-check-circle-fill">
+                            <path d="M12 21C16.9706 21 21 16.9706 21 12C21 10.1666 20.4518 8.46124 19.5103 7.03891L12.355 14.9893C11.6624 15.7589 10.4968 15.8726 9.66844 15.2513L6.4 12.8C5.95817 12.4686 5.86863 11.8418 6.2 11.4C6.53137 10.9582 7.15817 10.8686 7.6 11.2L10.8684 13.6513L18.214 5.48955C16.5986 3.94717 14.4099 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"/>
+                            </svg>
                             <div><br>
-                                <span id="doneNum">0</span>
+                                <span id="doneNum">0</span><!--HIER COUNTER FÜR DONE AUFGABEN-->
                                 <p>Done</p>
                             </div>
                         </div>
@@ -111,22 +111,28 @@
                 <a href="/board">
                     <div class="summary-urgent">
                         <div class="summary-urgent-badge">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"width="30" height="30" fill="currentColor" class="bi bi-check-circle-fill">
-                            <path
-                              d="M3.47876 7.9c-.5.3-1.1.1-1.4-.4s-.1-1 .4-1.3l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.2.4-.8.6-1.3.3l-4.5-2.7-4.5 2.7z"
-                              fill="#ff5630" />
-                            <path
-                              d="M3.47876 12.2c-.5.3-1.1.2-1.4-.3s-.1-1.1.4-1.4l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.3.5-.9.6-1.4.3l-4.4-2.7-4.5 2.7z"
-                              fill="#ff7452" />
-                          </svg>
-                            <div>
-                                <span id="urgentNum">0</span>
+                          <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="30.1445" cy="30.8083" r="30" fill="#FF3D00"/>
+                            <g clip-path="url(#clip0_62_691)">
+                            <path d="M45.0159 41.9714C44.6149 41.9721 44.2242 41.8425 43.9014 41.6018L29.7961 31.0719L15.6909 41.6018C15.4928 41.7499 15.2679 41.8571 15.029 41.9172C14.79 41.9774 14.5417 41.9893 14.2981 41.9524C14.0546 41.9154 13.8207 41.8302 13.6097 41.7018C13.3987 41.5733 13.2147 41.4041 13.0684 41.2037C12.922 41.0033 12.8161 40.7757 12.7566 40.5339C12.6972 40.2921 12.6854 40.0408 12.7219 39.7944C12.7957 39.2967 13.0618 38.849 13.4617 38.5499L28.6816 27.1765C29.0041 26.9349 29.3948 26.8044 29.7961 26.8044C30.1974 26.8044 30.5881 26.9349 30.9107 27.1765L46.1305 38.5499C46.4483 38.7869 46.684 39.1194 46.8039 39.5001C46.9238 39.8807 46.9218 40.2899 46.7982 40.6693C46.6746 41.0487 46.4357 41.3789 46.1157 41.6127C45.7956 41.8466 45.4107 41.9721 45.0159 41.9714Z" fill="white"/>
+                            <path d="M45.0159 32.0195C44.6149 32.0202 44.2242 31.8906 43.9014 31.6499L29.7961 21.12L15.6909 31.6499C15.2909 31.949 14.79 32.0751 14.2981 32.0004C13.8063 31.9258 13.364 31.6565 13.0684 31.2518C12.7728 30.8471 12.6482 30.3401 12.7219 29.8425C12.7957 29.3448 13.0618 28.8971 13.4617 28.598L28.6816 17.2246C29.0041 16.983 29.3948 16.8525 29.7961 16.8525C30.1974 16.8525 30.5881 16.983 30.9107 17.2246L46.1305 28.598C46.4483 28.835 46.684 29.1675 46.8039 29.5482C46.9238 29.9288 46.9218 30.338 46.7982 30.7174C46.6746 31.0968 46.4357 31.427 46.1157 31.6608C45.7956 31.8947 45.4107 32.0202 45.0159 32.0195Z" fill="white"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_62_691">
+                            <rect width="34.186" height="25.1163" fill="white" transform="translate(12.7031 16.855)"/>
+                            </clipPath>
+                            </defs>
+                            </svg>
+                            <div><br>
+                                <span id="urgentNum">0</span><!--HIER COUNTER FÜR URGENT AUFGABEN-->
                                 <p>Urgent</p>
                             </div>
                         </div>
-                        <img src="./assets/img/Desktop/general_elements/bar/vector_gray.svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2" height="106" viewBox="0 0 2 106" fill="none">
+                          <path d="M1 1.98828V104.011" stroke="#D1D1D1" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
                         <div>
-                            <h6 id="deadlineDate">-</h6>
+                            <h6 id="deadlineDate">-</h6><!--HIER DATUM FÜR URGENT AUFGABEN-->
                             <p>Upcoming Deadline</p>
                         </div>
                     </div>
@@ -134,53 +140,32 @@
                 <div class="summary-overview">
                     <a href="/board">
                         <div class="summary-overview-badge"><br>
-                            <span id="tasksNum">0</span>
+                            <span id="tasksNum">0</span><!--HIER COUNTER FÜR GESAMT TASKS-->
                             <p>Tasks in<br>Board</p>
                         </div>
                     </a>
                     <a href="/board">
                         <div class="summary-overview-badge"><br>
-                            <span id="inProgressNum">0</span>
+                            <span id="inProgressNum">0</span><!--HIER COUNTER FÜR in PROGRESS AUFGABEN-->
                             <p>Tasks in<br>Progress</p>
                         </div>
                     </a>
                     <a href="/board">
                         <div class="summary-overview-badge"><br>
-                            <span id="awaitFeedbackNum">0</span>
-                            <p>Awaiting Feedback</p>
+                            <span id="awaitFeedbackNum">0</span><!--HIER COUNTER FÜR FEEDBACK AUFGABEN-->
+                            <p>Awaiting <br>Feedback</p>
                         </div>
                     </a>
                 </div>
             </div>
             <div class="summary-greeting">
-                <div id="greeting">
-                    <h2></h2>
-                    <h1></h1>
+                <div id="greeting"> <!--ID GREETING-->
+                    <h2>Welcome,</h2>
+                    <h1>Name!</h1> <!--HIER NAMEN GENERIEREN-->
                 </div>
             </div>
         </div>
     </section>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-<script>
-  function myFunction() {
-    var x = document.getElementById("Demo");
-    if (x.className.indexOf("dd-show") == -1) {
-      x.className += " dd-show";
-    } else {
-      x.className = x.className.replace(" dd-show", "");
-    }
-  }
-</script>
 </body>
 </html>
