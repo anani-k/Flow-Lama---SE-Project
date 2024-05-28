@@ -1,47 +1,47 @@
 // Array enthält infos über die daten die später im Board vom Benutzer eingetragen werden.
 //  Gerade sind im Array Test daten(Zum Stylen etc.), sollen später entfernt werden. Erst dann sind von anfangan keine Karten vorhanden.
 let tasks = [
-  // {
-  //   progress: "done",
-  //   category: "Technical Task",
-  //   title: "ich liebe dich",
-  //   description: "JOOST",
-  //   date: "21.10.2002",
-  //   openSubtasks: ["testa", "testb"],
-  //   closedSubtasks: ["test3", "test4aaa"],
-  //   priority: "low",
-  //   assigedToId: ["4"],
-  // },
-  // {
-  //   progress: "awaitFeedback",
-  //   category: "Technical Task",
-  //   title: "aaaaaaaaaaa",
-  //   description: "do some cleancode",
-  //   date: "01.10.2002",
-  //   openSubtasks: [
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //     "test1",
-  //     "test2",
-  //   ],
-  //   closedSubtasks: ["test3", "test4"],
-  //   priority: "low",
-  //   assigedToId: ["1", "2", "3", "6", "5"],
-  // },
+  {
+    progress: "done",
+    category: "Technical Task",
+    title: "ich liebe dich",
+    description: "JOOST",
+    date: "21.10.2002",
+    openSubtasks: ["testa", "testb"],
+    closedSubtasks: ["test3", "test4aaa"],
+    priority: "low",
+    assigedToId: ["4"],
+  },
+  {
+    progress: "awaitFeedback",
+    category: "Technical Task",
+    title: "aaaaaaaaaaa",
+    description: "do some cleancode",
+    date: "01.10.2002",
+    openSubtasks: [
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+      "test1",
+      "test2",
+    ],
+    closedSubtasks: ["test3", "test4"],
+    priority: "low",
+    assigedToId: ["1", "2", "3", "6", "5"],
+  },
 ];
 
 // Array mit Beispiel Kontakten
@@ -263,9 +263,10 @@ function generateCard() {
     document.getElementById(tasks[i].progress).innerHTML += /*html*/ ` 
        <div  onclick="popupCardContentopenButton(${i})" draggable="true" class="cardContainer cursorPointer" ondragstart="startDraggin(${i})" id="generatedCard${i}">
 <div class="technicalTask">${tasks[i].category}</div>
-<div>
+<div class="cardContent">
     <div class="projectName">${tasks[i].title}</div>
     <div class="commentSection">${tasks[i].description} </div>
+    <div class="progessBarSubtasks" id="progessBarSubtasks${i}">  </div>
 </div>
 <div class="cardFooter">
     <div class="assignedUser" id="assignedUser${i}">
@@ -274,8 +275,22 @@ function generateCard() {
 </div>
 </div>`;
     returnContactIcon(i);
+    generateProgessBarSubtasks(i);
   }
   generatePlaceholder();
+}
+
+//fügt die progressbar hinzu
+function generateProgessBarSubtasks(i) {
+  let content = document.getElementById("progessBarSubtasks" + i);
+  let allSubtasks =
+    tasks[i].openSubtasks.length + tasks[i].closedSubtasks.length;
+  let closedSubtasks = tasks[i].closedSubtasks.length;
+  console.log(allSubtasks);
+  content.innerHTML = /*html*/ `
+<progress class="progressbar" value="${closedSubtasks}" max="${allSubtasks}"></progress>
+<span>${closedSubtasks}/${allSubtasks}</span>
+  `;
 }
 
 //Funktion entscheidet in welcher Spalte der Placeholder generiert werden soll
@@ -568,6 +583,7 @@ function renderContacts() {
 //Versteckt popup card, schließt sie quasi
 function popupCardContentcloseButton() {
   document.getElementById("TestCloseButton").classList.add("d-none");
+  generateCard();
 }
 
 //Öffnet Popup Card, wenn man eine Task anklickt
@@ -644,7 +660,7 @@ function generateClosedSubtasks(i) {
 function popUpSubtaskCheckbox(x, i) {
   let changedElement = tasks[i]["openSubtasks"].splice(x, 1);
   tasks[i]["closedSubtasks"].unshift(changedElement);
-
+  generateCard();
   popupCardContentopenButton(i);
 }
 
@@ -652,7 +668,7 @@ function popUpSubtaskCheckbox(x, i) {
 function popUpSubtaskCheckboxUncheck(x, i) {
   let changedElement = tasks[i]["closedSubtasks"].splice(x, 1);
   tasks[i]["openSubtasks"].unshift(changedElement);
-
+  generateCard();
   popupCardContentopenButton(i);
 }
 
