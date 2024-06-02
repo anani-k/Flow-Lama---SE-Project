@@ -1,142 +1,15 @@
 // Array enthält infos über die daten die später im Board vom Benutzer eingetragen werden.
 //  Gerade sind im Array Test daten(Zum Stylen etc.), sollen später entfernt werden. Erst dann sind von anfangan keine Karten vorhanden.
-let tasks = [
-  {
-    progress: "done",
-    category: "Technical Task",
-    title: "ich liebe dich",
-    description: "JOOST",
-    date: "21.10.2002",
-    openSubtasks: ["testa", "testb"],
-    closedSubtasks: ["test3", "test4aaa"],
-    priority: "low",
-    assigedToId: ["4"],
-  },
-  {
-    progress: "awaitFeedback",
-    category: "Technical Task",
-    title: "aaaaaaaaaaa",
-    description: "do some cleancode",
-    date: "01.10.2002",
-    openSubtasks: [
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-      "test1",
-      "test2",
-    ],
-    closedSubtasks: ["test3", "test4"],
-    priority: "low",
-    assigedToId: ["1", "2", "3", "6", "5"],
-  },
-];
+let tasks = [];
 
 // Array mit Beispiel Kontakten
-let contacts = [
-  {
-    id: "0",
-    firstName: "Joost",
-    lastName: "Heidrich",
-    initials: "JH",
-    color: "#FF5733",
-  },
-  {
-    id: "1",
-    firstName: "Michelle",
-    lastName: "Reimers",
-    initials: "MR",
-    color: "#FFC0CA", // Orange
-  },
-  {
-    id: "2",
-    firstName: "Lena",
-    lastName: "Schmidt",
-    initials: "LS",
-    color: "#33FF57", // Grün
-  },
-  {
-    id: "3",
-    firstName: "Maximilian",
-    lastName: "Bauer",
-    initials: "MB",
-    color: "#3357FF", // Blau
-  },
-
-  {
-    id: "5",
-    firstName: "Lucas",
-    lastName: "Fischer",
-    initials: "LF",
-    color: "#FFFF33", // Gelb
-  },
-  {
-    id: "4",
-    firstName: "Hannah",
-    lastName: "Weber",
-    initials: "HW",
-    color: "#FF33A8", // Pink
-  },
-  {
-    id: "6",
-    firstName: "Mia",
-    lastName: "Müller",
-    initials: "MM",
-    color: "#33FFF6", // Cyan
-  },
-  {
-    id: "7",
-    firstName: "Finn",
-    lastName: "Wagner",
-    initials: "FW",
-    color: "#9B33FF", // Lila
-  },
-  {
-    id: "8",
-    firstName: "Sophie",
-    lastName: "Schneider",
-    initials: "SS",
-    color: "#FF8C33", // Dunkelorange
-  },
-  {
-    id: "9",
-    firstName: "Paul",
-    lastName: "Neumann",
-    initials: "PN",
-    color: "#33FF8C", // Hellgrün
-  },
-  {
-    id: "10",
-    firstName: "Emma",
-    lastName: "Hoffmann",
-    initials: "EH",
-    color: "#FF3333", // Rot
-  },
-  {
-    id: "11",
-    firstName: "Jonas",
-    lastName: "Koch",
-    initials: "JK",
-    color: "#33A8FF", // Hellblau
-  },
-];
+let contacts = [];
 
 //Zwischenspeicher der ausgewählten Subtasks und kontakte
 let selectedSubtasks = [];
 let selectedContacs = [];
-
+let savedClosedSubtasks = [];
+let savedProgress = "";
 //Speichert das Element welches gerade gedrückt und bewegt wird
 let currentDraggedElement;
 
@@ -155,7 +28,13 @@ let selectedPriority = "medium";
 
 //init wird immer ausgeführt wenn die HTML datei geladen ist und ruft die Funktion zur erstellung der Tasks auf
 function init() {
+  this.setArray();
   this.generateCard();
+}
+
+function setArray() {
+  tasks = globalTasks;
+  contacts = globalContacts;
 }
 
 //die Kontakt ID gibt man in die Funktion und erhält die stelle im Array contacts zurück
@@ -286,7 +165,6 @@ function generateProgessBarSubtasks(i) {
   let allSubtasks =
     tasks[i].openSubtasks.length + tasks[i].closedSubtasks.length;
   let closedSubtasks = tasks[i].closedSubtasks.length;
-  console.log(allSubtasks);
   content.innerHTML = /*html*/ `
 <progress class="progressbar" value="${closedSubtasks}" max="${allSubtasks}"></progress>
 <span>${closedSubtasks}/${allSubtasks}</span>
@@ -508,15 +386,17 @@ function checkboxExchange(i) {
   ) {
     document.getElementById("CkeckboxChecked" + i).classList.remove("d-none");
     document.getElementById("checkboxUnchecked" + i).classList.add("d-none");
-    selectedContacs.push(i.toString());
+    selectedContacs.push(contacts[i].id);
   } else if (
     !document.getElementById("CkeckboxChecked" + i).classList.contains("d-none")
   ) {
     document.getElementById("CkeckboxChecked" + i).classList.add("d-none");
     document.getElementById("checkboxUnchecked" + i).classList.remove("d-none");
-    const index = selectedContacs.indexOf(i);
-    if (index > -1) {
-      selectedContacs.splice(index, 1);
+    for (let x = 0; x < selectedContacs.length; x++) {
+      const element = selectedContacs[x];
+      if (contacts[i].id == element) {
+        selectedContacs.splice(x, 1);
+      }
     }
   }
 }
@@ -738,5 +618,172 @@ function sortTasks() {
     } else {
       document.getElementById("generatedCard" + i).classList.remove("d-none");
     }
+  }
+}
+
+//öffnet das Popup edit Fenster und enthält alle die Funktionen aus add Task ↓↓↓
+
+function editCard(i) {
+  selectedSubtasks = tasks[i].openSubtasks;
+  selectedContacs = tasks[i].assigedToId;
+  savedClosedSubtasks = tasks[i].closedSubtasks;
+  savedProgress = tasks[i].progress;
+
+  document.getElementById("popupContainer").classList.remove("d-none");
+  document.getElementById(
+    "popupContainer"
+  ).innerHTML = `${this.returnEditOpenPopup(i)}`;
+  this.popupCardContentcloseButton();
+  this.addSubTask();
+  buttonSelect(tasks[i].priority + "Button");
+}
+
+function editFormInputs(event, i) {
+  let newTask = {
+    progress: "todo",
+    category: "Technical Task",
+    title: "aaaaaaaaaaa",
+    description: "do some cleancode",
+    date: "01.10.2002",
+    openSubtasks: ["test1", "test2"],
+    closedSubtasks: [],
+    priority: "",
+    assigedToId: [],
+  };
+
+  if (savedClosedSubtasks) {
+    newTask.closedSubtasks = savedClosedSubtasks;
+    savedClosedSubtasks = "";
+  }
+
+  newTask.progress = savedProgress;
+  newTask.priority = selectedPriority;
+  newTask.assigedToId = selectedContacs;
+  newTask.openSubtasks = selectedSubtasks;
+  event.preventDefault();
+
+  // Holt das Formular-Element
+  const form = event.target;
+
+  // Holt alle Eingabefelder des Formulars
+  const formData = new FormData(form);
+
+  for (const [name, value] of formData.entries()) {
+    newTask[name] = value;
+  }
+
+  newTask.date = revertDate(newTask.date);
+
+  tasks[i] = newTask;
+
+  this.generateCard();
+  this.closePopup();
+}
+
+function toggleDropdownAssignedToEdit(i) {
+  document.getElementById("assignedToDropdown").classList.toggle("show");
+  document.getElementById("assignedToClosed").classList.toggle("d-none");
+  document.getElementById("assignedToOpen").classList.toggle("d-none");
+  if (openContacs) {
+    this.renderContactsEdit();
+    openContacs = false;
+  }
+}
+
+function renderContactsEdit() {
+  document.getElementById("assignedToDropdown").innerHTML = "";
+  for (let i = 0; i < contacts.length; i++) {
+    const element = contacts[findIndexById(i.toString())];
+
+    document.getElementById("assignedToDropdown").innerHTML += /*html*/ `
+      <a href="#" onclick="checkboxExchange(${i})">
+      <div class="contactInformation">
+        <div class="ContactName">
+          <div class="contactIcon" style="background-color: ${element.color};">${element.initials}</div>
+          <div class="contactFullName">${element.firstName} ${element.lastName}</div>
+        </div>
+        <div class="contactInfoCheckbox"><input type="checkbox" class="hidden-checkbox">
+          <svg xmlns="http://www.w3.org/2000/svg" id="checkboxUnchecked${i}"x="0px" y="0px" width="30"
+            height="30" viewBox="0 0 48 48">
+            <path fill="#a5d6a7"
+              d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
+            </path>
+            <polyline fill="none" stroke="#transparent" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
+            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="3"
+              d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
+            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="3"
+              d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked${i}" class="d-none" x="0px" y="0px"
+            width="30" height="30" viewBox="0 0 48 48">
+            <path fill="#a5d6a7"
+              d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
+            </path>
+            <polyline fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
+            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="3"
+              d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
+            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+              stroke-miterlimit="10" stroke-width="3"
+              d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
+          </svg>
+        </div>
+      </div>
+      `;
+  }
+  this.checkboxExchangeEdit();
+}
+
+function checkboxExchangeEdit() {
+  for (let x = 0; x < selectedContacs.length; x++) {
+    let id = selectedContacs[x];
+    document.getElementById("CkeckboxChecked" + id).classList.remove("d-none");
+    document.getElementById("checkboxUnchecked" + id).classList.add("d-none");
+  }
+}
+
+//Funktionen um das richige Datum zu erfassen
+
+function convertDate(inputDate) {
+  let parts = inputDate.split(".");
+
+  let day = parts[0];
+  let month = parts[1];
+  let year = parts[2];
+
+  if (day.length < 2) day = "0" + day;
+  if (month.length < 2) month = "0" + month;
+
+  let formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
+
+function revertDate(inputDate) {
+  try {
+    // Prüfen, ob das Eingabedatum das richtige Format hat
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(inputDate)) {
+      throw new Error("Eingabedatum hat nicht das erwartete Format yyyy-MM-dd");
+    }
+
+    let parts = inputDate.split("-");
+
+    let year = parts[0];
+    let month = parts[1];
+    let day = parts[2];
+
+    if (day.length < 2) day = "0" + day;
+    if (month.length < 2) month = "0" + month;
+
+    let formattedDate = `${day}.${month}.${year}`;
+
+    return formattedDate;
+  } catch (error) {
+    console.error("Fehler bei der Datumsumwandlung:", error.message);
+    return null;
   }
 }

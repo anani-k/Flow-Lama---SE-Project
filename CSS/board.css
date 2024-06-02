@@ -183,6 +183,7 @@ h2 {
 
 .commentSection {
   color: grey;
+  word-break: break-word;
 }
 
 .assignedUser {
