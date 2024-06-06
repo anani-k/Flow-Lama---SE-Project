@@ -8,6 +8,10 @@ class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
 
+myEmitter.on('signUp',  (res) => {
+    res.render(__dirname + "/views/signUp.ejs");
+});
+
 myEmitter.on('userLogin', (username, res) => {
     console.log(`User logged in: ${username}`);
     res.render("summary");
@@ -36,5 +40,20 @@ myEmitter.on('failedSignUp', (username, res) => {
     console.log(`User failed to sign up: ${username}`);
     res.render("passwordFail");
 });
+
+myEmitter.on('contacts', (res) => {
+    console.log(`Opend Contacts`);
+    res.render(__dirname + "/views/contacts.ejs");
+});
+myEmitter.on('summary', (res) => {
+    console.log(`View Summary`);
+    res.render(__dirname + "/views/summary.ejs");
+});
+
+myEmitter.on('board', (res) => {
+    console.log(`View Summary`);
+    res.render(__dirname + "/views/board.ejs");
+});
+
 
 module.exports = myEmitter;

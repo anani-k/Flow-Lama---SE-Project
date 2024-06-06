@@ -1,5 +1,7 @@
 // routes.js
 
+const myEmitter = require("./myEmitter");
+
 function checkPassword(req) {
     const userPassword = req.body["password"];
     const confirmPassword = req.body["confirmPassword"];
@@ -21,22 +23,25 @@ module.exports = (app) => {
 
     // Sign Up
     app.get("/signUp", (req, res) => {
-        res.render(__dirname + "/views/signUp.ejs");
+        myEmitter.emit('signUp', res);
+
     });
 
     // Board
     app.get("/board", (req, res) => {
-        res.render(__dirname + "/views/board.ejs");
+        myEmitter.emit('board', res);
+
     });
 
     // Summary
     app.get("/summary", (req, res) => {
-        res.render(__dirname + "/views/summary.ejs");
+        myEmitter.emit('summary', res);
+
     });
 
     // Contacts
     app.get("/contacts", (req, res) => {
-        res.render(__dirname + "/views/contacts.ejs");
+        myEmitter.emit('contacts', res);
     });
 
     // logintry
