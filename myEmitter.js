@@ -8,6 +8,13 @@ class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
 
+myEmitter.on('index',  (res, req) => {
+    let counter = parseInt(req.cookies['counter']) || 0;
+    const maxAge = 3600 * 1000; // one hour
+    res.cookie('counter', counter + 1, { 'maxAge': maxAge });
+    res.render(__dirname + "/views/index.ejs");
+});
+
 myEmitter.on('signUp',  (res) => {
     res.render(__dirname + "/views/signUp.ejs");
 });

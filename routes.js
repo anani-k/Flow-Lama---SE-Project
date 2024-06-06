@@ -14,11 +14,13 @@ module.exports = (app) => {
     const myEmitter = require('./myEmitter');
 
     // Home/ index
+    app.get("/", (req, res) => {
+        myEmitter.emit('index', res, req);
+
+    });
     app.get("/index", (req, res) => {
-        let counter = parseInt(req.cookies['counter']) || 0;
-        const maxAge = 3600 * 1000; // one hour
-        res.cookie('counter', counter + 1, { 'maxAge': maxAge });
-        res.render(__dirname + "/views/index.ejs");
+        myEmitter.emit('index', res, req);
+
     });
 
     // Sign Up
@@ -56,7 +58,7 @@ module.exports = (app) => {
             req.session.sessionValue = username;
             myEmitter.emit('userLogin', username, res); // Benutzeranmeldung auslösen
         } else {
-            myEmitter.emit('failedLogin', username, res); // Benutzeranmeldung auslösen
+            myEmitter.emit('failedLogin', username, res); // fehlerhafte Benutzeranmeldung auslösen
         }
     });
 
