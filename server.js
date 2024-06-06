@@ -34,6 +34,7 @@ app.get("/index", function (req, res) {
     req.session.destroy();
     res.sendFile(__dirname + "/views/index.html");
 });
+
 app.get("/summary", function (req, res) {
     res.sendFile(__dirname + "/views/summary.html");
 });
@@ -44,7 +45,13 @@ app.get("/board", function (req, res) {
 app.get("/contacts", function (req, res) {
     res.sendFile(__dirname + "/views/contacts.html");
 });
+app.get("/projectOverview", function (req, res) {
+    res.sendFile(__dirname + "/views/projectOverview.html");
+});
 app.get("/signUp", function (req, res) {
     res.sendFile(__dirname + "/views/signUp.html");
 });
 
+app.get("/Test", function (req, res) {
+    res.sendFile(__dirname + "/views/Test.html");
+});
