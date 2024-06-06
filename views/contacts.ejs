@@ -2,13 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Contacts | projectName</title>
+        <title>Contacts | Flow Lama</title>
         <link rel="stylesheet" href="styles.css" type="text/css">
         <link rel="stylesheet" href="contacts.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="array.js"></script>
+        <script src="dropdown.js"></script>
+        <script src="contacs.js"></script>
 
       </head>
-    <body>
+    <body onload="init()">
 <!--Sidebar-->
 <div class="sidebar">
 
@@ -58,44 +61,31 @@
   <hr class="dropdown-divider">
   <div class="dropdown" style="right: 1rem;">
     <a onclick="myFunction()" href="#"
-      class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" aria-expanded="false">
-      <img src="" alt="" width="50" height="50" class="rounded-circle me-2">
-      <strong>User</strong>
+      class="d-flex align-items-center text-user text-decoration-none dropdown-toggle" aria-expanded="false">
+      <svg width="60"viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM11.9999 6C9.79077 6 7.99991 7.79086 7.99991 10C7.99991 12.2091 9.79077 14 11.9999 14C14.209 14 15.9999 12.2091 15.9999 10C15.9999 7.79086 14.209 6 11.9999 6ZM17.1115 15.9974C17.8693 16.4854 17.8323 17.5491 17.1422 18.1288C15.7517 19.2966 13.9581 20 12.0001 20C10.0551 20 8.27215 19.3059 6.88556 18.1518C6.18931 17.5723 6.15242 16.5032 6.91351 16.012C7.15044 15.8591 7.40846 15.7251 7.68849 15.6097C8.81516 15.1452 10.2542 15 12 15C13.7546 15 15.2018 15.1359 16.3314 15.5954C16.6136 15.7102 16.8734 15.8441 17.1115 15.9974Z" fill="#627254"/>
+      </svg>
     </a>
     <ul id="Demo" class="dropdown-menu text-small shadow">
       <li><a class="dropdown-item" href="/projectOverview">Switch project</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item" href="/index">Sign out</a></li>
+      <li><a class="dropdown-item" href="/index">Sign out</a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
     </ul>
-
-
   </div>
 </div>
 <!--Header-->
 
 
 <!--Modal add contacts-->
-<div id="id01" class="modal">
+<div id="id01" class="modal d-none">
     <div class="modal-content">
         <div class="popup-title">
             <h1 class="contentTitle">Add contact</h1>
             <span class="contentTitleSpan">Tasks are better with a team!</span>
         </div>
-        <div class="popup-fields">
-            <form class="popup-input noselect" onsubmit="return addNewContact()">
-                <input pattern="[a-zA-Z ]+" type="name" placeholder="Name" id="popUpName" required="" class="task-title-input">
-                <input type="email" placeholder="Email" id="popUpEmail" required="" class="task-title-input">
-                <input title="Only +, numbers &amp; spaces are allowed" pattern="[+]?[\d ]*" type="phone" placeholder="Phone" id="popUpPhone" required="" class="task-title-input">
-                <div id="popup-buttons" class="popup-buttons"><br>
-                  <button class="buttonCancel" onclick="document.getElementById('id01').style.display='none'" type="button">Cancel <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                  </svg></button>
-                  <button class="buttonInput" id="popUpSubmit" type="submit">Create contact<img src="" alt=""></button>
-                </div>
-              </form>
-
+        <div class="popup-fields" id="popup-fields">
         </div>
     </div>
 
@@ -108,26 +98,16 @@
   <div id="contactList">
 
 
-    <div class="add-new noselect">
-        <div class="add-new-button" onclick="document.getElementById('id01').style.display='block'">
+    <div class="add-new">
+        <div class="add-new-button" onclick="openAddContant()">
             <span>Add new contact</span><svg xmlns="http://www.w3.org/2000/svg" color="white" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
               <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
               <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
             </svg>
         </div>
     </div>
-    <div  class="contact-list noselect"><div class="contact-list-padding"></div>
-      <div class="letter">
-        <span>Anfangsbuchstabe</span>
-      </div>
-      <hr>
-      <div id="contact0" class="user" onclick="openContact(0)">
-        <div class="user-icon" style="background-color: #9327FF;">Initialen</div>
-          <div class="username">
-            <span>Name</span>
-            <a>Email</a>
-          </div>
-        </div>
+    <div  class="contact-list"><div class="contact-list-padding"></div>
+<div id="contactsListContainer"></div>
       </div>
     </div> 
 
@@ -138,11 +118,16 @@
     <section>
       <h1 class="contentTitle" style="color:black;">Contacts</h1>
     </section>
+    <div id="openContacs">
+      
+    </div>
   </div><!-- MainContent End -->
 
 </div><!-- Page Content ENDE -->
 
-<script>
+<!-- was machen sachen? ↓↓↓  -->
+
+<!-- <script>
   function myFunction() {
     var x = document.getElementById("Demo");
     if (x.className.indexOf("dd-show") == -1) {
@@ -171,7 +156,7 @@
 
     contactMenu.firstElementChild.style = 'animation: slideInContactMenu 300ms ease-out';
 }
-</script>
+</script> -->
 
     </body>
 </html>

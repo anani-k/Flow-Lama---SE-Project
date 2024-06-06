@@ -41,12 +41,13 @@ a {
 }
 .summary-todos {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
 }
 .summary-todos-badge {
     display: flex;
-    height: 10rem;
-    width: 15rem;
+    height: 5rem;
+    width: 20rem;
     justify-content: center;
     align-items: center;
     line-height: 30px;
@@ -55,7 +56,7 @@ a {
     background-color: #FFF;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
 }
-.summary-todos-badge:hover, .summary-urgent:hover, .summary-overview-badge:hover {
+.summary-todos-badge:hover {
     background-color: #627254;
     color: #FFF;
     transform: scale(1.075);
