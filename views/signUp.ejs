@@ -37,23 +37,14 @@
           <div class="spacer"></div>
         </div>
 
-        <form id="loginForm">
-          <div class="inputGroup nameContainer">
+        <form id="loginForm" action="newUser" method="post">
+          <div class="inputGroup">
             <div>
               <input
                 type="name"
-                id="name"
-                name="name"
-                placeholder="First Name"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="name"
-                id="lastName"
-                name="name"
-                placeholder="Last Name"
+                id="username"
+                name="username"
+                placeholder="Username"
                 required
               />
             </div>
@@ -78,7 +69,7 @@
           </div>
           <div class="inputGroup">
             <input
-              type="confirmPassword"
+              type="password"
               id="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm Password"
@@ -87,7 +78,7 @@
           </div>
 
           <div class="buttonContainer">
-            <a class="signUp" href="/summary" type="submit">Sign Up</a>
+            <button class="signUp" type="submit">Sign Up</button>
           </div>
         </form>
       </div>

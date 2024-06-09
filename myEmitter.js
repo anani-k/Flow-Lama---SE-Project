@@ -9,10 +9,15 @@ class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 myEmitter.on('index',  (res, req) => {
+    req.session.destroy();
     let counter = parseInt(req.cookies['counter']) || 0;
     const maxAge = 3600 * 1000; // one hour
     res.cookie('counter', counter + 1, { 'maxAge': maxAge });
     res.render(__dirname + "/views/index.ejs");
+});
+
+myEmitter.on('redirect', (res) => {
+   res.redirect('index');
 });
 
 myEmitter.on('signUp',  (res) => {
@@ -21,7 +26,7 @@ myEmitter.on('signUp',  (res) => {
 
 myEmitter.on('userLogin', (username, res) => {
     console.log(`User logged in: ${username}`);
-    res.render("summary");
+    res.redirect("summary");
 });
 
 myEmitter.on('userLogout', (username, res) => {
@@ -29,18 +34,18 @@ myEmitter.on('userLogout', (username, res) => {
     res.redirect("/index");
 });
 
-myEmitter.on('userSignUp', (username, useremail, userpassword, res) => {
+myEmitter.on('userSignUp', (req, res) => {
     const saltRounds = 10;
-    console.log(`New user signed up: ${username}`);
-    bcrypt.hash(userpassword, saltRounds, (err, hash) => {
-        db.prepare('INSERT INTO users(username, email, password) VALUES (?, ?, ?)').run(username, useremail, hash);
+    console.log(`New user signed up: ${req.body["username"]}`);
+    bcrypt.hash(req.body["password"], saltRounds, (err, hash) => {
+        db.prepare('INSERT INTO users(username, email, password) VALUES (?, ?, ?)').run(req.body["username"], req.body["email"], hash);
     });
     res.render(__dirname + "/views/index.ejs");
 });
 
 myEmitter.on('failedLogin', (username, res) => {
     console.log(`User failed to log in: ${username}`);
-    res.render("loginFail");
+    res.render("index");
 });
 
 myEmitter.on('failedSignUp', (username, res) => {
@@ -52,9 +57,10 @@ myEmitter.on('contacts', (res) => {
     console.log(`Opend Contacts`);
     res.render(__dirname + "/views/contacts.ejs");
 });
-myEmitter.on('summary', (res) => {
+myEmitter.on('summary', (req,res) => {
     console.log(`View Summary`);
-    res.render(__dirname + "/views/summary.ejs");
+    const username = req.session.sessionValue;
+    res.render(__dirname + "/views/summary.ejs",{username});
 });
 
 myEmitter.on('board', (res) => {

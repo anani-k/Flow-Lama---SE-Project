@@ -1,6 +1,7 @@
 // routes.js
 
 const myEmitter = require("./myEmitter");
+const bcrypt = require("bcrypt");
 
 function checkPassword(req) {
     const userPassword = req.body["password"];
@@ -31,19 +32,34 @@ module.exports = (app) => {
 
     // Board
     app.get("/board", (req, res) => {
-        myEmitter.emit('board', res);
+        if (req.session.sessionValue!=undefined){
+            myEmitter.emit('board', res);
+        } else{
+            myEmitter.emit('redirect', res);
+
+        }
 
     });
 
     // Summary
     app.get("/summary", (req, res) => {
-        myEmitter.emit('summary', res);
+        if (req.session.sessionValue!=undefined){
+            myEmitter.emit('summary', req, res);
+        } else{
+            myEmitter.emit('redirect', res);
+
+        }
 
     });
 
     // Contacts
     app.get("/contacts", (req, res) => {
-        myEmitter.emit('contacts', res);
+        if (req.session.sessionValue!=undefined){
+            myEmitter.emit('contacts', res);
+        } else{
+            myEmitter.emit('redirect', res);
+
+        }
     });
 
     // logintry
@@ -52,9 +68,7 @@ module.exports = (app) => {
         const userpassword = req.body["password"];
         const rows = db.prepare('SELECT password FROM Users WHERE username = ?').all(username);
         const hash = rows[0].password;
-        const check = bcrypt.compareSync(userpassword, hash);
-
-        if (rows.length > 0 && check) {
+        if (rows.length > 0 && bcrypt.compareSync(userpassword, hash)) {
             req.session.sessionValue = username;
             myEmitter.emit('userLogin', username, res); // Benutzeranmeldung auslösen
         } else {
@@ -64,10 +78,10 @@ module.exports = (app) => {
 
     // Register
     app.post("/newUser", (req, res) => {
-        const userName = req.body["name"];
+        const userName = req.body["username"];
 
         if (checkPassword(req)) {
-            myEmitter.emit('userSignUp', req); // Benutzerregistrierung auslösen
+            myEmitter.emit('userSignUp', req,res); // Benutzerregistrierung auslösen
         } else {
             myEmitter.emit('failedSignUp', userName, res); // Benutzerregistrierung auslösen
         }
