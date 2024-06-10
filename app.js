@@ -28,7 +28,10 @@ app.use(express.static(__dirname + "/css"));
 app.use(express.static('views'));
 app.use(express.static(__dirname + "/javascript"));
 
-
+//Test-User anlegen
+bcrypt.hash("Test",  saltRounds=10, (err, hash) => {
+    db.createUser("Test", "Test@TestMail.com", hash)
+});
 // Routen
 require('./routes')(app);
 
