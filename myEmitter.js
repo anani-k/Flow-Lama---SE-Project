@@ -24,9 +24,20 @@ myEmitter.on('signUp',  (res) => {
     res.render(__dirname + "/views/signUp.ejs");
 });
 
-myEmitter.on('userLogin', (username, res) => {
-    console.log(`User logged in: ${username}`);
-    res.redirect("summary");
+myEmitter.on('userLogin', (req, res) => {
+    const username = req.body["username"];
+    const userpassword = req.body["password"];
+    const user = db.getUserByUsername(username);
+    //console.log(user,user!==undefined,user.length,bcrypt.compareSync(userpassword, user.password));
+    if (user!==undefined&&bcrypt.compareSync(userpassword, user.password)) {
+        req.session.sessionValue = username;
+        console.log(`User logged in: ${username}`);
+        res.redirect("summary");
+    } else {
+        console.log(`User failed to log in: ${username}`);
+        res.render("index");
+    }
+
 });
 
 myEmitter.on('userLogout', (req, res) => {
@@ -37,18 +48,20 @@ myEmitter.on('userLogout', (req, res) => {
 });
 
 myEmitter.on('userSignUp', (req, res) => {
-    const saltRounds = 10;
-    console.log(`New user signed up: ${req.body["username"]}`);
-    bcrypt.hash(req.body["password"], saltRounds, (err, hash) => {
-        db.prepare('INSERT INTO users(username, email, password) VALUES (?, ?, ?)').run(req.body["username"], req.body["email"], hash);
-    });
-    res.render(__dirname + "/views/index.ejs");
+    const username= req.body["username"];
+    if(db.getUserByUsername(username)===undefined){
+        const saltRounds = 10;
+        bcrypt.hash(req.body["password"], saltRounds, (err, hash) => {
+            db.createUser(username, req.body["email"], hash)
+        });
+        res.render(__dirname + "/views/index.ejs");
+    } else {
+        console.log(`User ${username} already exists`)
+        res.redirect("/signUp");
+    }
+
 });
 
-myEmitter.on('failedLogin', (username, res) => {
-    console.log(`User failed to log in: ${username}`);
-    res.render("index");
-});
 
 myEmitter.on('failedSignUp', (username, res) => {
     console.log(`User failed to sign up: ${username}`);

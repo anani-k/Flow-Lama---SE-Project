@@ -64,16 +64,7 @@ module.exports = (app) => {
 
     // logintry
     app.post("/logintry", (req, res) => {
-        const username = req.body["username"];
-        const userpassword = req.body["password"];
-        const rows = db.prepare('SELECT password FROM Users WHERE username = ?').all(username);
-        const hash = rows[0].password;
-        if (rows.length > 0 && bcrypt.compareSync(userpassword, hash)) {
-            req.session.sessionValue = username;
-            myEmitter.emit('userLogin', username, res); // Benutzeranmeldung auslösen
-        } else {
-            myEmitter.emit('failedLogin', username, res); // fehlerhafte Benutzeranmeldung auslösen
-        }
+        myEmitter.emit('userLogin', req, res); // Benutzeranmeldung auslösen
     });
 
     // Register

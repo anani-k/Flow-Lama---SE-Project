@@ -9,7 +9,9 @@ CREATE TABLE Users (
    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
    username TEXT NOT NULL,
    email TEXT NOT NULL,
-   password TEXT NOT NULL
+   password TEXT NOT NULL,
+   UNIQUE(username)
+
 );
 
 -- Erstelle die Projekte-Tabelle
