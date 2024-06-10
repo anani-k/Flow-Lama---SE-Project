@@ -1,163 +1,168 @@
+#deadlineDate p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: xx-large;
+}
+
 .contentSummary {
-    margin-top: 5rem;
-    margin-left: 20rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 0.01em 16px;
-    height:100%;
-    width:80%;
-    position: fixed !important;
+  margin-top: 5rem;
+  margin-left: 20rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0.01em 16px;
+  height: 100%;
+  width: 80%;
+  position: fixed !important;
 }
 
 .summary-title {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    margin-bottom: 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 .summary-title h1 {
-    font-size: 3.8125rem;
+  font-size: 3.8125rem;
 }
 
 .summary-title img {
-    height: 3.6875rem;
+  height: 3.6875rem;
 }
 a {
-    text-decoration: none;
-    color: unset;
+  text-decoration: none;
+  color: unset;
 }
 .summary-title span {
-    font-size: 1.6875rem;
+  font-size: 1.6875rem;
 }
 .summary-main {
-    display: flex;
-
+  display: flex;
 }
 .summary-board {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
 .summary-todos {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 .summary-todos-badge {
-    display: flex;
-    height: 10rem;
-    width: 15rem;
-    justify-content: center;
-    align-items: center;
-    line-height: 30px;
-    gap: 1.125rem;
-    border-radius: 1.875rem;
-    background-color: #FFF;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  height: 10rem;
+  width: 15rem;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
+  gap: 1.125rem;
+  border-radius: 1.875rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
-.summary-todos-badge:hover, .summary-urgent:hover, .summary-overview-badge:hover {
-    background-color: #627254;
-    color: #FFF;
-    transform: scale(1.075);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    transition: 80ms ease-out;
-    fill: white;
+.summary-todos-badge:hover,
+.summary-urgent:hover,
+.summary-overview-badge:hover {
+  background-color: #627254;
+  color: #fff;
+  transform: scale(1.075);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: 80ms ease-out;
+  fill: white;
 }
-.summary-todos-badge:hover svg, .summary-urgent:hover svg, .summary-overview-badge:hover svg {
-    color: white;
+.summary-todos-badge:hover svg,
+.summary-urgent:hover svg,
+.summary-overview-badge:hover svg {
+  color: white;
 }
-
 
 .summary-todos-badge div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .summary-todos span {
-    font-size: 4rem;
-    font-weight: 600;
+  font-size: 4rem;
+  font-weight: 600;
 }
 .summary-todos-badge p {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 .summary-todos-badge img {
-    height: 4.3125rem;
+  height: 4.3125rem;
 }
 .summary-urgent {
-    display: flex;
-    width: 32rem;
-    height: 10rem;
-    padding: 1.75rem 3rem;
-    justify-content: center;
-    align-items: center;
-    line-height: 30px;
-    gap: 3.8125rem;
-    border-radius: 1.875rem;
-    background-color: #FFF;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  width: 32rem;
+  height: 10rem;
+  padding: 1.75rem 3rem;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
+  gap: 3.8125rem;
+  border-radius: 1.875rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 .summary-urgent-badge {
-    display: flex;
-    align-items: center;
-    gap: 1.125rem;
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
 }
 .summary-urgent-badge div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .summary-urgent-badge span {
-    font-size: 4rem;
-    font-weight: 600;
+  font-size: 4rem;
+  font-weight: 600;
 }
 .summary-overview {
-    display: flex;
-    gap: 1.75rem;
+  display: flex;
+  gap: 1.75rem;
 }
 .summary-overview-badge {
-    display: flex;
-    height: 8rem;
-    width: 9.5rem;
-    padding: 1.5625rem 0rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.8125rem;
-    line-height: 1rem;
-    border-radius: 1.875rem;
-    background-color: #FFF;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  height: 8rem;
+  width: 9.5rem;
+  padding: 1.5625rem 0rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8125rem;
+  line-height: 1rem;
+  border-radius: 1.875rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 .summary-overview-badge span {
-    font-size: 4rem;
-    font-weight: 600;
+  font-size: 4rem;
+  font-weight: 600;
 }
 .summary-overview-badge p {
-    font-size: 1rem;
-    text-align: center;
+  font-size: 1rem;
+  text-align: center;
 }
 .summary-greeting {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20rem;
 }
 .summary-greeting h2 {
-    font-size: 2.9375rem;
-    font-weight: 500;
-
+  font-size: 2.9375rem;
+  font-weight: 500;
 }
 .summary-greeting h1 {
-    font-size: 4rem;
-    color: #899d6a;
-    line-height: 1px;
+  font-size: 4rem;
+  color: #899d6a;
+  line-height: 1px;
 }
 
-
 .summary-todos-badge svg {
-    color: #627254;
-    line-height:1px;
+  color: #627254;
+  line-height: 1px;
 }

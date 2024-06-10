@@ -83,6 +83,13 @@ body {
   align-items: center;
   justify-content: space-between;
   z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.headertitleName {
+  margin-left: 340px;
+  font-size: x-large;
+  color: gray;
 }
 
 .logo {
