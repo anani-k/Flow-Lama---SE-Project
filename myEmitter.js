@@ -29,8 +29,10 @@ myEmitter.on('userLogin', (username, res) => {
     res.redirect("summary");
 });
 
-myEmitter.on('userLogout', (username, res) => {
+myEmitter.on('userLogout', (req, res) => {
+    const username = req.session.sessionValue;
     console.log(`User logged out: ${username}`);
+    req.session.destroy();
     res.redirect("/index");
 });
 
@@ -64,7 +66,7 @@ myEmitter.on('summary', (req,res) => {
 });
 
 myEmitter.on('board', (res) => {
-    console.log(`View Summary`);
+    console.log(`View Board`);
     res.render(__dirname + "/views/board.ejs");
 });
 

@@ -88,9 +88,7 @@ module.exports = (app) => {
     });
 
     // Logout
-    app.post("/logout", (req, res) => {
-        const username = req.session.sessionValue;
-        req.session.destroy();
-        myEmitter.emit('userLogout', username, res); // Benutzerabmeldung auslösen
+    app.get("/logout", (req, res) => {
+        myEmitter.emit('userLogout', req, res); // Benutzerabmeldung auslösen
     });
 };
