@@ -9,6 +9,8 @@ const bcrypt = require('bcrypt');
 const myEmitter = require('./myEmitter');
 const db = require('./db');
 
+// Initialisiere die Datenbank
+db.initializeDatabase();
 // Initialisierungen
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
