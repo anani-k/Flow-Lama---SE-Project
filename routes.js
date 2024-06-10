@@ -1,7 +1,6 @@
 // routes.js
 
 const myEmitter = require("./myEmitter");
-const bcrypt = require("bcrypt");
 
 function checkPassword(req) {
     const userPassword = req.body["password"];
@@ -10,8 +9,6 @@ function checkPassword(req) {
 }
 
 module.exports = (app) => {
-    const db = require('./db');
-    const bcrypt = require('bcrypt');
     const myEmitter = require('./myEmitter');
 
     // Home/ index
@@ -32,7 +29,7 @@ module.exports = (app) => {
 
     // Board
     app.get("/board", (req, res) => {
-        if (req.session.sessionValue!=undefined){
+        if (req.session.sessionValue!==undefined){
             myEmitter.emit('board', res);
         } else{
             myEmitter.emit('redirect', res);
@@ -43,7 +40,7 @@ module.exports = (app) => {
 
     // Summary
     app.get("/summary", (req, res) => {
-        if (req.session.sessionValue!=undefined){
+        if (req.session.sessionValue!==undefined){
             myEmitter.emit('summary', req, res);
         } else{
             myEmitter.emit('redirect', res);
@@ -54,7 +51,7 @@ module.exports = (app) => {
 
     // Contacts
     app.get("/contacts", (req, res) => {
-        if (req.session.sessionValue!=undefined){
+        if (req.session.sessionValue!==undefined){
             myEmitter.emit('contacts', res);
         } else{
             myEmitter.emit('redirect', res);
