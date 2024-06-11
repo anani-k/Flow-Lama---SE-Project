@@ -191,6 +191,7 @@ function SaveEditContact(event, i) {
   document.getElementById("id01").classList.add("d-none");
   sortedContacts = sortContactsByFirstName(globalContacts);
   this.renderContacts();
+  this.openContact(i);
 }
 
 //die Kontakt ID gibt man in die Funktion und erhält die stelle im Array contacts zurück

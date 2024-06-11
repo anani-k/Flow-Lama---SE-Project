@@ -78,8 +78,8 @@
 
 
 <!--Modal add contacts-->
-<div id="id01" class="modal d-none">
-    <div class="modal-content">
+<div id="id01" class="modal d-none" onclick="closeForm()">
+    <div class="modal-content" onclick="event.stopPropagation();">
         <div class="popup-title">
             <h1 class="contentTitle">Add contact</h1>
             <span class="contentTitleSpan">Tasks are better with a team!</span>

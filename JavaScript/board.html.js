@@ -2,7 +2,7 @@
 
 function returnOpenPopup() {
   return /*html*/ `
-  <form class="popupCard" onsubmit="logFormInputs(event)" autocomplete="off">
+  <form class="popupCard" onsubmit="logFormInputs(event)" autocomplete="off" onclick="event.stopPropagation(), closeCardPopups()">
 
   <div class="popupWarpper">
     <div class="popupHeadline">
@@ -34,10 +34,10 @@ function returnOpenPopup() {
         </div>
         <div>
           <p>Assigned to</p>
-          <div class="dropdown">
-            <input type="text" id="assignedTo" class="task-title-input cursorPointer"
-              placeholder="Select contacts to assign" onclick="toggleDropdownAssignedTo()" readonly>
-            <div class="dropdown-icon" onclick="toggleDropdownAssignedTo()">
+          <div class="dropdown" onclick="event.stopPropagation(), toggleDropdownAssignedTo()">
+            <input type="text" id="assignedTo" class="task-title-input"
+              placeholder="Select contacts to assign" onkeyup="sortContacs()" onclick="event.stopPropagation()" onfocus="toggleDropdownAssignedTo()">
+            <div class="dropdown-icon">
               <svg id="assignedToClosed" width="35" height="35" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_75597_14108" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
@@ -63,7 +63,7 @@ function returnOpenPopup() {
                 </g>
               </svg>
             </div>
-            <div id="assignedToDropdown" class="dropdown-content">
+            <div id="assignedToDropdown" class="dropdown-content" onclick="event.stopPropagation()">
 
               </a>
             </div>
@@ -132,7 +132,7 @@ function returnOpenPopup() {
       </div>
       <div class="category">
         <p>Category</p>
-        <div class="dropdown">
+        <div class="dropdown" onclick="event.stopPropagation()">
           <input type="text" id="taskCategory" class="task-title-input cursorPointer"
             placeholder="Select Task Category" onclick="toggleDropdown()"required name="category">
 
@@ -275,7 +275,7 @@ function returnOpenPopup() {
 
 function returnPopupCardContentopenButton(i) {
   return /*html*/ `
-<div class="popupCardContent">
+<div class="popupCardContent" onclick="event.stopPropagation();">
 <div class="popupCardContentHeader">
 <div class="popupCardCategory">${tasks[i].category}</div>
 <a onclick="popupCardContentcloseButton()">
@@ -356,7 +356,7 @@ ${returnPrioritySymbol(tasks[i].priority)}
 function returnEditOpenPopup(i) {
   let content = tasks[i];
   return /*html*/ `
-  <form class="popupCard" onsubmit="editFormInputs(event, ${i})" autocomplete="off">
+  <form class="popupCard" onsubmit="editFormInputs(event, ${i})" autocomplete="off" onclick="event.stopPropagation(), closeCardPopups()">
 
   <div class="popupWarpper">
     <div class="popupHeadline">
@@ -392,10 +392,10 @@ function returnEditOpenPopup(i) {
         </div>
         <div>
           <p>Assigned to</p>
-          <div class="dropdown">
-            <input type="text" id="assignedTo" class="task-title-input cursorPointer"
-              placeholder="Select contacts to assign" onclick="toggleDropdownAssignedToEdit(${i})" readonly>
-            <div class="dropdown-icon" onclick="toggleDropdownAssignedToEdit(${i})">
+          <div class="dropdown" onclick="event.stopPropagation(), toggleDropdownAssignedToEdit()">
+            <input type="text" id="assignedTo" class="task-title-input"
+              placeholder="Select contacts to assign" onkeyup="sortContacs()" onclick="event.stopPropagation()" onfocus="toggleDropdownAssignedToEdit()">
+              <div class="dropdown-icon" >
               <svg id="assignedToClosed" width="35" height="35" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_75597_14108" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
@@ -421,7 +421,7 @@ function returnEditOpenPopup(i) {
                 </g>
               </svg>
             </div>
-            <div id="assignedToDropdown" class="dropdown-content">
+            <div id="assignedToDropdown" class="dropdown-content" onclick="event.stopPropagation()">
 
               </a>
             </div>
@@ -492,7 +492,7 @@ function returnEditOpenPopup(i) {
       </div>
       <div class="category">
         <p>Category</p>
-        <div class="dropdown">
+        <div class="dropdown" onclick="event.stopPropagation()">
           <input type="text" id="taskCategory" class="task-title-input cursorPointer"
             placeholder="Select Task Category" onclick="toggleDropdown()"required name="category" value="${
               content.category

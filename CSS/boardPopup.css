@@ -131,6 +131,7 @@
 }
 
 #closeAddTaskButton:hover {
+  cursor: pointer;
   background-color: lightgrey;
 }
 
@@ -270,6 +271,7 @@
 .prioButton:hover {
   background-color: none;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 #urgentButton svg {

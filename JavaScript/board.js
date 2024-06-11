@@ -35,6 +35,7 @@ function init() {
 function setArray() {
   tasks = globalTasks;
   contacts = globalContacts;
+  contacts = sortContactsByFirstName(contacts);
 }
 
 //die Kontakt ID gibt man in die Funktion und erhält die stelle im Array contacts zurück
@@ -386,7 +387,7 @@ function checkboxExchange(i) {
   ) {
     document.getElementById("CkeckboxChecked" + i).classList.remove("d-none");
     document.getElementById("checkboxUnchecked" + i).classList.add("d-none");
-    selectedContacs.push(contacts[i].id);
+    selectedContacs.push(i.toString());
   } else if (
     !document.getElementById("CkeckboxChecked" + i).classList.contains("d-none")
   ) {
@@ -394,7 +395,7 @@ function checkboxExchange(i) {
     document.getElementById("checkboxUnchecked" + i).classList.remove("d-none");
     for (let x = 0; x < selectedContacs.length; x++) {
       const element = selectedContacs[x];
-      if (contacts[i].id == element) {
+      if (i == element) {
         selectedContacs.splice(x, 1);
       }
     }
@@ -407,7 +408,7 @@ function toggleDropdownAssignedTo() {
   document.getElementById("assignedToClosed").classList.toggle("d-none");
   document.getElementById("assignedToOpen").classList.toggle("d-none");
   if (openContacs) {
-    renderContacts();
+    this.renderContacts();
     openContacs = false;
   }
 }
@@ -416,17 +417,17 @@ function toggleDropdownAssignedTo() {
 function renderContacts() {
   document.getElementById("assignedToDropdown").innerHTML = "";
   for (let i = 0; i < contacts.length; i++) {
-    const element = contacts[findIndexById(i.toString())];
+    const element2 = contacts[i];
 
     document.getElementById("assignedToDropdown").innerHTML += /*html*/ `
-    <a href="#" onclick="checkboxExchange(${i})">
+    <a href="#" onclick="checkboxExchange(${element2.id})" id="contacts${i}">
     <div class="contactInformation">
       <div class="ContactName">
-        <div class="contactIcon" style="background-color: ${element.color};">${element.initials}</div>
-        <div class="contactFullName">${element.firstName} ${element.lastName}</div>
+        <div class="contactIcon" style="background-color: ${element2.color};">${element2.initials}</div>
+        <div class="contactFullName">${element2.firstName} ${element2.lastName}</div>
       </div>
       <div class="contactInfoCheckbox"><input type="checkbox" class="hidden-checkbox">
-        <svg xmlns="http://www.w3.org/2000/svg" id="checkboxUnchecked${i}" x="0px" y="0px" width="30"
+        <svg xmlns="http://www.w3.org/2000/svg" id="checkboxUnchecked${element2.id}" x="0px" y="0px" width="30"
           height="30" viewBox="0 0 48 48">
           <path fill="#a5d6a7"
             d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
@@ -440,7 +441,7 @@ function renderContacts() {
             stroke-miterlimit="10" stroke-width="3"
             d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked${i}" class="d-none" x="0px" y="0px"
+        <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked${element2.id}" class="d-none" x="0px" y="0px"
           width="30" height="30" viewBox="0 0 48 48">
           <path fill="#a5d6a7"
             d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
@@ -581,6 +582,7 @@ function logFormInputs(event) {
     newTask[name] = value;
   }
   tasks.push(newTask);
+  console.log(tasks);
 
   this.generateCard();
   this.closePopup();
@@ -680,7 +682,7 @@ function editFormInputs(event, i) {
   this.closePopup();
 }
 
-function toggleDropdownAssignedToEdit(i) {
+function toggleDropdownAssignedToEdit() {
   document.getElementById("assignedToDropdown").classList.toggle("show");
   document.getElementById("assignedToClosed").classList.toggle("d-none");
   document.getElementById("assignedToOpen").classList.toggle("d-none");
@@ -693,56 +695,68 @@ function toggleDropdownAssignedToEdit(i) {
 function renderContactsEdit() {
   document.getElementById("assignedToDropdown").innerHTML = "";
   for (let i = 0; i < contacts.length; i++) {
-    const element = contacts[findIndexById(i.toString())];
+    document.getElementById("assignedToDropdown").innerHTML = "";
+    for (let i = 0; i < contacts.length; i++) {
+      const element2 = contacts[i];
 
-    document.getElementById("assignedToDropdown").innerHTML += /*html*/ `
-      <a href="#" onclick="checkboxExchange(${i})">
-      <div class="contactInformation">
-        <div class="ContactName">
-          <div class="contactIcon" style="background-color: ${element.color};">${element.initials}</div>
-          <div class="contactFullName">${element.firstName} ${element.lastName}</div>
-        </div>
-        <div class="contactInfoCheckbox"><input type="checkbox" class="hidden-checkbox">
-          <svg xmlns="http://www.w3.org/2000/svg" id="checkboxUnchecked${i}"x="0px" y="0px" width="30"
-            height="30" viewBox="0 0 48 48">
-            <path fill="#a5d6a7"
-              d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
-            </path>
-            <polyline fill="none" stroke="#transparent" stroke-linecap="round" stroke-linejoin="round"
-              stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
-            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
-              stroke-miterlimit="10" stroke-width="3"
-              d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
-            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
-              stroke-miterlimit="10" stroke-width="3"
-              d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked${i}" class="d-none" x="0px" y="0px"
-            width="30" height="30" viewBox="0 0 48 48">
-            <path fill="#a5d6a7"
-              d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
-            </path>
-            <polyline fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
-              stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
-            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
-              stroke-miterlimit="10" stroke-width="3"
-              d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
-            <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
-              stroke-miterlimit="10" stroke-width="3"
-              d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
-          </svg>
-        </div>
+      document.getElementById("assignedToDropdown").innerHTML += /*html*/ `
+    <a href="#" onclick="checkboxExchange(${element2.id})" id="contacts${i}">
+    <div class="contactInformation">
+      <div class="ContactName">
+        <div class="contactIcon" style="background-color: ${element2.color};">${element2.initials}</div>
+        <div class="contactFullName">${element2.firstName} ${element2.lastName}</div>
       </div>
-      `;
+      <div class="contactInfoCheckbox"><input type="checkbox" class="hidden-checkbox">
+        <svg xmlns="http://www.w3.org/2000/svg" id="checkboxUnchecked${element2.id}" x="0px" y="0px" width="30"
+          height="30" viewBox="0 0 48 48">
+          <path fill="#a5d6a7"
+            d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
+          </path>
+          <polyline fill="none" stroke="#transparent" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" id="CkeckboxChecked${element2.id}" class="d-none" x="0px" y="0px"
+          width="30" height="30" viewBox="0 0 48 48">
+          <path fill="#a5d6a7"
+            d="M42,45H15c-1.7,0-3-1.3-3-3V15c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v27C45,43.7,43.7,45,42,45z">
+          </path>
+          <polyline fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3" points="17.5,23.5 22.5,28.5 33,18"></polyline>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M40.5,30.9v6.6c0,1.7-1.3,3-3,3h-27c-1.7,0-3-1.3-3-3V24"></path>
+          <path fill="none" stroke="#18193f" stroke-linecap="round" stroke-linejoin="round"
+            stroke-miterlimit="10" stroke-width="3"
+            d="M7.5,17.1v-6.6c0-1.7,1.3-3,3-3h27c1.7,0,3,1.3,3,3v12.8"></path>
+        </svg>
+      </div>
+    </div>
+    `;
+    }
   }
   this.checkboxExchangeEdit();
 }
 
 function checkboxExchangeEdit() {
-  for (let x = 0; x < selectedContacs.length; x++) {
-    let id = selectedContacs[x];
-    document.getElementById("CkeckboxChecked" + id).classList.remove("d-none");
-    document.getElementById("checkboxUnchecked" + id).classList.add("d-none");
+  for (let i = 0; i < selectedContacs.length; i++) {
+    for (let x = 0; x < contacts.length; x++) {
+      const id = selectedContacs[i];
+
+      if (contacts[x].id === id) {
+        document
+          .getElementById("CkeckboxChecked" + id)
+          .classList.remove("d-none");
+        document
+          .getElementById("checkboxUnchecked" + id)
+          .classList.add("d-none");
+      }
+    }
   }
 }
 
@@ -786,4 +800,42 @@ function revertDate(inputDate) {
     console.error("Fehler bei der Datumsumwandlung:", error.message);
     return null;
   }
+}
+
+function closeCardPopups() {
+  document.getElementById("assignedToDropdown").classList.remove("show");
+  document.getElementById("assignedToClosed").classList.remove("d-none");
+  document.getElementById("assignedToOpen").classList.add("d-none");
+
+  document.getElementById("myDropdown").classList.remove("show");
+}
+
+function sortContacs() {
+  let value = document.getElementById("assignedTo").value.replace(/\s+/g, "");
+  for (let i = 0; i < contacts.length; i++) {
+    const element = contacts[i].firstName + contacts[i].lastName + " ";
+    if (!element.toLowerCase().includes(value.toLowerCase())) {
+      console.log(value, element);
+      document.getElementById("contacts" + i).classList.add("d-none");
+    } else {
+      document.getElementById("contacts" + i).classList.remove("d-none");
+    }
+  }
+}
+
+function sortContactsByFirstName(contacts) {
+  let contactsCopy = [...contacts];
+
+  return contactsCopy.sort((a, b) => {
+    let nameA = a.firstName.toLowerCase();
+    let nameB = b.firstName.toLowerCase();
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
 }
