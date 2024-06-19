@@ -8,6 +8,7 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const myEmitter = require("./myEmitter");
 const db = require("./db");
+const {exampleAddTasks, exampleAddContacts, exampleDeleteTaskByTitle} = require("./JavaScript/array");
 
 // Initialisiere die Datenbank
 db.initializeDatabase();
@@ -21,6 +22,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+//array DB
+exampleAddTasks();
+exampleAddContacts();
+
+exampleDeleteTaskByTitle();
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");

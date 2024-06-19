@@ -77,6 +77,12 @@ const getTaskById = (taskId) => {
     return stmt.get(taskId);
 };
 
+const getTaskIdByTitle=(taskTitle) =>{
+    const stmt = db.prepare('SELECT task_id FROM Tasks WHERE task_title = ?');
+    const row = stmt.get(taskTitle);
+    return row ? row.task_id : null;
+}
+
 const updateTaskStatus = (taskId, status) => {
     const stmt = db.prepare('UPDATE Tasks SET status = ? WHERE task_id = ?');
     stmt.run(status, taskId);
@@ -84,6 +90,7 @@ const updateTaskStatus = (taskId, status) => {
 
 const deleteTask = (taskId) => {
     const stmt = db.prepare('DELETE FROM Tasks WHERE task_id = ?');
+
     stmt.run(taskId);
 };
 
@@ -101,6 +108,17 @@ const getAllContactsByUserId = (userId) => {
 const deleteContact = (userId, contactUserId) => {
     const stmt = db.prepare('DELETE FROM Contacts WHERE user_id = ? AND contact_user_id = ?');
     stmt.run(userId, contactUserId);
+};
+
+//GlobalContacts
+const addGlobalContact = (firstName,lastName,initials,color,email,phone)=>{
+    const stmt =db.prepare('INSERT INTO GlobalContacts(first_name,last_name,initials,color,email,phone)VALUES (?,?,?,?,?,?)');
+    stmt.run(firstName,lastName,initials,color,email,phone);
+};
+
+const deleteGlobalContactFromDbById=(globalContactId)=>{
+    const stmt =db.prepare('DELETE  FROM GlobalContacts WHERE global_contact_id = ?');
+    stmt.run(globalContactId);
 };
 
 module.exports = {
@@ -121,5 +139,9 @@ module.exports = {
     addContact,
     getAllContactsByUserId,
     deleteContact,
-    db
+    db,
+    getTaskIdByTitle,
+    addGlobalContact,
+    deleteGlobalContactFromDbById,
+
 };
