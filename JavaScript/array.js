@@ -2,12 +2,14 @@
 // Array, von dem alle anderen Dateien sich ihre Infos holen
 
 const { createTask, deleteTask, getTaskIdByTitle, addGlobalContact, deleteGlobalContactById,
-  deleteGlobalContactFromDbById
+  deleteGlobalContactFromDbById, getTaskById, getGlobalContactFromDbById
 } = require("../db");
 
 let globalTasks = [];
 let globalContacts = [];
 
+var globalTaskLastId=1;
+var globalContactsLastId=1;
 
 // Funktion zum Benachrichtigen der Datenbank über Änderungen
 const notifyDatabase = (changeType, entityType, data) => {
@@ -20,7 +22,8 @@ const notifyDatabase = (changeType, entityType, data) => {
       // updateTask(data.id, data);
     } else if (changeType === 'delete') {
 
-      deleteTask(getTaskIdByTitle(data.title));
+      deleteTask(data.task_id);
+
     }
   } else if (entityType === 'contact') {
     if (changeType === 'add') {
@@ -28,9 +31,9 @@ const notifyDatabase = (changeType, entityType, data) => {
     } else if (changeType === 'update') {
       // updateContact(data.id, data);
     } else if (changeType === 'delete') {
-
-      deleteGlobalContactFromDbById(data.id);
-
+      console.log(11222333,data);
+      deleteGlobalContactFromDbById(data.global_contact_id);
+      //console.log(globalContacts);
     }
   }
 };
@@ -47,7 +50,8 @@ const arrayHandler = (entityType) => ({
   deleteProperty(target, property) {
     if (property in target) {
       const value = target[property];
-      notifyDatabase('delete', entityType, value); // notify before deletion
+      //console.log(111222,entityType,value);
+      //notifyDatabase('delete', entityType, value); // notify before deletion
       delete target[property];
     }
     return true;
@@ -59,9 +63,15 @@ const arrayHandler = (entityType) => ({
 globalTasks = new Proxy(globalTasks, arrayHandler('task'));
 globalContacts = new Proxy(globalContacts, arrayHandler('contact'));
 
+//Allg Funktionen
+
+
+
+
 // Funktion zum Hinzufügen eines neuen Kontakts
 const addContact = (firstName, lastName, initials, color, email, phone) => {
   globalContacts.push({
+    id: globalContactsLastId,
     firstName,
     lastName,
     initials,
@@ -69,7 +79,7 @@ const addContact = (firstName, lastName, initials, color, email, phone) => {
     email,
     phone,
   });
-  updateContactIds();
+  globalContactsLastId++;
 };
 
 const exampleAddContacts = () => {
@@ -84,29 +94,46 @@ const exampleAddContacts = () => {
   //console.log(globalContacts);
 };
 
-const updateContactIds = () => {
+/*const updateContactIds = () => {
   globalContacts.forEach((contact, index) => {
     contact.id = index + 1;
   });
-};
+};*/
+
+function isContactIdInArray(id) {
+  const foundContact = globalContacts.find(contact => contact.id === id);
+  return foundContact !== undefined;
+}
+
+function getContactIndexById(id) {
+  return globalContacts.findIndex(contact => contact.id === id);
+}
 
 const deleteGlobalContactsById = (id) => {
+if(isContactIdInArray(id)){
+  notifyDatabase('delete', 'contact', getGlobalContactFromDbById(id)); // Notify after getting the correct contact
+  globalContacts.splice(getContactIndexById(id), 1); // Entfernt ausschließlich den Kontakt mit der angegebenen ID
 
-  globalContacts.splice(id-1, 1); // Entfernt ausschließlich den Kontakt mit der angegebenen ID
-  notifyDatabase('delete', 'contact', id); // Notify after getting the correct contact
-  updateContactIds(); // Aktualisiert die IDs der verbleibenden Kontakte
-  console.log(`Contact with ID ${id} deleted.`);
+  console.log(`Contact with ID ${id} deleted.`);}
+else{
+  console.log('Id &{id} not Found');
+  }
 
 };
 
-const exampleDeleteContactById = () => {
+
+const exampleDeleteContactById3 = () => {
   deleteGlobalContactsById(3);
 
 };
 
+
+
+
 // Beispiel, um eine Aufgabe hinzuzufügen und zu löschen
 const addTask = (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId) => {
   globalTasks.push({
+    id:globalTaskLastId,
     progress,
     category,
     title,
@@ -117,7 +144,7 @@ const addTask = (progress, category, title, description, date, openSubtasks, clo
     priority,
     assigedToId,
   });
-  updateTaskIds();
+  globalTaskLastId++;
 };
 
 const exampleAddTasks = () => {
@@ -157,13 +184,49 @@ const exampleAddTasks = () => {
       ["1", "2", "3", "6", "5"]
   );
 
-  console.log(globalTasks);
+  // console.log(globalTasks);
 };
 
+/*
 const updateTaskIds = () => {
   globalTasks.forEach((task, index) => {
     task.id = index + 1;
   });
+};
+*/
+
+function isTaskIdInArray(id) {
+  const foundTask = globalTasks.find(contact => contact.id === id);
+  return foundTask !== undefined;
+}
+
+function getTaskIndexById(id) {
+  return globalTasks.findIndex(task => task.id === id);
+}
+
+const deleteTaskById = (id)=>{
+if (isTaskIdInArray(id)){
+
+  // Finde den Index des Elements mit dem gegebenen Titel
+  const task = getTaskById(id)
+  console.log("deleteTaskById:", id,getTaskIndexById(id));
+  // Überprüfe, ob das Element im Array gefunden wurde
+
+    notifyDatabase('delete','task',task);
+    globalTasks.splice(getTaskIndexById(id), 1);
+
+    console.log(`Task: "${id}" aus array gelöscht`);
+
+    //test console array auswerfen
+    //console.log("array nach dem löschen: ",globalTasks);
+
+  } else {
+    console.log(`Task with title "${id}" not found.`);
+  }
+};
+
+const exampleDeleteTaskById1=()=>{
+  deleteTaskById(1);
 };
 
 const deleteTaskByTitle = (title) => {
@@ -172,10 +235,15 @@ const deleteTaskByTitle = (title) => {
   console.log("deleteTaskByTitle:", title, index);
   // Überprüfe, ob das Element im Array gefunden wurde
   if (index !== -1) {
-    // Entferne das Element mit splice
+
+    notifyDatabase('delete','task',getTaskById(getTaskIdByTitle(title)));
     globalTasks.splice(index-1, 1);
+
     console.log(`Task: "${title}" aus array gelöscht`);
-    updateTaskIds();
+
+    //test console array auswerfen
+    //console.log("array nach dem löschen: ",globalTasks);
+
   } else {
     console.log(`Task with title "${title}" not found.`);
   }
@@ -183,19 +251,21 @@ const deleteTaskByTitle = (title) => {
 
 const exampleDeleteTaskByTitle = () => {
   deleteTaskByTitle("Button Design");
-  console.log(globalTasks);
+  // console.log(globalTasks);
 };
 
 module.exports = {
   globalTasks,
   globalContacts,
   exampleAddContacts,
-  exampleDeleteContactById,
+  exampleDeleteContactById3,
   exampleAddTasks,
   exampleDeleteTaskByTitle,
   addContact,
   addTask,
   deleteTaskByTitle,
   deleteGlobalContactsById,
-  updateTaskIds,
+  deleteTaskById,
+  exampleDeleteTaskById1,
+  isContactIdInArray,
 };

@@ -8,7 +8,11 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const myEmitter = require("./myEmitter");
 const db = require("./db");
-const {exampleAddTasks, exampleAddContacts, exampleDeleteTaskByTitle} = require("./JavaScript/array");
+const {exampleAddTasks, exampleAddContacts, exampleDeleteTaskByTitle, exampleDeleteTaskById1, exampleDeleteContactById,
+    globalTasks, addTask, globalContacts, deleteGlobalContactsById, isIdInArray, exampleDeleteContactById3,
+    isContactIdInArray, deleteTaskById
+} = require("./JavaScript/array");
+const {getGlobalContactFromDbById, getTaskById} = require("./db");
 
 // Initialisiere die Datenbank
 db.initializeDatabase();
@@ -24,10 +28,32 @@ app.use(
 );
 
 //array DB
-exampleAddTasks();
-exampleAddContacts();
 
-exampleDeleteTaskByTitle();
+//Contact example
+
+/*
+exampleAddContacts();
+console.log(123456,isContactIdInArray(2));
+exampleDeleteContactById3();
+console.log(isContactIdInArray(3));
+exampleDeleteContactById3();
+deleteGlobalContactsById(4)
+console.log(globalContacts);
+*/
+
+
+
+
+
+//Tasks example
+
+exampleAddTasks();
+
+//exampleDeleteTaskByTitle();
+exampleDeleteTaskById1();
+
+//deleteTaskById(2);
+console.log(globalTasks,111);
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");

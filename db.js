@@ -121,6 +121,16 @@ const deleteGlobalContactFromDbById=(globalContactId)=>{
     stmt.run(globalContactId);
 };
 
+const deleteGlobalContactFromDbByName=(firstName,lastName)=>{
+    const stmt = db.prepare('DELETE * FROM GlobalContacts WHERE first_name = ? AND last_name = ?');
+    stmt.run(firstName,lastName);
+};
+
+const getGlobalContactFromDbById=(globalContactId)=>{
+  const stmt = db.prepare('SELECT * FROM GlobalContacts WHERE global_contact_id = ?');
+  return stmt.get(globalContactId);
+};
+
 module.exports = {
     initializeDatabase,
     getUserByUsername,
@@ -143,5 +153,6 @@ module.exports = {
     getTaskIdByTitle,
     addGlobalContact,
     deleteGlobalContactFromDbById,
+    getGlobalContactFromDbById
 
 };
