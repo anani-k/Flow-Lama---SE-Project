@@ -10,7 +10,7 @@ const myEmitter = require("./myEmitter");
 const db = require("./db");
 const {exampleAddTasks, exampleAddContacts, exampleDeleteTaskByTitle, exampleDeleteTaskById1, exampleDeleteContactById,
     globalTasks, addTask, globalContacts, deleteGlobalContactsById, isIdInArray, exampleDeleteContactById3,
-    isContactIdInArray, deleteTaskById
+    isContactIdInArray, deleteTaskById, exampleUpdateContactById, exampleUpdateTaskStatus
 } = require("./JavaScript/array");
 const {getGlobalContactFromDbById, getTaskById} = require("./db");
 
@@ -38,6 +38,7 @@ exampleDeleteContactById3();
 console.log(isContactIdInArray(3));
 exampleDeleteContactById3();
 deleteGlobalContactsById(4)
+exampleUpdateContactById();
 console.log(globalContacts);
 */
 
@@ -47,13 +48,16 @@ console.log(globalContacts);
 
 //Tasks example
 
+
 exampleAddTasks();
 
 //exampleDeleteTaskByTitle();
-exampleDeleteTaskById1();
-
+//exampleDeleteTaskById1();
 //deleteTaskById(2);
+exampleUpdateTaskStatus();
 console.log(globalTasks,111);
+
+
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");

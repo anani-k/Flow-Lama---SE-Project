@@ -2,7 +2,7 @@
 // Array, von dem alle anderen Dateien sich ihre Infos holen
 
 const { createTask, deleteTask, getTaskIdByTitle, addGlobalContact, deleteGlobalContactById,
-  deleteGlobalContactFromDbById, getTaskById, getGlobalContactFromDbById
+  deleteGlobalContactFromDbById, getTaskById, getGlobalContactFromDbById, updateGlobalContactById, updateTaskStatusInDb
 } = require("../db");
 
 let globalTasks = [];
@@ -19,7 +19,7 @@ const notifyDatabase = (changeType, entityType, data) => {
     if (changeType === 'add') {
       createTask(data.title, data.description, data.date, data.progress, data.assignee_id, data.project_id);
     } else if (changeType === 'update') {
-      // updateTask(data.id, data);
+       updateTaskStatusInDb(data.id, data.progress);
     } else if (changeType === 'delete') {
 
       deleteTask(data.task_id);
@@ -29,7 +29,7 @@ const notifyDatabase = (changeType, entityType, data) => {
     if (changeType === 'add') {
       addGlobalContact(data.firstName, data.lastName, data.initials, data.color, data.email, data.phone);
     } else if (changeType === 'update') {
-      // updateContact(data.id, data);
+       updateGlobalContactById(data.id,data.firstName,data.lastName,data.initials,data.email,data.phone);
     } else if (changeType === 'delete') {
       console.log(11222333,data);
       deleteGlobalContactFromDbById(data.global_contact_id);
@@ -38,12 +38,12 @@ const notifyDatabase = (changeType, entityType, data) => {
   }
 };
 
-const arrayHandler = (entityType) => ({
+/*const arrayHandler = (entityType) => ({
   set(target, property, value, receiver) {
     const changeType = property in target ? 'update' : 'add';
     if (target[property] !== value) {
       target[property] = value;
-      notifyDatabase(changeType, entityType, value);
+console.log(123435123)
     }
     return true;
   },
@@ -60,17 +60,18 @@ const arrayHandler = (entityType) => ({
 
 
 // Erstellen der Proxies
-globalTasks = new Proxy(globalTasks, arrayHandler('task'));
-globalContacts = new Proxy(globalContacts, arrayHandler('contact'));
-
+//globalTasks = new Proxy(globalTasks, arrayHandler('task'));
+//globalContacts = new Proxy(globalContacts, arrayHandler('contact'));
+*/
 //Allg Funktionen
 
 
 
 
-// Funktion zum Hinzufügen eines neuen Kontakts
+// Funktionen für Kontakte
 const addContact = (firstName, lastName, initials, color, email, phone) => {
-  globalContacts.push({
+  // Erstelle das Kontaktobjekt
+  const contact = {
     id: globalContactsLastId,
     firstName,
     lastName,
@@ -78,7 +79,9 @@ const addContact = (firstName, lastName, initials, color, email, phone) => {
     color,
     email,
     phone,
-  });
+  };
+  notifyDatabase('add', 'contact', contact);
+  globalContacts.push(contact);
   globalContactsLastId++;
 };
 
@@ -93,6 +96,37 @@ const exampleAddContacts = () => {
   addContact("Finn", "Wagner", "FW", "#9B33FF", "finn.wagner@example.com", "+49 151 1234567");
   //console.log(globalContacts);
 };
+
+const updateContactById = (id, field, value) => {
+
+  const contactIndex = globalContacts.findIndex(contact => contact.id === id);
+
+  if (contactIndex !== -1) {
+
+    const contact = globalContacts[contactIndex];
+
+    if (contact.hasOwnProperty(field)) {
+      contact[field] = value;
+
+      notifyDatabase('update', 'contact', contact);
+
+      globalContacts[contactIndex] = contact;
+
+      return `Contact with id ${id} successfully updated.`;
+    } else {
+
+      return `Field "${field}" does not exist on contact.`;
+    }
+  } else {
+    return `Contact with id ${id} not found.`;
+  }
+};
+
+const exampleUpdateContactById=()=>{
+  updateContactById(1,"firstName","Lion");
+  updateContactById(1234,"firstName","klaus");
+  updateContactById(1,"thisFieldDoesNotExist");
+}
 
 /*const updateContactIds = () => {
   globalContacts.forEach((contact, index) => {
@@ -109,6 +143,8 @@ function getContactIndexById(id) {
   return globalContacts.findIndex(contact => contact.id === id);
 }
 
+
+
 const deleteGlobalContactsById = (id) => {
 if(isContactIdInArray(id)){
   notifyDatabase('delete', 'contact', getGlobalContactFromDbById(id)); // Notify after getting the correct contact
@@ -116,7 +152,7 @@ if(isContactIdInArray(id)){
 
   console.log(`Contact with ID ${id} deleted.`);}
 else{
-  console.log('Id &{id} not Found');
+  console.log('Id ${id} not Found');
   }
 
 };
@@ -130,10 +166,11 @@ const exampleDeleteContactById3 = () => {
 
 
 
-// Beispiel, um eine Aufgabe hinzuzufügen und zu löschen
+// Funktionen für Tasks
 const addTask = (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId) => {
-  globalTasks.push({
-    id:globalTaskLastId,
+  // Erstelle das Task-Objekt
+  const task = {
+    id: globalTaskLastId,
     progress,
     category,
     title,
@@ -143,9 +180,13 @@ const addTask = (progress, category, title, description, date, openSubtasks, clo
     closedSubtasks,
     priority,
     assigedToId,
-  });
+  };
+  notifyDatabase('add', 'task', task);
+  globalTasks.push(task);
   globalTaskLastId++;
+
 };
+
 
 const exampleAddTasks = () => {
   addTask(
@@ -186,6 +227,26 @@ const exampleAddTasks = () => {
 
   // console.log(globalTasks);
 };
+
+const updateTaskStatus = (id, value) => {
+  if (isTaskIdInArray(id)) {
+    const taskIndex = globalTasks.findIndex(contact => contact.id === id);
+
+    const task = globalTasks[taskIndex];
+    task.progress = value;
+
+      notifyDatabase('update', 'task', task);
+      globalTasks[taskIndex] = task;
+      return `Task with id ${id} successfully updated.`;
+
+  } else {
+    return `Task with id ${id} not found.`;
+  }
+};
+
+const exampleUpdateTaskStatus=()=>{
+  updateTaskStatus(3,"doneeee");
+}
 
 /*
 const updateTaskIds = () => {
@@ -268,4 +329,7 @@ module.exports = {
   deleteTaskById,
   exampleDeleteTaskById1,
   isContactIdInArray,
+  updateContactById,
+  exampleUpdateContactById,
+  exampleUpdateTaskStatus
 };

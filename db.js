@@ -83,7 +83,7 @@ const getTaskIdByTitle=(taskTitle) =>{
     return row ? row.task_id : null;
 }
 
-const updateTaskStatus = (taskId, status) => {
+const updateTaskStatusInDb = (taskId, status) => {
     const stmt = db.prepare('UPDATE Tasks SET status = ? WHERE task_id = ?');
     stmt.run(status, taskId);
 };
@@ -121,14 +121,26 @@ const deleteGlobalContactFromDbById=(globalContactId)=>{
     stmt.run(globalContactId);
 };
 
-const deleteGlobalContactFromDbByName=(firstName,lastName)=>{
+/*const deleteGlobalContactFromDbByName=(firstName,lastName)=>{
     const stmt = db.prepare('DELETE * FROM GlobalContacts WHERE first_name = ? AND last_name = ?');
     stmt.run(firstName,lastName);
-};
+};*/
 
 const getGlobalContactFromDbById=(globalContactId)=>{
   const stmt = db.prepare('SELECT * FROM GlobalContacts WHERE global_contact_id = ?');
   return stmt.get(globalContactId);
+};
+
+const updateGlobalContactById = (id, firstName, lastName, initials, color, email, phone) => {
+
+    const stmt = db.prepare(`
+        UPDATE GlobalContacts
+        SET first_name = ?, last_name = ?, initials = ?, color = ?, email = ?, phone = ?
+        WHERE global_contact_id = ?;
+    `);
+    stmt.run(firstName, lastName, initials, color, email, phone, id);
+
+    console.log(`Contact with id ${id} successfully updated in the Database.`);
 };
 
 module.exports = {
@@ -144,7 +156,7 @@ module.exports = {
     createTask,
     getAllTasksByProjectId,
     getTaskById,
-    updateTaskStatus,
+    updateTaskStatusInDb,
     deleteTask,
     addContact,
     getAllContactsByUserId,
@@ -153,6 +165,7 @@ module.exports = {
     getTaskIdByTitle,
     addGlobalContact,
     deleteGlobalContactFromDbById,
-    getGlobalContactFromDbById
+    getGlobalContactFromDbById,
+    updateGlobalContactById,
 
 };
