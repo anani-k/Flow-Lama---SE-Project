@@ -63,8 +63,8 @@ const deleteProject = (projectId) => {
 
 // Funktionen für Aufgaben
 const createTask = (taskTitle, description, dueDate, status, assigneeId, projectId) => {
-    const stmt = db.prepare('INSERT INTO Tasks (task_title, description, date, status, assignee_id, project_id) VALUES (?, ?, ?, ?, ?, ?)');
-    stmt.run(taskTitle, description, dueDate, status, assigneeId, projectId);
+    const stmt = db.prepare('INSERT INTO Tasks (task_title, description, date, progress) VALUES ( ?, ?, ?, ?)');
+    stmt.run(taskTitle, description, dueDate, status);
 };
 
 const getAllTasksByProjectId = (projectId) => {

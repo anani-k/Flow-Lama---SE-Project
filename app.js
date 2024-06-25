@@ -8,7 +8,7 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const myEmitter = require("./myEmitter");
 const db = require("./db");
-const { globalTasks, taskProxy} = require("./JavaScript/array");
+//const { globalTasks, taskProxy} = require("./JavaScript/array");
 
 // Initialisiere die Datenbank
 db.initializeDatabase();

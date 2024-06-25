@@ -1,16 +1,6 @@
 
 // Funktion zum Benachrichtigen der Datenbank über Änderungen
-const {
-    createTask,
-    updateTaskStatusInDb,
-    deleteTask,
-    addGlobalContact,
-    updateGlobalContactById,
-    deleteGlobalContactFromDbById,
-    getGlobalContactFromDbById,
-    getTaskById,
-    getTaskIdByTitle
-} = require("../SEnerv/db");
+
 
 
 const notifyDatabase = (changeType, entityType, data) => {
@@ -18,22 +8,24 @@ const notifyDatabase = (changeType, entityType, data) => {
 
     if (entityType === 'task') {
         if (changeType === 'add') {
-            createTask(data.title, data.description, data.date, data.progress, data.assignee_id, data.project_id);
-        } else if (changeType === 'update') {
-            updateTaskStatusInDb(data.id, data.progress);
+          //  const stmt = db.prepare('INSERT INTO Tasks (task_title, description, date, progress) VALUES ( ?, ?, ?, ?)');
+            // stmt.run(data.title, data.description, data.date, data.status) ;
+        }
+        else if (changeType === 'update') {
+            //updateTaskStatusInDb(data.id, data.progress);
         } else if (changeType === 'delete') {
 
-            deleteTask(data.task_id);
+            //deleteTask(data.task_id);
 
         }
     } else if (entityType === 'contact') {
         if (changeType === 'add') {
-            addGlobalContact(data.firstName, data.lastName, data.initials, data.color, data.email, data.phone);
+            //addGlobalContact(data.firstName, data.lastName, data.initials, data.color, data.email, data.phone);
         } else if (changeType === 'update') {
-            updateGlobalContactById(data.id,data.firstName,data.lastName,data.initials,data.email,data.phone);
+            //updateGlobalContactById(data.id,data.firstName,data.lastName,data.initials,data.email,data.phone);
         } else if (changeType === 'delete') {
             console.log(11222333,data);
-            deleteGlobalContactFromDbById(data.global_contact_id);
+            //deleteGlobalContactFromDbById(data.global_contact_id);
             //console.log(globalContacts);
         }
     }
@@ -132,23 +124,20 @@ const exampleDeleteContactById3 = () => {
 
 
 // Funktionen für Tasks
-const addTask = (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId) => {
+const addTask = (progress, category, title, description, date, priority) => {
     // Erstelle das Task-Objekt
     const task = {
-        id: globalTaskLastId,
+        id: GlobalLastId,
         progress,
         category,
         title,
         description,
         date,
-        openSubtasks,
-        closedSubtasks,
-        priority,
-        assigedToId,
+
     };
     notifyDatabase('add', 'task', task);
     globalTasks.push(task);
-    globalTaskLastId++;
+    GlobalLastId++;
 
 };
 
@@ -213,13 +202,7 @@ const exampleUpdateTaskStatus=()=>{
     updateTaskStatus(3,"doneeee");
 }
 
-/*
-const updateTaskIds = () => {
-  globalTasks.forEach((task, index) => {
-    task.id = index + 1;
-  });
-};
-*/
+
 
 function isTaskIdInArray(id) {
     const foundTask = globalTasks.find(contact => contact.id === id);
