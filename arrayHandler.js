@@ -11,6 +11,8 @@ const {
     getTaskById,
     getTaskIdByTitle
 } = require("../SEnerv/db");
+
+
 const notifyDatabase = (changeType, entityType, data) => {
     //console.log(`Change detected: ${changeType} for ${entityType}`, data);
 
