@@ -103,6 +103,36 @@ const deleteContact = (userId, contactUserId) => {
     stmt.run(userId, contactUserId);
 };
 
+
+//
+
+// Update GlobalContacts
+function updateDatabase(contacts) {
+    db.exec('DELETE FROM GlobalContacts');
+    const insert = db.prepare(`
+        INSERT INTO GlobalContacts (global_contact_id, first_name, last_name, initials, color, email, phone)
+        VALUES (@id, @firstName, @lastName, @initials, @color, @email, @phone)
+    `);
+    for (const contact of contacts) {
+        insert.run(contact);
+    }
+    console.log('Database updated successfully!');
+}
+
+// Update Tasks
+function updateTasksDatabase(tasks) {
+    db.exec('DELETE FROM Tasks');
+    const insert = db.prepare(`
+        INSERT INTO Tasks (task_id, task_title, description, date, progress)
+        VALUES (@id, @task_title, @description, @due_date, @progress)
+    `);
+    for (const task of tasks) {
+        insert.run(task);
+    }
+    console.log('Tasks database updated successfully!');
+}
+
+
 module.exports = {
     initializeDatabase,
     getUserByUsername,
@@ -121,5 +151,8 @@ module.exports = {
     addContact,
     getAllContactsByUserId,
     deleteContact,
-    db
+    db,
+    updateDatabase,
+    updateTasksDatabase,
+
 };
