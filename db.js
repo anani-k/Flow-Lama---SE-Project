@@ -2,8 +2,10 @@
 
 const DATABASE = "database.db";
 const db = require("better-sqlite3")(DATABASE);
+const sqliteChanges = require('sqlite-changes');
 const fs = require('fs');
 const path = require('path');
+const changesDb = new sqliteChanges.Database('database.db');
 
 // Funktion zum Initialisieren der Datenbank
 const initializeDatabase = () => {
@@ -15,6 +17,9 @@ const initializeDatabase = () => {
 
     console.log("Database initialized from DB_init.sql");
 };
+
+//Benachrichtigung über Datenbank-Änderungen
+
 
 // Funktionen für Benutzer
 const getUserByUsername = (username) => {

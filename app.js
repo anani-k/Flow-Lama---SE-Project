@@ -21,6 +21,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(bodyParser.json()); // Add this middleware to parse JSON data
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");
@@ -39,8 +40,36 @@ require("./routes")(app);
 
 // Server starten
 const PORT = 3000;
-app.listen(PORT, () => {
+// Store connected clients
+const clients = []
+const server = app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+// Handle new client connections
+app.get('/stream', (req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
+    });
 
+    // Add the client to the list of connected clients
+    clients.push(res);
+
+    // Handle client disconnections
+    req.on('close', () => {
+        const index = clients.indexOf(res);
+        if (index!== -1) {
+            clients.splice(index, 1);
+        }
+    });
+changesDb.on('change', (changes) => {
+    console.log('Database changed:', changes);
+
+    // Send a notification to the client to refresh its data
+    clients.forEach((client) => {
+        client.res.write('Event: update\n');
+        client.res.write('Data: update\n\n');
+    });
+});
 module.exports = { app, myEmitter };

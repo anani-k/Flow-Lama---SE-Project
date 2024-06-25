@@ -83,5 +83,40 @@ myEmitter.on('board', (res) => {
     res.render(__dirname + "/views/board.ejs");
 });
 
+myEmitter.on('newData', (req, res) => {
+    const data = req.body;
+    const globalTasks = [];
+    const globalContacts = [];
+    let taskIndex = 0;
+    let contactIndex = 0;
+
+    for (const key in data) {
+        if (key.startsWith('task_')) {
+            const property = key.replace(/task_\d+_/, '');
+            if (!globalTasks[taskIndex]) {
+                globalTasks[taskIndex] = {};
+            }
+            globalTasks[taskIndex][property] = data[key];
+            if(property==="assigedToId"){
+                taskIndex+=1;
+            }
+        } else if (key.startsWith('contact_')) {
+            const property = key.replace(/contact_\d+_/, '');
+            if (!globalContacts[taskIndex]) {
+                globalContacts[taskIndex] = {};
+            }
+            globalContacts[taskIndex][property] = data[key];
+            if(property==="phone"){
+                taskIndex+=1;
+            }
+        } else if (key === 'GlobalLastId') {
+            // handle GlobalLastId separately
+        }
+    }
+
+    res.send('Data received successfully!');
+    console.log('Received data:', globalTasks, globalContacts);
+});
+
 
 module.exports = myEmitter;

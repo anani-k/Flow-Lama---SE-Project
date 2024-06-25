@@ -1,6 +1,10 @@
 // routes.js
-
 const myEmitter = require("./myEmitter");
+const bodyParser = require("body-parser");
+
+module.exports = (app) => {
+    const myEmitter = require('./myEmitter');
+    app.use(bodyParser.json()); // Parse JSON data
 
 function checkPassword(req) {
     const userPassword = req.body["password"];
@@ -8,8 +12,6 @@ function checkPassword(req) {
     return userPassword === confirmPassword; //gerne noch Passwordbedingungen implementierten
 }
 
-module.exports = (app) => {
-    const myEmitter = require('./myEmitter');
 
     // Home/ index
     app.get("/", (req, res) => {
@@ -75,8 +77,28 @@ module.exports = (app) => {
         }
     });
 
+    app.post("/newDataFromClient", (req, res) => {
+        if (req.session.sessionValue!==undefined){
+            myEmitter.emit('newData', req, res);
+        } else{
+            myEmitter.emit('redirect', res);
+        }
+    });
+
     // Logout
     app.get("/logout", (req, res) => {
         myEmitter.emit('userLogout', req, res); // Benutzerabmeldung auslösen
+    });
+
+    //newData in DB
+    app.get('/updates', (req, res) => {
+        // Send the current data to the client
+        db.all('SELECT * FROM users', (err, rows) => {
+            if (err) {
+                res.status(500).send({ error: 'Error fetching updates' });
+            } else {
+                res.send(rows);
+            }
+        });
     });
 };
