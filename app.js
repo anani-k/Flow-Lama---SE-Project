@@ -8,6 +8,7 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const myEmitter = require("./myEmitter");
 const db = require("./db");
+const { globalTasks, taskProxy} = require("./JavaScript/array");
 
 // Initialisiere die Datenbank
 db.initializeDatabase();
@@ -21,6 +22,24 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+/*globalTasks.push({
+    progress: "todo",
+    category: "Technical Tasssssssssssk",
+    title: "Button Design",
+    description: "Design all Buttons in green",
+    date: "11.06.2024",
+    openSubtasks: ["testa", "testb"],
+    closedSubtasks: ["test3", "test4aaa"],
+    priority: "low",
+    assigedToId: ["1", "2", "4"],
+});*/
+
+
+
+
+//globalTasks.pop();
+
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");

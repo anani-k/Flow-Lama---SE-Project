@@ -1,5 +1,7 @@
 // Array enthält infos über die daten die später im Board vom Benutzer eingetragen werden.
 //  Gerade sind im Array Test daten(Zum Stylen etc.), sollen später entfernt werden. Erst dann sind von anfangan keine Karten vorhanden.
+import {addTask} from "../arrayHandler";
+
 let tasks = [];
 
 // Array mit Beispiel Kontakten
@@ -582,6 +584,7 @@ function logFormInputs(event) {
     newTask[name] = value;
   }
   tasks.push(newTask);
+
   console.log(tasks);
 
   this.generateCard();

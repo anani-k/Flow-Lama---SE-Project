@@ -63,7 +63,7 @@ const deleteProject = (projectId) => {
 
 // Funktionen für Aufgaben
 const createTask = (taskTitle, description, dueDate, status, assigneeId, projectId) => {
-    const stmt = db.prepare('INSERT INTO Tasks (task_title, description, due_date, status, assignee_id, project_id) VALUES (?, ?, ?, ?, ?, ?)');
+    const stmt = db.prepare('INSERT INTO Tasks (task_title, description, date, status, assignee_id, project_id) VALUES (?, ?, ?, ?, ?, ?)');
     stmt.run(taskTitle, description, dueDate, status, assigneeId, projectId);
 };
 
@@ -121,15 +121,13 @@ function updateDatabase(contacts) {
 
 // Update Tasks
 function updateTasksDatabase(tasks) {
-    db.exec('DELETE FROM Tasks');
-    const insert = db.prepare(`
-        INSERT INTO Tasks (task_id, task_title, description, date, progress)
-        VALUES (@id, @task_title, @description, @due_date, @progress)
-    `);
-    for (const task of tasks) {
-        insert.run(task);
-    }
-    console.log('Tasks database updated successfully!');
+   console.log(Array.isArray(tasks))
+    console.log(tasks)
+   for (const task in tasks){
+       //console.log(task);
+       //const stmt = db.prepare('INSERT INTO Tasks (task_title, description,date,progress) VALUES (?,?,?,?)');
+       //stmt.run(task.title, task.description,task.date,task.progress);
+   }
 }
 
 
