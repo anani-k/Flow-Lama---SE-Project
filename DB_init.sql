@@ -30,9 +30,9 @@ CREATE TABLE Tasks (
    due_date TEXT,
    status TEXT,
    assignee_id INTEGER,
-   project_id INTEGER,
-   FOREIGN KEY(assignee_id) REFERENCES Users(user_id),
-   FOREIGN KEY(project_id) REFERENCES Projects(project_id)
+   project_id INTEGER
+   --FOREIGN KEY(assignee_id) REFERENCES Users(user_id),
+   --FOREIGN KEY(project_id) REFERENCES Projects(project_id)
 );
 
 -- Erstelle die Kontakte-Tabelle
@@ -44,3 +44,11 @@ CREATE TABLE Contacts (
   FOREIGN KEY(contact_user_id) REFERENCES Users(user_id),
   UNIQUE(user_id, contact_user_id)
 );
+
+CREATE TRIGGER update_tasks_trigger
+AFTER UPDATE ON Tasks
+FOR EACH ROW
+BEGIN
+    -- Notify the application of the change
+    SELECT RAISE(IGNORE);
+END;

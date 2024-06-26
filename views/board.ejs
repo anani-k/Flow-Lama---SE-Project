@@ -14,6 +14,21 @@
   <script src="board.html.js"></script>
   <script src="dropdown.js"></script>
   <script src="mailer.js"></script>
+  <script>
+    const eventSource = new EventSource('/events');
+
+    eventSource.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      console.log('Update received:', data);
+      // Update your UI with the new data
+    };
+
+    eventSource.onerror = function(err) {
+      console.error('EventSource failed:', err);
+      eventSource.close();
+    };
+  </script>
+
 
 </head>
 

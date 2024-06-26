@@ -2,10 +2,9 @@
 
 const DATABASE = "database.db";
 const db = require("better-sqlite3")(DATABASE);
-const sqliteChanges = require('sqlite-changes');
 const fs = require('fs');
 const path = require('path');
-const changesDb = new sqliteChanges.Database('database.db');
+const EventEmitter = require('events');
 
 // Funktion zum Initialisieren der Datenbank
 const initializeDatabase = () => {
@@ -18,7 +17,8 @@ const initializeDatabase = () => {
     console.log("Database initialized from DB_init.sql");
 };
 
-//Benachrichtigung über Datenbank-Änderungen
+class MyEmitter extends EventEmitter {}
+const DatabaseEmitter = new MyEmitter();
 
 
 // Funktionen für Benutzer
@@ -30,6 +30,7 @@ const getUserByUsername = (username) => {
 const createUser = (username, email, passwordHash) => {
     const stmt = db.prepare('INSERT INTO Users (username, email, password) VALUES (?, ?, ?)');
     stmt.run(username, email, passwordHash);
+    DatabaseEmitter.emit('dbChange', { type: 'userCreated'});
     console.log(`New user signed up: ${username}`);
 
 };
@@ -44,6 +45,8 @@ const userExists = (username) => {
 const createProject = (projectName, description, boardName) => {
     const stmt = db.prepare('INSERT INTO Projects (project_name, description, board_name) VALUES (?, ?, ?)');
     stmt.run(projectName, description, boardName);
+    DatabaseEmitter.emit('dbChange', { type: 'projectCreated'});
+
 };
 
 const getAllProjects = () => {
@@ -64,12 +67,14 @@ const getProjectByName = (projectName) => {
 const deleteProject = (projectId) => {
     const stmt = db.prepare('DELETE FROM Projects WHERE project_id = ?');
     stmt.run(projectId);
+    DatabaseEmitter.emit('dbChange', { type: 'projectDeleted'});
 };
 
 // Funktionen für Aufgaben
 const createTask = (taskTitle, description, dueDate, status, assigneeId, projectId) => {
     const stmt = db.prepare('INSERT INTO Tasks (task_title, description, due_date, status, assignee_id, project_id) VALUES (?, ?, ?, ?, ?, ?)');
     stmt.run(taskTitle, description, dueDate, status, assigneeId, projectId);
+    DatabaseEmitter.emit('dbChange', { type: 'taskCreated'});
 };
 
 const getAllTasksByProjectId = (projectId) => {
@@ -85,17 +90,20 @@ const getTaskById = (taskId) => {
 const updateTaskStatus = (taskId, status) => {
     const stmt = db.prepare('UPDATE Tasks SET status = ? WHERE task_id = ?');
     stmt.run(status, taskId);
+    DatabaseEmitter.emit('dbChange', { type: 'taskUpdated'});
 };
 
 const deleteTask = (taskId) => {
     const stmt = db.prepare('DELETE FROM Tasks WHERE task_id = ?');
     stmt.run(taskId);
+    DatabaseEmitter.emit('dbChange', { type: 'taskDeleted'});
 };
 
 // Funktionen für Kontakte
 const addContact = (userId, contactUserId) => {
     const stmt = db.prepare('INSERT INTO Contacts (user_id, contact_user_id) VALUES (?, ?)');
     stmt.run(userId, contactUserId);
+    DatabaseEmitter.emit('dbChange', { type: 'addedContact'});
 };
 
 const getAllContactsByUserId = (userId) => {
@@ -106,6 +114,7 @@ const getAllContactsByUserId = (userId) => {
 const deleteContact = (userId, contactUserId) => {
     const stmt = db.prepare('DELETE FROM Contacts WHERE user_id = ? AND contact_user_id = ?');
     stmt.run(userId, contactUserId);
+    DatabaseEmitter.emit('dbChange', { type: 'deletedContact'});
 };
 
 module.exports = {
@@ -126,5 +135,6 @@ module.exports = {
     addContact,
     getAllContactsByUserId,
     deleteContact,
-    db
+    db,
+    DatabaseEmitter
 };

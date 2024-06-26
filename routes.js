@@ -1,6 +1,9 @@
 // routes.js
-const myEmitter = require("./myEmitter");
+const DatabaseEmitter = require("./myEmitter");
 const bodyParser = require("body-parser");
+const db = require('./db');
+const myEmitter = require("./myEmitter");
+
 
 module.exports = (app) => {
     const myEmitter = require('./myEmitter');
@@ -90,15 +93,34 @@ function checkPassword(req) {
         myEmitter.emit('userLogout', req, res); // Benutzerabmeldung auslösen
     });
 
-    //newData in DB
-    app.get('/updates', (req, res) => {
-        // Send the current data to the client
-        db.all('SELECT * FROM users', (err, rows) => {
-            if (err) {
-                res.status(500).send({ error: 'Error fetching updates' });
-            } else {
-                res.send(rows);
-            }
+
+    app.get('/events', (req, res) => {
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+        res.flushHeaders();
+        console.log(`Established Connection`);
+
+
+        const sendUpdate = (update) => {
+
+            //@LION    Der Value muss durch die daten der Datenbank ersetzt werden. Hier muss also erst die Datenbank ausgelesen und die Daten in einer Vaiablen
+            //gespeichert werden, die du dann dem stringify übergibst (anstatt dem jetztigen String "Test"
+            res.write(`data: ${JSON.stringify('TEST')}\n\n`);
+
+
+        };
+
+        db.DatabaseEmitter.on('dbChange', () => {
+            console.log(`DatabaseDatabaseCHANGE`);
+            sendUpdate();
+
+        });
+
+        req.on('close', () => {
+            console.log(`Closed Connection`);
+            db.DatabaseEmitter.removeListener('dbChange', sendUpdate);
         });
     });
+
 };

@@ -32,7 +32,8 @@ myEmitter.on('userLogin', (req, res) => {
     if (user!==undefined&&bcrypt.compareSync(userpassword, user.password)) {
         req.session.sessionValue = username;
         console.log(`User logged in: ${username}`);
-        res.redirect("summary");
+        const loggingIn = true;
+        res.render(__dirname + "/views/summary.ejs",{username,loggingIn});
     } else {
         console.log(`User failed to log in: ${username}`);
         res.render("index");
@@ -70,17 +71,21 @@ myEmitter.on('failedSignUp', (username, res) => {
 
 myEmitter.on('contacts', (res) => {
     console.log(`Opend Contacts`);
+    db.createTask("Test","DB test", "26.06.2024","in progress","1","2");
+
     res.render(__dirname + "/views/contacts.ejs");
 });
 myEmitter.on('summary', (req,res) => {
     console.log(`View Summary`);
     const username = req.session.sessionValue;
-    res.render(__dirname + "/views/summary.ejs",{username});
+    const loggingIn  = false
+    res.render(__dirname + "/views/summary.ejs",{username,loggingIn});
 });
 
 myEmitter.on('board', (res) => {
     console.log(`View Board`);
     res.render(__dirname + "/views/board.ejs");
+    db.createTask("Test","DB test", "26.06.2024","in progress","1","2");
 });
 
 myEmitter.on('newData', (req, res) => {
