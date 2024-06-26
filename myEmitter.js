@@ -121,6 +121,14 @@ myEmitter.on('newData', (req, res) => {
 
     res.send('Data received successfully!');
     console.log('Received data:', globalTasks, globalContacts);
+
+    //@LION Hier habe ich dir die daten vom Client wieder als zwei Arrays zusammengesetzt: globalTasks und globalContacts.
+    //Bitte hier die Daten in die Datenbank einfügen lassen
+    //Bitte nur die Datenbankfunktionen verwenden, keine Hardgecodeten SQL-Statements
+    //Wenn du weitere Datenbank funktionen erstellst, die die Datenbank verändern, UNBEDINGT folgende Zeile am ende der neuen Funktion einfügen:
+    //   DatabaseEmitter.emit('dbChange', { type: '** HIER Art der änderung Beschreiben**'});
+    //Beispiele für diese zeile findest du in allen andern "schreibenden" DB-Funktionen
+    //Datenbankaufbau bitte ändern, wenn nötig
 });
 
 
