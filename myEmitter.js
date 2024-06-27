@@ -96,7 +96,7 @@ myEmitter.on('newData', (req, res) => {
     const globalContacts = [];
     let taskIndex = 0;
     let contactIndex = 0;
-
+    console.log(data);
     for (const key in data) {
         if (key.startsWith('task_')) {
             const property = key.replace(/task_\d+_/, '');
@@ -109,12 +109,12 @@ myEmitter.on('newData', (req, res) => {
             }
         } else if (key.startsWith('contact_')) {
             const property = key.replace(/contact_\d+_/, '');
-            if (!globalContacts[taskIndex]) {
-                globalContacts[taskIndex] = {};
+            if (!globalContacts[contactIndex]) {
+                globalContacts[contactIndex] = {};
             }
-            globalContacts[taskIndex][property] = data[key];
+            globalContacts[contactIndex][property] = data[key];
             if(property==="phone"){
-                taskIndex+=1;
+                contactIndex+=1;
             }
         } else if (key === 'GlobalLastId') {
             // handle GlobalLastId separately
