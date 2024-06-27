@@ -8,11 +8,6 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const myEmitter = require("./myEmitter");
 const db = require("./db");
-const {exampleAddTasks, exampleAddContacts, exampleDeleteTaskByTitle, exampleDeleteTaskById1, exampleDeleteContactById,
-    globalTasks, addTask, globalContacts, deleteGlobalContactsById, isIdInArray, exampleDeleteContactById3,
-    isContactIdInArray, deleteTaskById, exampleUpdateContactById, exampleUpdateTaskStatus
-} = require("./JavaScript/array");
-const {getGlobalContactFromDbById, getTaskById} = require("./db");
 
 // Initialisiere die Datenbank
 db.initializeDatabase();
@@ -26,38 +21,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-//array DB
-
-//Contact example
-
-/*
-exampleAddContacts();
-console.log(123456,isContactIdInArray(2));
-exampleDeleteContactById3();
-console.log(isContactIdInArray(3));
-exampleDeleteContactById3();
-deleteGlobalContactsById(4)
-exampleUpdateContactById();
-console.log(globalContacts);
-*/
-
-
-
-
-
-//Tasks example
-
-
-exampleAddTasks();
-
-//exampleDeleteTaskByTitle();
-//exampleDeleteTaskById1();
-//deleteTaskById(2);
-exampleUpdateTaskStatus();
-console.log(globalTasks,111);
-
-
+app.use(bodyParser.json()); // Add this middleware to parse JSON data
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");
@@ -68,8 +32,8 @@ app.use(express.static("views"));
 app.use(express.static(__dirname + "/javascript"));
 
 //Test-User anlegen
-bcrypt.hash("Test", (saltRounds = 10), (err, hash) => {
-  db.createUser("Test", "Test@TestMail.com", hash);
+bcrypt.hash("a", (saltRounds = 10), (err, hash) => {
+  db.createUser("a", "Test@TestMail.com", hash);
 });
 // Routen
 require("./routes")(app);

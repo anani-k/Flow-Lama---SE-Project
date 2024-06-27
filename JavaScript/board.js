@@ -541,6 +541,7 @@ function generateClosedSubtasks(i) {
 function popUpSubtaskCheckbox(x, i) {
   let changedElement = tasks[i]["openSubtasks"].splice(x, 1);
   tasks[i]["closedSubtasks"].unshift(changedElement);
+  globalTasks = tasks;
   generateCard();
   popupCardContentopenButton(i);
 }
@@ -549,6 +550,7 @@ function popUpSubtaskCheckbox(x, i) {
 function popUpSubtaskCheckboxUncheck(x, i) {
   let changedElement = tasks[i]["closedSubtasks"].splice(x, 1);
   tasks[i]["openSubtasks"].unshift(changedElement);
+  globalTasks = tasks;
   generateCard();
   popupCardContentopenButton(i);
 }
@@ -583,9 +585,10 @@ function logFormInputs(event) {
   }
   tasks.push(newTask);
   console.log(tasks);
-
+  globalTasks = tasks;
   this.generateCard();
   this.closePopup();
+
 }
 
 //Funktion setzt, beim drücken des Clear Buttons die Inhalte zurück
@@ -677,9 +680,10 @@ function editFormInputs(event, i) {
   newTask.date = revertDate(newTask.date);
 
   tasks[i] = newTask;
-
+  globalTasks = tasks;
   this.generateCard();
   this.closePopup();
+
 }
 
 function toggleDropdownAssignedToEdit() {

@@ -13,6 +13,22 @@
   <script src="board.js"></script>
   <script src="board.html.js"></script>
   <script src="dropdown.js"></script>
+  <script src="mailer.js"></script>
+  <script>
+    const eventSource = new EventSource('/events');
+
+    eventSource.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      console.log('Update received:', data);
+      // Update your UI with the new data
+    };
+
+    eventSource.onerror = function(err) {
+      console.error('EventSource failed:', err);
+      eventSource.close();
+    };
+  </script>
+
 
 </head>
 
@@ -27,7 +43,7 @@
 
     <ul class="sidebarnav">
       <li>
-        <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page">
+        <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page" onclick="sendDataToServer()">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list-check"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -36,7 +52,7 @@
         </a>
       </li>
       <li>
-        <a href="/board" class="sidebar-link active">
+        <a href="/board" class="sidebar-link active" onclick="sendDataToServer()">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-kanban"
             viewBox="0 0 16 16">
             <path
@@ -47,7 +63,7 @@
         </a>
       </li>
       <li>
-        <a href="/contacts" class="sidebarbutton sidebar-link">
+        <a href="/contacts" class="sidebarbutton sidebar-link" onclick="sendDataToServer()">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
             class="bi bi-person-lines-fill" viewBox="0 0 16 16">
             <path
@@ -75,7 +91,7 @@
     </a>
     <ul id="Demo" class="dropdown-menu text-small shadow">
 
-      <li><a class="dropdown-item" href="/logout">Sign out</a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
+      <li><a class="dropdown-item" onclick="sendDataToServer()" href="/logout">Sign out </a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
     </ul>
   </div>
 </div>
