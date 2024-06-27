@@ -3,6 +3,7 @@
 const EventEmitter = require('events');
 const bcrypt = require("bcrypt");
 const db = require("./db");
+const {updateGlobalContacts, updateTasks, DatabaseEmitter} = require("./db");
 
 class MyEmitter extends EventEmitter {}
 
@@ -123,7 +124,8 @@ myEmitter.on('newData', (req, res) => {
 
     res.send('Data received successfully!');
     console.log('Received data:', globalTasks, globalContacts);
-
+    updateTasks(globalTasks);
+    updateGlobalContacts(globalContacts);
     //@LION Hier habe ich dir die daten vom Client wieder als zwei Arrays zusammengesetzt: globalTasks und globalContacts.
     //Bitte hier die Daten in die Datenbank einfügen lassen
     //Bitte nur die Datenbankfunktionen verwenden, keine Hardgecodeten SQL-Statements

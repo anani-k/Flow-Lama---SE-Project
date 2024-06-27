@@ -3,6 +3,7 @@ const DatabaseEmitter = require("./myEmitter");
 const bodyParser = require("body-parser");
 const db = require('./db');
 const myEmitter = require("./myEmitter");
+const {fetchAndTransformContacts} = require("./db");
 
 
 module.exports = (app) => {
@@ -101,12 +102,34 @@ function checkPassword(req) {
         res.flushHeaders();
         console.log(`Established Connection`);
 
+        function arrayToString(data) {
+            // Initialize an empty array to hold key-value strings
+            let resultArray = [];
+
+            // Loop through each object in the array
+            data.forEach(obj => {
+                // Loop through each key-value pair in the object
+                for (const key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        // Concatenate key and value with a colon and push to the array
+                        resultArray.push(`${key}:${obj[key]}`);
+                    }
+                }
+            });
+
+            // Join all elements in the array with an '&' symbol
+            return resultArray.join('&');
+        }
 
         const sendUpdate = (update) => {
+            const contactArray = fetchAndTransformContacts();
+            const contactString = arrayToString(contactArray);
+            console.log(11111222333,contactString);
+
 
             //@LION    Der Value muss durch die daten der Datenbank ersetzt werden. Hier muss also erst die Datenbank ausgelesen und die Daten in einer Vaiablen
             //gespeichert werden, die du dann dem stringify übergibst (anstatt dem jetztigen String "Test"
-            res.write(`data: ${JSON.stringify('TEST')}\n\n`);
+            res.write(`data: ${JSON.stringify(contactString)}\n\n`);
 
 
         };

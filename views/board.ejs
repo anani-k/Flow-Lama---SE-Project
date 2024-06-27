@@ -20,7 +20,46 @@
 
       eventSource.onmessage = function(event) {
         const data = JSON.parse(event.data);
-        console.log('Update received (BOARD):', data);
+        console.log('Update received:', data);
+
+
+        function stringToArray(str) {
+          // Split the string by '&' to get key-value pairs
+          const keyValuePairs = str.split('&');
+          // Initialize an empty array to hold the objects
+          let resultArray = [];
+          // Initialize an empty object to collect key-value pairs for each item
+          let currentObject = {};
+
+          // Iterate through the array of key-value pairs
+          keyValuePairs.forEach(pair => {
+            // Split each key-value pair by ':' to separate the key and value
+            const [key, ...rest] = pair.split(':');
+            const value = rest.join(':'); // Join the rest in case the value contains colons
+
+            // If the key is 'global_contact_id' or any other unique key to identify a new object, push the current object to the result array
+            if (key === 'global_contact_id' && Object.keys(currentObject).length > 0) {
+              resultArray.push(currentObject);
+              currentObject = {}; // Reset currentObject
+            }
+
+            // Add the key-value pair to the current object
+            currentObject[key] = value;
+          });
+
+          // Push the last object to the array after the loop ends
+          if (Object.keys(currentObject).length > 0) {
+            resultArray.push(currentObject);
+          }
+
+          return resultArray;
+        }
+        globalContacts=stringToArray(data);
+
+
+
+        console.log(1234,stringToArray(data));
+        console.log("Array",globalContacts);
         //@LION Hier data in Array einfügen. Logik für unterteilung dafür bitte selbst ausdenken. Inspiration kannst du dir evtl.
         //aus myEmitter.js ab Zeile 91 holen
         //Ob du bereits die richtigen Daten schickst, kannst du in der Browser-Konsole sehen. Rechtsklick auf Seite und dann "inspect" oder der gleichen und dort Konsole öffnen

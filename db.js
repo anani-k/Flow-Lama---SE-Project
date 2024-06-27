@@ -98,6 +98,12 @@ const deleteTask = (taskId) => {
     stmt.run(taskId);
     DatabaseEmitter.emit('dbChange', { type: 'taskDeleted'});
 };
+const updateTasks=(tasks)=>{
+    db.exec('DELETE FROM TASKS')
+    for (eintrag in tasks){
+        createTask(tasks[eintrag].title,tasks[eintrag].description,tasks[eintrag].date,tasks[eintrag].progress);
+    }
+}
 
 // Funktionen für Kontakte
 const addContact = (userId, contactUserId) => {
@@ -116,6 +122,38 @@ const deleteContact = (userId, contactUserId) => {
     stmt.run(userId, contactUserId);
     DatabaseEmitter.emit('dbChange', { type: 'deletedContact'});
 };
+
+function fetchAndTransformContacts() {
+    try {
+        const rows = db.prepare('SELECT * FROM GlobalContacts').all();
+
+        // Transform each row into a single object with all key:value pairs
+        const transformedContacts = rows.map(contact => {
+            let transformedContact = {};
+            for (let [key, value] of Object.entries(contact)) {
+                transformedContact[key] = value;
+            }
+            return transformedContact;
+        });
+
+        return transformedContacts;
+    } catch (err) {
+        console.error('Error fetching data', err);
+    }
+}
+
+function updateGlobalContacts(contacts) {
+    db.exec('DELETE FROM GlobalContacts');
+    console.log(contacts,1234)
+    for (eintrag in contacts){
+        const stmt = db.prepare('INSERT INTO GlobalContacts(first_name, last_name, initials, color, email, phone) VALUES (?,?,?,?,?,?)');
+        stmt.run(contacts[eintrag].firstName, contacts[eintrag].lastName, contacts[eintrag].initials, contacts[eintrag].color, contacts[eintrag].email, contacts[eintrag].phone);
+    }
+    DatabaseEmitter.emit('dbChange', { type: 'updatedContact'});
+
+    console.log('Database updated successfully!');
+
+}
 
 module.exports = {
     initializeDatabase,
@@ -136,5 +174,9 @@ module.exports = {
     getAllContactsByUserId,
     deleteContact,
     db,
-    DatabaseEmitter
+    DatabaseEmitter,
+    updateGlobalContacts,
+    updateTasks,
+    fetchAndTransformContacts
+
 };
