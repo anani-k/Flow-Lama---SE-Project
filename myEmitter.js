@@ -71,6 +71,7 @@ myEmitter.on('failedSignUp', (username, res) => {
 
 myEmitter.on('contacts', (res) => {
     console.log(`Opend Contacts`);
+    //folgende Zeile nur zum Testen, um db event zu triggern
     db.createTask("Test","DB test", "26.06.2024","in progress","1","2");
 
     res.render(__dirname + "/views/contacts.ejs");
@@ -85,6 +86,7 @@ myEmitter.on('summary', (req,res) => {
 myEmitter.on('board', (res) => {
     console.log(`View Board`);
     res.render(__dirname + "/views/board.ejs");
+    //Folgende Zeile nur zum Testen, um db event zu triggern
     db.createTask("Test","DB test", "26.06.2024","in progress","1","2");
 });
 

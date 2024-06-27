@@ -10,14 +10,14 @@
     <script src="summary.js"></script>
     <script src="array.js"></script>
   </head>
-  <% if(loggingIn){%>
+
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
         const eventSource = new EventSource('/events');
 
         eventSource.onmessage = function(event) {
           const data = JSON.parse(event.data);
-          console.log('Update received:', data);
+          console.log('Update received (SUMMARY):', data);
           //@LION Hier data in Array einfügen. Logik für unterteilung dafür bitte selbst ausdenken. Inspiration kannst du dir evtl.
           //aus myEmitter.js ab Zeile 91 holen
           //Ob du bereits die richtigen Daten schickst, kannst du in der Browser-Konsole sehen. Rechtsklick auf Seite und dann "inspect" oder der gleichen und dort Konsole öffnen
@@ -32,7 +32,7 @@
         };
       });
     </script>
-  <% }%>
+
   <body onload="init()">
     <!--Sidebar-->
     <div class="sidebar">

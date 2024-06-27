@@ -9,6 +9,28 @@
         <script src="array.js"></script>
         <script src="dropdown.js"></script>
         <script src="contacs.js"></script>
+        <script src="mailer.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const eventSource = new EventSource('/events');
+
+                eventSource.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    console.log('Update received (CONTACTS):', data);
+                    //@LION Hier data in Array einfügen. Logik für unterteilung dafür bitte selbst ausdenken. Inspiration kannst du dir evtl.
+                    //aus myEmitter.js ab Zeile 91 holen
+                    //Ob du bereits die richtigen Daten schickst, kannst du in der Browser-Konsole sehen. Rechtsklick auf Seite und dann "inspect" oder der gleichen und dort Konsole öffnen
+                    //Bisher kommt immer "TEST" an
+
+                };
+
+                eventSource.onerror = function(err) {
+                    console.error('EventSource failed:', err);
+                    sendDataToServer();
+                    eventSource.close();
+                };
+            });
+        </script>
 
       </head>
     <body onload="init()">
