@@ -6,9 +6,23 @@
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <link rel="stylesheet" href="summary.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="array.js"></script>
+    <script>
+      let tasksFromServer = <%- updatedtasks %>;
+      let contactsFromServer = <%- updatedcontacts %>;
+      let lastIdFromServer = <%- lastID %>;// Hier wird das Array aus den Server-Daten eingebettet
+      console.log("ROLL",tasksFromServer,contactsFromServer,lastIdFromServer); // Array ist verfügbar und kann verwendet werden
+      // Weitere Initialisierungscode hier
+      globalTasks=tasksFromServer;
+      globalContacts=contactsFromServer;
+      GlobalLastId=lastIdFromServer;
+      console.log("ER",globalContacts,globalTasks,GlobalLastId)
+
+    </script>
     <script src="dropdown.js"></script>
     <script src="summary.js"></script>
-    <script src="array.js"></script>
+    <script src="mailer.js"></script>
+
   </head>
   <body onload="init()">
     <!--Sidebar-->

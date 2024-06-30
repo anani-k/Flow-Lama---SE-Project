@@ -7,8 +7,22 @@
         <link rel="stylesheet" href="contacts.css" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="array.js"></script>
+        <script>
+            let tasksFromServer = <%- updatedtasks %>;
+            let contactsFromServer = <%- updatedcontacts %>;
+            let lastIdFromServer = <%= lastID %>;// Hier wird das Array aus den Server-Daten eingebettet
+            console.log("LOS",lastIdFromServer);
+            console.log("ROLL",tasksFromServer,contactsFromServer); // Array ist verfügbar und kann verwendet werden
+            // Weitere Initialisierungscode hier
+            globalTasks=tasksFromServer;
+            globalContacts=contactsFromServer;
+            GlobalLastId=lastIdFromServer;
+            console.log("ER",globalContacts,globalTasks,GlobalLastId)
+
+        </script>
         <script src="dropdown.js"></script>
         <script src="contacs.js"></script>
+        <script src="mailer.js"></script>
 
       </head>
     <body onload="init()">
@@ -21,7 +35,7 @@
 
   <ul class="sidebarnav">
     <li>
-      <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page">
+      <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page" onclick="sendDataToServer('contacts')">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list-check"
           viewBox="0 0 16 16">
           <path fill-rule="evenodd"
@@ -30,7 +44,7 @@
       </a>
     </li>
     <li>
-      <a href="/board" class="sidebarbutton sidebar-link">
+      <a href="/board" class="sidebarbutton sidebar-link" onclick="sendDataToServer('contacts')">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-kanban"
           viewBox="0 0 16 16">
           <path
@@ -41,7 +55,7 @@
       </a>
     </li>
     <li>
-      <a href="/contacts" class="sidebar-link active">
+      <a href="/contacts" class="sidebar-link active" onclick="sendDataToServer('contacts')">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
           class="bi bi-person-lines-fill" viewBox="0 0 16 16">
           <path
@@ -70,7 +84,7 @@
       </svg>
     </a>
     <ul id="Demo" class="dropdown-menu text-small shadow">
-      <li><a class="dropdown-item" href="/logout">Sign out</a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
+      <li><a class="dropdown-item" onclick="sendDataToServer('contacts')" href="/logout">Sign out</a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
     </ul>
   </div>
 </div>

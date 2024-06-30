@@ -3,6 +3,9 @@
 const EventEmitter = require('events');
 const bcrypt = require("bcrypt");
 const db = require("./db");
+const {updateGlobalContacts, updateTasks, DatabaseEmitter, fetchAndTransformTasks, fetchAndTransformContacts,
+    insertGlobalContacts, getLastContactID
+} = require("./db");
 
 class MyEmitter extends EventEmitter {}
 
@@ -32,12 +35,12 @@ myEmitter.on('userLogin', (req, res) => {
     if (user!==undefined&&bcrypt.compareSync(userpassword, user.password)) {
         req.session.sessionValue = username;
         console.log(`User logged in: ${username}`);
-        res.redirect("summary");
+        const loggingIn = true;
+        res.redirect("/summary");
     } else {
         console.log(`User failed to log in: ${username}`);
         res.render("index");
     }
-
 });
 
 myEmitter.on('userLogout', (req, res) => {
@@ -62,7 +65,6 @@ myEmitter.on('userSignUp', (req, res) => {
 
 });
 
-
 myEmitter.on('failedSignUp', (username, res) => {
     console.log(`User failed to sign up: ${username}`);
     res.render("passwordFail");
@@ -70,17 +72,80 @@ myEmitter.on('failedSignUp', (username, res) => {
 
 myEmitter.on('contacts', (res) => {
     console.log(`Opend Contacts`);
-    res.render(__dirname + "/views/contacts.ejs");
+    let tasksArray = fetchAndTransformTasks();
+    let contactsArray =fetchAndTransformContacts();
+    let lastID = getLastContactID();
+    console.log("Send data:",tasksArray,contactsArray,lastID);
+    res.render(__dirname + "/views/contacts.ejs", { updatedtasks: JSON.stringify(tasksArray) ,updatedcontacts: JSON.stringify(contactsArray),lastID });
 });
 myEmitter.on('summary', (req,res) => {
     console.log(`View Summary`);
     const username = req.session.sessionValue;
-    res.render(__dirname + "/views/summary.ejs",{username});
+    let tasksArray =fetchAndTransformTasks();
+    let contactsArray = fetchAndTransformContacts();
+    let lastID= getLastContactID();
+    console.log("Send data:",tasksArray,contactsArray,lastID);
+
+    res.render(__dirname + "/views/summary.ejs",{username,updatedtasks: JSON.stringify(tasksArray) ,updatedcontacts: JSON.stringify(contactsArray),lastID});
 });
 
 myEmitter.on('board', (res) => {
     console.log(`View Board`);
-    res.render(__dirname + "/views/board.ejs");
+    let tasksArray = fetchAndTransformTasks();
+    let contactsArray = fetchAndTransformContacts();
+    let lastID= getLastContactID();
+    console.log("Send data:",tasksArray,contactsArray,lastID);
+
+    res.render(__dirname + "/views/board.ejs", { updatedtasks: JSON.stringify(tasksArray) ,updatedcontacts: JSON.stringify(contactsArray),lastID });
+});
+
+myEmitter.on('newData', (req, res) => {
+    const data = req.body;
+    const globalTasks = [];
+    const globalContacts = [];
+    let taskIndex = 0;
+    let contactIndex = 0;
+    let savedKey;
+    for(let key in data){
+        savedKey = key;
+        break;
+    }
+    if (savedKey!==undefined&&savedKey.startsWith('task_')) {
+        for (const task in data) {
+            const property = task.replace(/task_\d+_/, '');
+            if (!globalTasks[taskIndex]) {
+                globalTasks[taskIndex] = {};
+            }
+            globalTasks[taskIndex][property] = data[task];
+            if (property === "assigedToId") {
+                taskIndex += 1;
+            }
+        }
+        updateTasks(globalTasks);
+    }else if (savedKey!==undefined&&savedKey.startsWith('contact_')) {
+        for (const contact in data) {
+            const property = contact.replace(/contact_\d+_/, '');
+            if (!globalContacts[contactIndex]) {
+                globalContacts[contactIndex] = {};
+            }
+            globalContacts[contactIndex][property] = data[contact];
+            if (property === "phone") {
+                contactIndex += 1;
+            }
+        }
+        updateGlobalContacts(globalContacts);
+    }
+
+    res.send('Data received successfully!');
+    console.log('Received data:', globalTasks, globalContacts);
+
+    //@LION Hier habe ich dir die daten vom Client wieder als zwei Arrays zusammengesetzt: globalTasks und globalContacts.
+    //Bitte hier die Daten in die Datenbank einfügen lassen
+    //Bitte nur die Datenbankfunktionen verwenden, keine Hardgecodeten SQL-Statements
+    //Wenn du weitere Datenbank funktionen erstellst, die die Datenbank verändern, UNBEDINGT folgende Zeile am ende der neuen Funktion einfügen:
+    //   DatabaseEmitter.emit('dbChange', { type: '** HIER Art der änderung Beschreiben**'});
+    //Beispiele für diese zeile findest du in allen andern "schreibenden" DB-Funktionen
+    //Datenbankaufbau bitte ändern, wenn nötig
 });
 
 

@@ -10,10 +10,23 @@
   <link rel="stylesheet" href="boardPopupCard.css" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="array.js"></script>
+  <script src="mailer.js"></script>
+  <script>
+    let tasksFromServer = <%- updatedtasks %>;
+    let contactsFromServer = <%- updatedcontacts %>;
+    let lastIdFromServer = <%- lastID %>;// Hier wird das Array aus den Server-Daten eingebettet
+    console.log("ROLL",tasksFromServer,contactsFromServer,lastIdFromServer); // Array ist verfügbar und kann verwendet werden
+    // Weitere Initialisierungscode hier
+    globalTasks=tasksFromServer;
+    globalContacts=contactsFromServer;
+    GlobalLastId=lastIdFromServer;
+    console.log("ER",globalContacts,globalTasks,GlobalLastId)
+  </script>
+
+
   <script src="board.js"></script>
   <script src="board.html.js"></script>
   <script src="dropdown.js"></script>
-
 </head>
 
 <body onload="init()">
@@ -27,7 +40,7 @@
 
     <ul class="sidebarnav">
       <li>
-        <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page">
+        <a href="/summary" class="sidebarbutton sidebar-link" aria-current="page" onclick="sendDataToServer('tasks')">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list-check"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -36,7 +49,7 @@
         </a>
       </li>
       <li>
-        <a href="/board" class="sidebar-link active">
+        <a href="/board" class="sidebar-link active" onclick="sendDataToServer('tasks')">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-kanban"
             viewBox="0 0 16 16">
             <path
@@ -47,7 +60,7 @@
         </a>
       </li>
       <li>
-        <a href="/contacts" class="sidebarbutton sidebar-link">
+        <a href="/contacts" class="sidebarbutton sidebar-link" onclick="sendDataToServer('tasks')">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
             class="bi bi-person-lines-fill" viewBox="0 0 16 16">
             <path
@@ -75,7 +88,7 @@
     </a>
     <ul id="Demo" class="dropdown-menu text-small shadow">
 
-      <li><a class="dropdown-item" href="/logout">Sign out</a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
+      <li><a class="dropdown-item" onclick="sendDataToServer('tasks')" href="/logout">Sign out </a></li><!--HIER SIGNOUT - COOKIES BEENDEN-->
     </ul>
   </div>
 </div>

@@ -21,6 +21,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(bodyParser.json()); // Add this middleware to parse JSON data
 
 app.engine(".ejs", require("ejs").__express);
 app.set("view engine", "ejs");

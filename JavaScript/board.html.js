@@ -77,7 +77,7 @@ function returnOpenPopup() {
       <div class="rightSide">
         <div class="dateArea">
           <p>Due date</p>
-          <input class="task-title-input cursorPointer" type="date" placeholder="dd/mm/yyyy""  name="date" required>
+          <input class="task-title-input cursorPointer" type="date" placeholder="dd/mm/yyyy"  name="date" required>
 
         </div>
         <div>

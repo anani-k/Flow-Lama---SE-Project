@@ -541,6 +541,7 @@ function generateClosedSubtasks(i) {
 function popUpSubtaskCheckbox(x, i) {
   let changedElement = tasks[i]["openSubtasks"].splice(x, 1);
   tasks[i]["closedSubtasks"].unshift(changedElement);
+  globalTasks = tasks;
   generateCard();
   popupCardContentopenButton(i);
 }
@@ -549,6 +550,7 @@ function popUpSubtaskCheckbox(x, i) {
 function popUpSubtaskCheckboxUncheck(x, i) {
   let changedElement = tasks[i]["closedSubtasks"].splice(x, 1);
   tasks[i]["openSubtasks"].unshift(changedElement);
+  globalTasks = tasks;
   generateCard();
   popupCardContentopenButton(i);
 }
@@ -581,11 +583,13 @@ function logFormInputs(event) {
   for (const [name, value] of formData.entries()) {
     newTask[name] = value;
   }
+  newTask.date = revertDate(newTask.date);
   tasks.push(newTask);
   console.log(tasks);
-
+  globalTasks = tasks;
   this.generateCard();
   this.closePopup();
+
 }
 
 //Funktion setzt, beim drücken des Clear Buttons die Inhalte zurück
@@ -673,13 +677,12 @@ function editFormInputs(event, i) {
   for (const [name, value] of formData.entries()) {
     newTask[name] = value;
   }
-
   newTask.date = revertDate(newTask.date);
-
   tasks[i] = newTask;
-
+  globalTasks = tasks;
   this.generateCard();
   this.closePopup();
+
 }
 
 function toggleDropdownAssignedToEdit() {
@@ -773,7 +776,6 @@ function convertDate(inputDate) {
   if (month.length < 2) month = "0" + month;
 
   let formattedDate = `${year}-${month}-${day}`;
-
   return formattedDate;
 }
 
@@ -794,7 +796,6 @@ function revertDate(inputDate) {
     if (month.length < 2) month = "0" + month;
 
     let formattedDate = `${day}.${month}.${year}`;
-
     return formattedDate;
   } catch (error) {
     console.error("Fehler bei der Datumsumwandlung:", error.message);
