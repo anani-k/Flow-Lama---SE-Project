@@ -583,6 +583,7 @@ function logFormInputs(event) {
   for (const [name, value] of formData.entries()) {
     newTask[name] = value;
   }
+  newTask.date = revertDate(newTask.date);
   tasks.push(newTask);
   console.log(tasks);
   globalTasks = tasks;
@@ -676,9 +677,7 @@ function editFormInputs(event, i) {
   for (const [name, value] of formData.entries()) {
     newTask[name] = value;
   }
-
   newTask.date = revertDate(newTask.date);
-
   tasks[i] = newTask;
   globalTasks = tasks;
   this.generateCard();
@@ -777,7 +776,6 @@ function convertDate(inputDate) {
   if (month.length < 2) month = "0" + month;
 
   let formattedDate = `${year}-${month}-${day}`;
-
   return formattedDate;
 }
 
@@ -798,7 +796,6 @@ function revertDate(inputDate) {
     if (month.length < 2) month = "0" + month;
 
     let formattedDate = `${day}.${month}.${year}`;
-
     return formattedDate;
   } catch (error) {
     console.error("Fehler bei der Datumsumwandlung:", error.message);
