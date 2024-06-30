@@ -13,7 +13,6 @@ const initializeDatabase = () => {
 
     // Führt alle SQL-Befehle aus der Datei aus
     db.exec(db_init);
-
     console.log("Database initialized from DB_init.sql");
 };
 
@@ -30,7 +29,7 @@ const getUserByUsername = (username) => {
 const createUser = (username, email, passwordHash) => {
     const stmt = db.prepare('INSERT INTO Users (username, email, password) VALUES (?, ?, ?)');
     stmt.run(username, email, passwordHash);
-    DatabaseEmitter.emit('dbChange', { type: 'userCreated'});
+    //DatabaseEmitter.emit('dbChange', { type: 'userCreated'});
     console.log(`New user signed up: ${username}`);
 
 };
@@ -45,7 +44,7 @@ const userExists = (username) => {
 const createProject = (projectName, description, boardName) => {
     const stmt = db.prepare('INSERT INTO Projects (project_name, description, board_name) VALUES (?, ?, ?)');
     stmt.run(projectName, description, boardName);
-    DatabaseEmitter.emit('dbChange', { type: 'projectCreated'});
+    //DatabaseEmitter.emit('dbChange', { type: 'projectCreated'});
 
 };
 
@@ -67,14 +66,15 @@ const getProjectByName = (projectName) => {
 const deleteProject = (projectId) => {
     const stmt = db.prepare('DELETE FROM Projects WHERE project_id = ?');
     stmt.run(projectId);
-    DatabaseEmitter.emit('dbChange', { type: 'projectDeleted'});
+    //DatabaseEmitter.emit('dbChange', { type: 'projectDeleted'});
 };
 
 // Funktionen für Aufgaben
-const createTask = (taskTitle, description, dueDate, status, assigneeId, projectId) => {
-    const stmt = db.prepare('INSERT INTO Tasks (task_title, description, due_date, status, assignee_id, project_id) VALUES (?, ?, ?, ?, ?, ?)');
-    stmt.run(taskTitle, description, dueDate, status, assigneeId, projectId);
-    DatabaseEmitter.emit('dbChange', { type: 'taskCreated'});
+const createTask = (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId) => {
+    const stmt = db.prepare('INSERT INTO tasks (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId)\n' +
+        '            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    stmt.run(progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId);
+    //DatabaseEmitter.emit('dbChange', { type: 'taskCreated'});
 };
 
 const getAllTasksByProjectId = (projectId) => {
@@ -88,39 +88,62 @@ const getTaskById = (taskId) => {
 };
 
 const updateTaskStatus = (taskId, status) => {
-    const stmt = db.prepare('UPDATE Tasks SET status = ? WHERE task_id = ?');
+    const stmt = db.prepare('UPDATE Tasks SET progress = ? WHERE task_id = ?');
     stmt.run(status, taskId);
-    DatabaseEmitter.emit('dbChange', { type: 'taskUpdated'});
+    //DatabaseEmitter.emit('dbChange', { type: 'taskUpdated'});
 };
 
 const deleteTask = (taskId) => {
     const stmt = db.prepare('DELETE FROM Tasks WHERE task_id = ?');
     stmt.run(taskId);
-    DatabaseEmitter.emit('dbChange', { type: 'taskDeleted'});
+    //DatabaseEmitter.emit('dbChange', { type: 'taskDeleted'});
 };
 const updateTasks=(tasks)=>{
     db.exec('DELETE FROM TASKS')
     for (eintrag in tasks){
-        createTask(tasks[eintrag].title,tasks[eintrag].description,tasks[eintrag].date,tasks[eintrag].progress);
+        createTask(tasks[eintrag].progress, tasks[eintrag].category, tasks[eintrag].title, tasks[eintrag].description, tasks[eintrag].date, JSON.stringify(tasks[eintrag].openSubtasks), JSON.stringify(tasks[eintrag].closedSubtasks), tasks[eintrag].priority, JSON.stringify(tasks[eintrag].assigedToId));
+    }
+
+
+}
+function fetchAndTransformTasks() {
+    try {
+        const rows = db.prepare('SELECT * FROM Tasks').all();
+
+        // Transform each row into a single object with all key:value pairs
+        const transformedTasks = rows.map(row => ({
+            progress: row.progress,
+            category: row.category,
+            title: row.title,
+            description: row.description,
+            date: row.date,
+            openSubtasks: JSON.parse(row.openSubtasks),
+            closedSubtasks: JSON.parse(row.closedSubtasks),
+            priority: row.priority,
+            assigedToId: JSON.parse(row.assigedToId)
+        }));
+        return transformedTasks;
+    } catch (err) {
+        console.error('Error fetching data', err);
     }
 }
 
 // Funktionen für Kontakte
 const addContact = (userId, contactUserId) => {
-    const stmt = db.prepare('INSERT INTO Contacts (user_id, contact_user_id) VALUES (?, ?)');
+    const stmt = db.prepare('INSERT INTO GlobalContacts (user_id, contact_user_id) VALUES (?, ?)');
     stmt.run(userId, contactUserId);
-    DatabaseEmitter.emit('dbChange', { type: 'addedContact'});
+    //DatabaseEmitter.emit('dbChange', { type: 'addedContact'});
 };
 
 const getAllContactsByUserId = (userId) => {
-    const stmt = db.prepare('SELECT * FROM Contacts WHERE user_id = ?');
+    const stmt = db.prepare('SELECT * FROM GlobalContacts WHERE user_id = ?');
     return stmt.all(userId);
 };
 
 const deleteContact = (userId, contactUserId) => {
-    const stmt = db.prepare('DELETE FROM Contacts WHERE user_id = ? AND contact_user_id = ?');
+    const stmt = db.prepare('DELETE FROM GlobalContacts WHERE user_id = ? AND contact_user_id = ?');
     stmt.run(userId, contactUserId);
-    DatabaseEmitter.emit('dbChange', { type: 'deletedContact'});
+    //DatabaseEmitter.emit('dbChange', { type: 'deletedContact'});
 };
 
 function fetchAndTransformContacts() {
@@ -128,14 +151,15 @@ function fetchAndTransformContacts() {
         const rows = db.prepare('SELECT * FROM GlobalContacts').all();
 
         // Transform each row into a single object with all key:value pairs
-        const transformedContacts = rows.map(contact => {
-            let transformedContact = {};
-            for (let [key, value] of Object.entries(contact)) {
-                transformedContact[key] = value;
-            }
-            return transformedContact;
-        });
-
+        const transformedContacts = rows.map(row => ({
+            id: row.id.toString(), // Konvertiere ID in String, falls sie nicht schon String ist
+            firstName: row.firstname,
+            lastName: row.lastname,
+            initials: row.initials,
+            color: row.color,
+            email: row.email,
+            phone: row.phone
+        }));
         return transformedContacts;
     } catch (err) {
         console.error('Error fetching data', err);
@@ -144,15 +168,26 @@ function fetchAndTransformContacts() {
 
 function updateGlobalContacts(contacts) {
     db.exec('DELETE FROM GlobalContacts');
-    console.log(contacts,1234)
     for (eintrag in contacts){
-        const stmt = db.prepare('INSERT INTO GlobalContacts(first_name, last_name, initials, color, email, phone) VALUES (?,?,?,?,?,?)');
-        stmt.run(contacts[eintrag].firstName, contacts[eintrag].lastName, contacts[eintrag].initials, contacts[eintrag].color, contacts[eintrag].email, contacts[eintrag].phone);
+        const stmt = db.prepare('INSERT INTO GlobalContacts(id,firstname, lastname, initials, color, email, phone) VALUES (?,?,?,?,?,?,?)');
+        stmt.run(contacts[eintrag].id,contacts[eintrag].firstName, contacts[eintrag].lastName, contacts[eintrag].initials, contacts[eintrag].color, contacts[eintrag].email, contacts[eintrag].phone);
     }
-    DatabaseEmitter.emit('dbChange', { type: 'updatedContact'});
+    //DatabaseEmitter.emit('dbChange', { type: 'updatedContact'});
 
     console.log('Database updated successfully!');
 
+}
+
+function getLastContactID(){
+    let lastId;
+    const rows = db.prepare('SELECT id FROM GlobalContacts ORDER BY id DESC').all();
+    if (rows.length === 0) {
+        lastId = 0; // Wenn keine Ergebnisse gefunden wurden, setze lastId auf 0 oder einen anderen Standardwert
+    } else {
+        // rows[0] ist das erste Objekt im Array (also die erste Zeile der Abfrage)
+        lastId = rows[0].id; // Zugriff auf die Eigenschaft id des ersten Objekts im Array
+    }
+    return lastId;
 }
 
 module.exports = {
@@ -177,6 +212,8 @@ module.exports = {
     DatabaseEmitter,
     updateGlobalContacts,
     updateTasks,
-    fetchAndTransformContacts
+    fetchAndTransformContacts,
+    fetchAndTransformTasks,
+    getLastContactID
 
 };

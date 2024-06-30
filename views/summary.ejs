@@ -6,75 +6,24 @@
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <link rel="stylesheet" href="summary.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="array.js"></script>
+    <script>
+      let tasksFromServer = <%- updatedtasks %>;
+      let contactsFromServer = <%- updatedcontacts %>;
+      let lastIdFromServer = <%- lastID %>;// Hier wird das Array aus den Server-Daten eingebettet
+      console.log("ROLL",tasksFromServer,contactsFromServer,lastIdFromServer); // Array ist verfügbar und kann verwendet werden
+      // Weitere Initialisierungscode hier
+      globalTasks=tasksFromServer;
+      globalContacts=contactsFromServer;
+      GlobalLastId=lastIdFromServer;
+      console.log("ER",globalContacts,globalTasks,GlobalLastId)
+
+    </script>
     <script src="dropdown.js"></script>
     <script src="summary.js"></script>
-    <script src="array.js"></script>
     <script src="mailer.js"></script>
+
   </head>
-  <% if(loggingIn){%>
-    <script>
-      document.addEventListener('DOMContentLoaded', (event) => {
-        const eventSource = new EventSource('/events');
-
-        eventSource.onmessage = function(event) {
-          const data = JSON.parse(event.data);
-          console.log('Update received:', data);
-
-
-          function stringToArray(str) {
-            // Split the string by '&' to get key-value pairs
-            const keyValuePairs = str.split('&');
-            // Initialize an empty array to hold the objects
-            let resultArray = [];
-            // Initialize an empty object to collect key-value pairs for each item
-            let currentObject = {};
-
-            // Iterate through the array of key-value pairs
-            keyValuePairs.forEach(pair => {
-              // Split each key-value pair by ':' to separate the key and value
-              const [key, ...rest] = pair.split(':');
-              const value = rest.join(':'); // Join the rest in case the value contains colons
-
-              // If the key is 'global_contact_id' or any other unique key to identify a new object, push the current object to the result array
-              if (key === 'global_contact_id' && Object.keys(currentObject).length > 0) {
-                resultArray.push(currentObject);
-                currentObject = {}; // Reset currentObject
-              }
-
-              // Add the key-value pair to the current object
-              currentObject[key] = value;
-            });
-
-            // Push the last object to the array after the loop ends
-            if (Object.keys(currentObject).length > 0) {
-              resultArray.push(currentObject);
-            }
-
-            return resultArray;
-          }
-          globalContacts=stringToArray(data);
-
-
-
-          console.log(1234,stringToArray(data));
-          console.log("Array",globalContacts);
-
-          //@LION Hier data in Array einfügen. Logik für unterteilung dafür bitte selbst ausdenken. Inspiration kannst du dir evtl.
-          //aus myEmitter.js ab Zeile 91 holen
-          //Ob du bereits die richtigen Daten schickst, kannst du in der Browser-Konsole sehen. Rechtsklick auf Seite und dann "inspect" oder der gleichen und dort Konsole öffnen
-          //Bisher kommt immer "TEST" an
-
-        };
-
-        eventSource.onerror = function(err) {
-          console.error('EventSource failed:', err);
-          sendDataToServer();
-          eventSource.close();
-        };
-      });
-    </script>
-  <% }%>
-
   <body onload="init()">
     <!--Sidebar-->
     <div class="sidebar">

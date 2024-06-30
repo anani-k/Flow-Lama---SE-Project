@@ -1,30 +1,29 @@
-function sendDataToServer() {
+function sendDataToServer(type) {
     const dataToSend = {};
-
-    globalTasks.forEach((task, index) => {
-        dataToSend[`task_${index}_progress`] = task.progress;
-        dataToSend[`task_${index}_category`] = task.category;
-        dataToSend[`task_${index}_title`] = task.title;
-        dataToSend[`task_${index}_description`] = task.description;
-        dataToSend[`task_${index}_date`] = task.date;
-        dataToSend[`task_${index}_openSubtasks`] = task.openSubtasks;
-        dataToSend[`task_${index}_closedSubtasks`] = task.closedSubtasks;
-        dataToSend[`task_${index}_priority`] = task.priority;
-        dataToSend[`task_${index}_assigedToId`] = task.assigedToId;
-    });
-
-    globalContacts.forEach((contact, index) => {
-        dataToSend[`contact_${index}_id`] = contact.id;
-        dataToSend[`contact_${index}_firstName`] = contact.firstName;
-        dataToSend[`contact_${index}_lastName`] = contact.lastName;
-        dataToSend[`contact_${index}_initials`] = contact.initials;
-        dataToSend[`contact_${index}_color`] = contact.color;
-        dataToSend[`contact_${index}_email`] = contact.email;
-        dataToSend[`contact_${index}_phone`] = contact.phone;
-    });
-
-    dataToSend.GlobalLastId = GlobalLastId;
-    console.log(dataToSend);
+    if(type==="tasks") {
+        globalTasks.forEach((task, index) => {
+            dataToSend[`task_${index}_progress`] = task.progress;
+            dataToSend[`task_${index}_category`] = task.category;
+            dataToSend[`task_${index}_title`] = task.title;
+            dataToSend[`task_${index}_description`] = task.description;
+            dataToSend[`task_${index}_date`] = task.date;
+            dataToSend[`task_${index}_openSubtasks`] = task.openSubtasks;
+            dataToSend[`task_${index}_closedSubtasks`] = task.closedSubtasks;
+            dataToSend[`task_${index}_priority`] = task.priority;
+            dataToSend[`task_${index}_assigedToId`] = task.assigedToId;
+        });
+    }else if(type==="contacts") {
+        globalContacts.forEach((contact, index) => {
+            dataToSend[`contact_${index}_id`] = contact.id;
+            dataToSend[`contact_${index}_firstName`] = contact.firstName;
+            dataToSend[`contact_${index}_lastName`] = contact.lastName;
+            dataToSend[`contact_${index}_initials`] = contact.initials;
+            dataToSend[`contact_${index}_color`] = contact.color;
+            dataToSend[`contact_${index}_email`] = contact.email;
+            dataToSend[`contact_${index}_phone`] = contact.phone;
+        });
+    }
+    console.log("Data to Server",dataToSend);
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/newDataFromClient', true);

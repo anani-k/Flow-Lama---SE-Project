@@ -3,6 +3,8 @@ DROP TABLE IF EXISTS Contacts;
 DROP TABLE IF EXISTS Tasks;
 DROP TABLE IF EXISTS Projects;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS GlobalContacts;
+
 
 -- Erstelle die Benutzer-Tabelle
 CREATE TABLE Users (
@@ -23,32 +25,27 @@ CREATE TABLE Projects (
 );
 
 -- Erstelle die Aufgaben-Tabelle
-CREATE TABLE Tasks (
-   task_id INTEGER PRIMARY KEY AUTOINCREMENT,
-   task_title TEXT NOT NULL,
-   description TEXT,
-   due_date TEXT,
-   status TEXT,
-   assignee_id INTEGER,
-   project_id INTEGER
-   --FOREIGN KEY(assignee_id) REFERENCES Users(user_id),
-   --FOREIGN KEY(project_id) REFERENCES Projects(project_id)
+CREATE TABLE Tasks
+(
+    id             INTEGER PRIMARY KEY ,
+    progress       TEXT,
+    category       TEXT,
+    title          TEXT,
+    description    TEXT,
+    date           TEXT,
+    openSubtasks   TEXT,
+    closedSubtasks TEXT,
+    priority       TEXT,
+    assigedToId    TEXT
 );
 
--- Erstelle die Kontakte-Tabelle
-CREATE TABLE Contacts (
-  contact_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
-  contact_user_id INTEGER NOT NULL,
-  FOREIGN KEY(user_id) REFERENCES Users(user_id),
-  FOREIGN KEY(contact_user_id) REFERENCES Users(user_id),
-  UNIQUE(user_id, contact_user_id)
+CREATE TABLE GlobalContacts (
+    id INTEGER PRIMARY KEY ,
+    firstname TEXT NOT NULL ,
+    lastname TEXT NOT NULL ,
+    initials TEXT NOT NULL ,
+    color TEXT,
+    email TEXT,
+    phone TEXT
 );
 
-CREATE TRIGGER update_tasks_trigger
-AFTER UPDATE ON Tasks
-FOR EACH ROW
-BEGIN
-    -- Notify the application of the change
-    SELECT RAISE(IGNORE);
-END;

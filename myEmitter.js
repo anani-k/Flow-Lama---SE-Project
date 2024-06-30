@@ -3,7 +3,9 @@
 const EventEmitter = require('events');
 const bcrypt = require("bcrypt");
 const db = require("./db");
-const {updateGlobalContacts, updateTasks, DatabaseEmitter} = require("./db");
+const {updateGlobalContacts, updateTasks, DatabaseEmitter, fetchAndTransformTasks, fetchAndTransformContacts,
+    insertGlobalContacts, getLastContactID
+} = require("./db");
 
 class MyEmitter extends EventEmitter {}
 
@@ -34,12 +36,11 @@ myEmitter.on('userLogin', (req, res) => {
         req.session.sessionValue = username;
         console.log(`User logged in: ${username}`);
         const loggingIn = true;
-        res.render(__dirname + "/views/summary.ejs",{username,loggingIn});
+        res.redirect("/summary");
     } else {
         console.log(`User failed to log in: ${username}`);
         res.render("index");
     }
-
 });
 
 myEmitter.on('userLogout', (req, res) => {
@@ -64,7 +65,6 @@ myEmitter.on('userSignUp', (req, res) => {
 
 });
 
-
 myEmitter.on('failedSignUp', (username, res) => {
     console.log(`User failed to sign up: ${username}`);
     res.render("passwordFail");
@@ -72,23 +72,31 @@ myEmitter.on('failedSignUp', (username, res) => {
 
 myEmitter.on('contacts', (res) => {
     console.log(`Opend Contacts`);
-    //folgende Zeile nur zum Testen, um db event zu triggern
-    db.createTask("Test","DB test", "26.06.2024","in progress","1","2");
-
-    res.render(__dirname + "/views/contacts.ejs");
+    let tasksArray = fetchAndTransformTasks();
+    let contactsArray =fetchAndTransformContacts();
+    let lastID = getLastContactID();
+    console.log("Send data:",tasksArray,contactsArray,lastID);
+    res.render(__dirname + "/views/contacts.ejs", { updatedtasks: JSON.stringify(tasksArray) ,updatedcontacts: JSON.stringify(contactsArray),lastID });
 });
 myEmitter.on('summary', (req,res) => {
     console.log(`View Summary`);
     const username = req.session.sessionValue;
-    const loggingIn  = false
-    res.render(__dirname + "/views/summary.ejs",{username,loggingIn});
+    let tasksArray =fetchAndTransformTasks();
+    let contactsArray = fetchAndTransformContacts();
+    let lastID= getLastContactID();
+    console.log("Send data:",tasksArray,contactsArray,lastID);
+
+    res.render(__dirname + "/views/summary.ejs",{username,updatedtasks: JSON.stringify(tasksArray) ,updatedcontacts: JSON.stringify(contactsArray),lastID});
 });
 
 myEmitter.on('board', (res) => {
     console.log(`View Board`);
-    res.render(__dirname + "/views/board.ejs");
-    //Folgende Zeile nur zum Testen, um db event zu triggern
-    db.createTask("Test","DB test", "26.06.2024","in progress","1","2");
+    let tasksArray = fetchAndTransformTasks();
+    let contactsArray = fetchAndTransformContacts();
+    let lastID= getLastContactID();
+    console.log("Send data:",tasksArray,contactsArray,lastID);
+
+    res.render(__dirname + "/views/board.ejs", { updatedtasks: JSON.stringify(tasksArray) ,updatedcontacts: JSON.stringify(contactsArray),lastID });
 });
 
 myEmitter.on('newData', (req, res) => {
@@ -97,35 +105,40 @@ myEmitter.on('newData', (req, res) => {
     const globalContacts = [];
     let taskIndex = 0;
     let contactIndex = 0;
-    console.log(data);
-    for (const key in data) {
-        if (key.startsWith('task_')) {
-            const property = key.replace(/task_\d+_/, '');
+    let savedKey;
+    for(let key in data){
+        savedKey = key;
+        break;
+    }
+    if (savedKey!==undefined&&savedKey.startsWith('task_')) {
+        for (const task in data) {
+            const property = task.replace(/task_\d+_/, '');
             if (!globalTasks[taskIndex]) {
                 globalTasks[taskIndex] = {};
             }
-            globalTasks[taskIndex][property] = data[key];
-            if(property==="assigedToId"){
-                taskIndex+=1;
+            globalTasks[taskIndex][property] = data[task];
+            if (property === "assigedToId") {
+                taskIndex += 1;
             }
-        } else if (key.startsWith('contact_')) {
-            const property = key.replace(/contact_\d+_/, '');
+        }
+        updateTasks(globalTasks);
+    }else if (savedKey!==undefined&&savedKey.startsWith('contact_')) {
+        for (const contact in data) {
+            const property = contact.replace(/contact_\d+_/, '');
             if (!globalContacts[contactIndex]) {
                 globalContacts[contactIndex] = {};
             }
-            globalContacts[contactIndex][property] = data[key];
-            if(property==="phone"){
-                contactIndex+=1;
+            globalContacts[contactIndex][property] = data[contact];
+            if (property === "phone") {
+                contactIndex += 1;
             }
-        } else if (key === 'GlobalLastId') {
-            // handle GlobalLastId separately
         }
+        updateGlobalContacts(globalContacts);
     }
 
     res.send('Data received successfully!');
     console.log('Received data:', globalTasks, globalContacts);
-    updateTasks(globalTasks);
-    updateGlobalContacts(globalContacts);
+
     //@LION Hier habe ich dir die daten vom Client wieder als zwei Arrays zusammengesetzt: globalTasks und globalContacts.
     //Bitte hier die Daten in die Datenbank einfügen lassen
     //Bitte nur die Datenbankfunktionen verwenden, keine Hardgecodeten SQL-Statements
