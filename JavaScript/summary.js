@@ -185,14 +185,12 @@ function calculateArray() {
 
 //Nimmt Datum, von der ersten urgent task
 function returnDeadline() {
-  let date;
+  let date="No urgent tasks";
   let dateFound = false;
-  for (let i = 0; i <= tasks.length; i++) {
-    if (tasks.length!==0 && tasks[i].priority === "urgent" && !dateFound) {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks.length!==0 && tasks[i].priority == "urgent" && !dateFound) {
       dateFound = true;
       date = tasks[i].date;
-    } else {
-      date = "No urgent tasks";
     }
   }
   return /*html*/ `
