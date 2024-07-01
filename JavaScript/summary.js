@@ -187,12 +187,12 @@ function calculateArray() {
 function returnDeadline() {
   let date;
   let dateFound = false;
-  for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].priority == "urgent" && !dateFound) {
+  for (let i = 0; i <= tasks.length; i++) {
+    if (tasks.length!==0 && tasks[i].priority === "urgent" && !dateFound) {
       dateFound = true;
       date = tasks[i].date;
     } else {
-      date = "no Urgent Tasks found";
+      date = "No urgent tasks";
     }
   }
   return /*html*/ `
