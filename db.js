@@ -29,7 +29,6 @@ const getUserByUsername = (username) => {
 const createUser = (username, email, passwordHash) => {
     const stmt = db.prepare('INSERT INTO Users (username, email, password) VALUES (?, ?, ?)');
     stmt.run(username, email, passwordHash);
-    //DatabaseEmitter.emit('dbChange', { type: 'userCreated'});
     console.log(`New user signed up: ${username}`);
 
 };
@@ -40,63 +39,27 @@ const userExists = (username) => {
     return row.count > 0;
 };
 
-// Funktionen für Projekte
-const createProject = (projectName, description, boardName) => {
-    const stmt = db.prepare('INSERT INTO Projects (project_name, description, board_name) VALUES (?, ?, ?)');
-    stmt.run(projectName, description, boardName);
-    //DatabaseEmitter.emit('dbChange', { type: 'projectCreated'});
-
-};
-
-const getAllProjects = () => {
-    const stmt = db.prepare('SELECT * FROM Projects');
-    return stmt.all();
-};
-
-const getProjectById = (projectId) => {
-    const stmt = db.prepare('SELECT * FROM Projects WHERE project_id = ?');
-    return stmt.get(projectId);
-};
-
-const getProjectByName = (projectName) => {
-    const stmt = db.prepare('SELECT * FROM Projects WHERE project_name = ?');
-    return stmt.get(projectName);
-};
-
-const deleteProject = (projectId) => {
-    const stmt = db.prepare('DELETE FROM Projects WHERE project_id = ?');
-    stmt.run(projectId);
-    //DatabaseEmitter.emit('dbChange', { type: 'projectDeleted'});
-};
-
 // Funktionen für Aufgaben
 const createTask = (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId) => {
     const stmt = db.prepare('INSERT INTO tasks (progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId)\n' +
         '            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
     stmt.run(progress, category, title, description, date, openSubtasks, closedSubtasks, priority, assigedToId);
-    //DatabaseEmitter.emit('dbChange', { type: 'taskCreated'});
 };
 
-const getAllTasksByProjectId = (projectId) => {
-    const stmt = db.prepare('SELECT * FROM Tasks WHERE project_id = ?');
-    return stmt.all(projectId);
-};
 
 const getTaskById = (taskId) => {
-    const stmt = db.prepare('SELECT * FROM Tasks WHERE task_id = ?');
+    const stmt = db.prepare('SELECT * FROM Tasks WHERE id = ?');
     return stmt.get(taskId);
 };
 
 const updateTaskStatus = (taskId, status) => {
-    const stmt = db.prepare('UPDATE Tasks SET progress = ? WHERE task_id = ?');
+    const stmt = db.prepare('UPDATE Tasks SET progress = ? WHERE id = ?');
     stmt.run(status, taskId);
-    //DatabaseEmitter.emit('dbChange', { type: 'taskUpdated'});
 };
 
 const deleteTask = (taskId) => {
-    const stmt = db.prepare('DELETE FROM Tasks WHERE task_id = ?');
+    const stmt = db.prepare('DELETE FROM Tasks WHERE id = ?');
     stmt.run(taskId);
-    //DatabaseEmitter.emit('dbChange', { type: 'taskDeleted'});
 };
 const updateTasks=(tasks)=>{
     db.exec('DELETE FROM TASKS')
@@ -132,21 +95,19 @@ function fetchAndTransformTasks() {
 }
 
 // Funktionen für Kontakte
-const addContact = (userId, contactUserId) => {
-    const stmt = db.prepare('INSERT INTO GlobalContacts (user_id, contact_user_id) VALUES (?, ?)');
-    stmt.run(userId, contactUserId);
-    //DatabaseEmitter.emit('dbChange', { type: 'addedContact'});
+const addContact = (userId,firstname, lastname, initials) => {
+    const stmt = db.prepare('INSERT INTO GlobalContacts (id,firstname, lastname, initials) VALUES (?,?,?,?)');
+    stmt.run(userId,firstname,lastname,initials);
 };
 
 const getAllContactsByUserId = (userId) => {
-    const stmt = db.prepare('SELECT * FROM GlobalContacts WHERE user_id = ?');
+    const stmt = db.prepare('SELECT * FROM GlobalContacts WHERE id = ?');
     return stmt.all(userId);
 };
 
 const deleteContact = (userId, contactUserId) => {
-    const stmt = db.prepare('DELETE FROM GlobalContacts WHERE user_id = ? AND contact_user_id = ?');
-    stmt.run(userId, contactUserId);
-    //DatabaseEmitter.emit('dbChange', { type: 'deletedContact'});
+    const stmt = db.prepare('DELETE FROM GlobalContacts WHERE id = ?');
+    stmt.run(userId);
 };
 
 function fetchAndTransformContacts() {
@@ -177,7 +138,6 @@ function updateGlobalContacts(contacts) {
             stmt.run(contacts[eintrag].id, contacts[eintrag].firstName, contacts[eintrag].lastName, contacts[eintrag].initials, contacts[eintrag].color, contacts[eintrag].email, contacts[eintrag].phone);
         }
     }
-    //DatabaseEmitter.emit('dbChange', { type: 'updatedContact'});
 
     console.log('Database updated successfully!');
 
@@ -200,13 +160,7 @@ module.exports = {
     getUserByUsername,
     createUser,
     userExists,
-    createProject,
-    getAllProjects,
-    getProjectById,
-    getProjectByName,
-    deleteProject,
     createTask,
-    getAllTasksByProjectId,
     getTaskById,
     updateTaskStatus,
     deleteTask,

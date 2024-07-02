@@ -16,14 +16,6 @@ CREATE TABLE Users (
 
 );
 
--- Erstelle die Projekte-Tabelle
-CREATE TABLE Projects (
-  project_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  project_name TEXT NOT NULL,
-  description TEXT,
-  board_name TEXT NOT NULL
-);
-
 -- Erstelle die Aufgaben-Tabelle
 CREATE TABLE Tasks
 (

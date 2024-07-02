@@ -20,17 +20,15 @@ function checkPassword(req) {
     // Home/ index
     app.get("/", (req, res) => {
         myEmitter.emit('index', res, req);
-
     });
+
     app.get("/index", (req, res) => {
         myEmitter.emit('index', res, req);
-
     });
 
     // Sign Up
     app.get("/signUp", (req, res) => {
         myEmitter.emit('signUp', res);
-
     });
 
     // Board
@@ -39,9 +37,7 @@ function checkPassword(req) {
             myEmitter.emit('board', res);
         } else{
             myEmitter.emit('redirect', res);
-
         }
-
     });
 
     // Summary
@@ -50,9 +46,7 @@ function checkPassword(req) {
             myEmitter.emit('summary', req, res);
         } else{
             myEmitter.emit('redirect', res);
-
         }
-
     });
 
     // Contacts
@@ -61,7 +55,6 @@ function checkPassword(req) {
             myEmitter.emit('contacts', res);
         } else{
             myEmitter.emit('redirect', res);
-
         }
     });
 
@@ -94,56 +87,4 @@ function checkPassword(req) {
         myEmitter.emit('userLogout', req, res); // Benutzerabmeldung auslösen
     });
 
-/*
-    app.get('/events', (req, res) => {
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
-        res.flushHeaders();
-        console.log(`Established Connection`);
-
-        function arrayToString(data) {
-            // Initialize an empty array to hold key-value strings
-            let resultArray = [];
-
-            // Loop through each object in the array
-            data.forEach(obj => {
-                // Loop through each key-value pair in the object
-                for (const key in obj) {
-                    if (obj.hasOwnProperty(key)) {
-                        // Concatenate key and value with a colon and push to the array
-                        resultArray.push(`${key}:${obj[key]}`);
-                    }
-                }
-            });
-
-            // Join all elements in the array with an '&' symbol
-            return resultArray.join('&');
-        }
-
-        const sendUpdate = (update) => {
-            const contactArray = fetchAndTransformContacts();
-            const contactString = arrayToString(contactArray);
-            console.log(11111222333,contactString);
-
-
-            //@LION    Der Value muss durch die daten der Datenbank ersetzt werden. Hier muss also erst die Datenbank ausgelesen und die Daten in einer Vaiablen
-            //gespeichert werden, die du dann dem stringify übergibst (anstatt dem jetztigen String "Test"
-            res.write(`data: ${JSON.stringify(contactString)}\n\n`);
-
-
-        };
-
-        db.DatabaseEmitter.on('dbChange', () => {
-            console.log(`DatabaseDatabaseCHANGE`);
-            sendUpdate();
-
-        });
-
-        req.on('close', () => {
-            console.log(`Closed Connection`);
-            db.DatabaseEmitter.removeListener('dbChange', sendUpdate);
-        });
-    });
-*/
 };
