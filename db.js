@@ -100,8 +100,11 @@ const deleteTask = (taskId) => {
 };
 const updateTasks=(tasks)=>{
     db.exec('DELETE FROM TASKS')
-    for (eintrag in tasks){
-        createTask(tasks[eintrag].progress, tasks[eintrag].category, tasks[eintrag].title, tasks[eintrag].description, tasks[eintrag].date, JSON.stringify(tasks[eintrag].openSubtasks), JSON.stringify(tasks[eintrag].closedSubtasks), tasks[eintrag].priority, JSON.stringify(tasks[eintrag].assigedToId));
+    console.log("Tasks hat länge",tasks.length);
+    if(tasks.length>0) {
+        for (eintrag in tasks) {
+            createTask(tasks[eintrag].progress, tasks[eintrag].category, tasks[eintrag].title, tasks[eintrag].description, tasks[eintrag].date, JSON.stringify(tasks[eintrag].openSubtasks), JSON.stringify(tasks[eintrag].closedSubtasks), tasks[eintrag].priority, JSON.stringify(tasks[eintrag].assigedToId));
+        }
     }
 
 
@@ -168,9 +171,11 @@ function fetchAndTransformContacts() {
 
 function updateGlobalContacts(contacts) {
     db.exec('DELETE FROM GlobalContacts');
-    for (eintrag in contacts){
-        const stmt = db.prepare('INSERT INTO GlobalContacts(id,firstname, lastname, initials, color, email, phone) VALUES (?,?,?,?,?,?,?)');
-        stmt.run(contacts[eintrag].id,contacts[eintrag].firstName, contacts[eintrag].lastName, contacts[eintrag].initials, contacts[eintrag].color, contacts[eintrag].email, contacts[eintrag].phone);
+    if(contacts.length>0) {
+        for (eintrag in contacts) {
+            const stmt = db.prepare('INSERT INTO GlobalContacts(id,firstname, lastname, initials, color, email, phone) VALUES (?,?,?,?,?,?,?)');
+            stmt.run(contacts[eintrag].id, contacts[eintrag].firstName, contacts[eintrag].lastName, contacts[eintrag].initials, contacts[eintrag].color, contacts[eintrag].email, contacts[eintrag].phone);
+        }
     }
     //DatabaseEmitter.emit('dbChange', { type: 'updatedContact'});
 

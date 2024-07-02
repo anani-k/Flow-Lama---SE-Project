@@ -110,7 +110,16 @@ myEmitter.on('newData', (req, res) => {
         savedKey = key;
         break;
     }
-    if (savedKey!==undefined&&savedKey.startsWith('task_')) {
+    if(savedKey!==undefined&&savedKey.startsWith('FromPage')) {
+        console.log("This ist the saved key", data[savedKey]);
+        if (data[savedKey] === "Tasks") {
+            updateTasks([]);
+        } else if (data[savedKey] === "Contacts") {
+            updateGlobalContacts([]);
+        } else {
+            console.log("Fehler beim Übertragen der Daten");
+        }
+    } else if (savedKey!==undefined&&savedKey.startsWith('task_')) {
         for (const task in data) {
             const property = task.replace(/task_\d+_/, '');
             if (!globalTasks[taskIndex]) {

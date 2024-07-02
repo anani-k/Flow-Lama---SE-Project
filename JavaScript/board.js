@@ -45,6 +45,7 @@ function findIndexById(id) {
       return i;
     }
   }
+    return false
 }
 
 //Überprüft die reingegebene Priorität und returned das passende SVG
@@ -107,21 +108,25 @@ function returnContactIcon(i) {
   if (tasks[i].assigedToId.length < 4) {
     for (let x = 0; x < tasks[i].assigedToId.length; x++) {
       let userID = tasks[i].assigedToId[x];
-      content.innerHTML += /*html*/ `
+      if (findIndexById(userID) !== false) {
+        content.innerHTML += /*html*/ `
     <!-- nimmt die ersten beiden buchstaben des Vor- und Nachnamen -->
       <div style="background-color: ${
-        contacts[findIndexById(userID)].color
-      };">${contacts[findIndexById(userID)].initials}</div>`;
+            contacts[findIndexById(userID)].color
+        };">${contacts[findIndexById(userID)].initials}</div>`;
+      }
     }
 
     //trifft das obere nicht zu, dann werden die ersten beiden kontakte gerendert und alles anderen als plus zahl addiert und die beiden ersten abgezogen
   } else if (tasks[i].assigedToId.length > 3) {
     for (let x = 0; x < 2; x++) {
       let userID = tasks[i].assigedToId[x];
-      content.innerHTML += /*html*/ `
+      if (findIndexById(userID) !== false) {
+        content.innerHTML += /*html*/ `
       <div style="background-color: ${
-        contacts[findIndexById(userID)].color
-      };">${contacts[findIndexById(userID)].initials}</div>`;
+            contacts[findIndexById(userID)].color
+        };">${contacts[findIndexById(userID)].initials}</div>`;
+      }
     }
     content.innerHTML += /*html*/ `
 <div style="background-color: rgb(98,114,84);">+${
