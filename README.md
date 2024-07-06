@@ -5,16 +5,16 @@ Das System ermöglicht Benutzern die Registrierung, Anmeldung, so wie Abmeldung 
 
 
 Features:
-  Benutzerauthentifizierung (registrieren, anmelden, abmelden)
-  Task managment (erstellen, lesen, aktualisieren, löschen)
-  Kontakt managment (erstellen, lesen, aktualisieren, löschen)
+  - Benutzerauthentifizierung (registrieren, anmelden, abmelden)
+  - Task managment (erstellen, lesen, aktualisieren, löschen)
+  - Kontakt managment (erstellen, lesen, aktualisieren, löschen)
 
 
 Technologie:
-  Node.js,
-  Express.js,
-  SQLite,
-  EJS templating engine
+  - Node.js,
+  - Express.js,
+  - SQLite,
+  - EJS templating engine
 
 
 Getting Started:
@@ -26,12 +26,12 @@ Getting Started:
 
 
 Directory Struktur:
-  app.js - Hauptanwendungsdatei
-  db.js - Datenbanklogik und Schema
-  myEmitter.js - Event emitter für den Umgang von Events
-  routes.js - Route handlers für die Anwendungen
-  views/ - EJS templates für die UI
-  public/ - Static assets (images, CSS, JavaScript)
+  - app.js: Hauptanwendungsdatei
+  - db.js: Datenbanklogik und Schema
+  - myEmitter.js: Event emitter for handling Events
+  - routes.js: Route handler für die Anwendungen-
+  - views/: EJS templates für die UI
+  - public/: Static assets (images, CSS, JavaScript)
 
 
 Authoren: 
