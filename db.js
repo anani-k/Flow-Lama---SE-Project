@@ -4,7 +4,6 @@ const DATABASE = "database.db";
 const db = require("better-sqlite3")(DATABASE);
 const fs = require('fs');
 const path = require('path');
-const EventEmitter = require('events');
 
 // Funktion zum Initialisieren der Datenbank
 const initializeDatabase = () => {
@@ -15,9 +14,6 @@ const initializeDatabase = () => {
     db.exec(db_init);
     console.log("Database initialized from DB_init.sql");
 };
-
-class MyEmitter extends EventEmitter {}
-const DatabaseEmitter = new MyEmitter();
 
 
 // Funktionen für Benutzer
@@ -168,7 +164,6 @@ module.exports = {
     getAllContactsByUserId,
     deleteContact,
     db,
-    DatabaseEmitter,
     updateGlobalContacts,
     updateTasks,
     fetchAndTransformContacts,

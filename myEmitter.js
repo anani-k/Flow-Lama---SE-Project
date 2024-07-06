@@ -46,6 +46,7 @@ myEmitter.on('userLogout', (req, res) => {
     const username = req.session.sessionValue;
     console.log(`User logged out: ${username}`);
     req.session.destroy();
+    console.log(req.session);
     res.redirect("/index");
 });
 

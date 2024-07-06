@@ -1,21 +1,14 @@
-// routes.js
-const DatabaseEmitter = require("./myEmitter");
 const bodyParser = require("body-parser");
-const db = require('./db');
-const myEmitter = require("./myEmitter");
-const {fetchAndTransformContacts} = require("./db");
-
-
-module.exports = (app) => {
-    const myEmitter = require('./myEmitter');
-    app.use(bodyParser.json()); // Parse JSON data
+const myEmitter = require('./myEmitter');
 
 function checkPassword(req) {
     const userPassword = req.body["password"];
     const confirmPassword = req.body["confirmPassword"];
-    return userPassword === confirmPassword; //gerne noch Passwordbedingungen implementierten
+    return userPassword === confirmPassword;
 }
 
+const routes = (app) => {
+    app.use(bodyParser.json()); // Parse JSON data
 
     // Home/ index
     app.get("/", (req, res) => {
@@ -86,5 +79,7 @@ function checkPassword(req) {
     app.get("/logout", (req, res) => {
         myEmitter.emit('userLogout', req, res); // Benutzerabmeldung auslösen
     });
-
 };
+
+module.exports = routes;
+module.exports.checkPassword = checkPassword;

@@ -32,5 +32,8 @@
     "express-session": "^1.18.0",
     "mocha": "^10.5.2",
     "sinon": "^18.0.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
   }
 }

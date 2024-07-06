@@ -2,7 +2,7 @@ const assert = require('assert');
 const sinon = require('sinon');
 const myEmitter = require('../myEmitter');
 const db = require('../db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 
 describe('myEmitter', () => {
