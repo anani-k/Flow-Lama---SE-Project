@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --experimental-modules test/db.test.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "node app.js"
   },
   "repository": {
     "type": "git",
