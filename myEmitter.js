@@ -1,7 +1,7 @@
 // myEmitter.js
 
 const EventEmitter = require('events');
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const db = require("./db");
 const {updateGlobalContacts, updateTasks, DatabaseEmitter, fetchAndTransformTasks, fetchAndTransformContacts,
     insertGlobalContacts, getLastContactID
