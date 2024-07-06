@@ -29,7 +29,7 @@ Directory Struktur:
   - app.js: Hauptanwendungsdatei
   - db.js: Datenbanklogik und Schema
   - myEmitter.js: Event emitter for handling Events
-  - routes.js: Route handler für die Anwendungen-
+  - routes.js: Route handler für die Anwendungen
   - views/: EJS templates für die UI
   - public/: Static assets (images, CSS, JavaScript)
 
