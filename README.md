@@ -6,11 +6,11 @@ Das System ermöglicht Benutzern die Registrierung, Anmeldung, so wie Abmeldung 
 
 Features:
   - Benutzerauthentifizierung (registrieren, anmelden, abmelden)
-  - Task managment (erstellen, lesen, aktualisieren, löschen)
-  - Kontakt managment (erstellen, lesen, aktualisieren, löschen)
+  - Taskmanagment (erstellen, lesen, aktualisieren, löschen)
+  - Kontaktmanagment (erstellen, lesen, aktualisieren, löschen)
 
 
-Technologie:
+Technologien:
   - Node.js,
   - Express.js,
   - SQLite,
@@ -19,17 +19,17 @@ Technologie:
 
 Getting Started:
 
-  1. Klone die Repository: https://github.com/anani-k/Flow-Lama---SE-Project
+  1. Klone das Repository: https://github.com/anani-k/Flow-Lama---SE-Project
   2. Installiere die Abhängigkeiten: npm install
   3. Anwendung ausführen: node app.js
-  4. Öffne einen web browser und gehe auf: http://localhost:3000
+  4. Öffne einen Webbrowser und gehe auf: http://localhost:3000
 
 
-Directory Struktur:
+Ordner-Struktur:
   - app.js: Hauptanwendungsdatei
-  - db.js: Datenbanklogik und Schema
-  - myEmitter.js: Event emitter for handling Events
-  - routes.js: Route handler für die Anwendungen
+  - db.js: Datenbanklogik
+  - myEmitter.js: Eventhandler
+  - routes.js: Routehandler für die Anwendung
   - views/: EJS templates für die UI
   - public/: Static assets (images, CSS, JavaScript)
 

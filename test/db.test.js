@@ -1,3 +1,5 @@
+//Hinweis: Testfile nur bei "leerer" Datenbank ausführen
+
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
