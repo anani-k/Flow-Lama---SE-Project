@@ -1,3 +1,5 @@
+//Author Ann-Katrin
+
 // Array mit Beispiel Kontakten
 let sortedContacts = sortContactsByFirstName(globalContacts);
 
