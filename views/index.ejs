@@ -1,46 +1,55 @@
+<!-- Autor: Michelle -->
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome on Flow Lama!</title>
+    <link rel="stylesheet" href="index.css" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Welcome on Flow Lama!</title>
-  <link rel="stylesheet" href="index.css" type="text/css">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
-  <div class="logoContainer">
-    <img class="logo" src="./lama.png" alt="Logo Lama">
-  </div>
-
-
-  <div class="container">
-    <div class="loginBox">
-      <h2>Log in</h2>
-
-      <form id="loginForm" action="/loginTry" method="post">
-        <div class="inputGroup">
-          <input type="username" id="username" name="username" placeholder="User Name" required>
-        </div>
-        <div class="inputGroup">
-          <input type="password" id="password" name="password" placeholder="Password" required>
-        </div>
-        <div class="checkbox">
-          <div class="rememberMe">
-            <input type="checkbox" id="rememberMe" name="rememberMe">
-            <label for="rememberMe">Remember me</label>
-          </div>
-        </div>
-        <div class="buttonContainer">
-          <button type="submit">Log In</button>
-          <a class="signUp" href="signUp" type="submit">Sign Up</a>
-        </div>
-      </form>
+  <body>
+    <div class="logoContainer">
+      <img class="logo" src="./lama.png" alt="Logo Lama" />
     </div>
 
-  </div>
-  <script src="script.js"></script>
-</body>
+    <div class="container">
+      <div class="loginBox">
+        <h2>Log in</h2>
 
+        <form id="loginForm" action="/loginTry" method="post">
+          <div class="inputGroup">
+            <input
+              type="username"
+              id="username"
+              name="username"
+              placeholder="User Name"
+              required
+            />
+          </div>
+          <div class="inputGroup">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="checkbox">
+            <div class="rememberMe">
+              <input type="checkbox" id="rememberMe" name="rememberMe" />
+              <label for="rememberMe">Remember me</label>
+            </div>
+          </div>
+          <div class="buttonContainer">
+            <button type="submit">Log In</button>
+            <a class="signUp" href="signUp" type="submit">Sign Up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -1,3 +1,4 @@
+<!-- Autor: Michelle (Außgenommen backend funktionen) -->
 <!DOCTYPE html>
 <html>
 
@@ -10,6 +11,8 @@
   <link rel="stylesheet" href="boardPopupCard.css" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="array.js"></script>
+
+  <!-- backend -->
   <script src="mailer.js"></script>
   <script>
     let tasksFromServer = <%- updatedtasks %>;
@@ -22,7 +25,7 @@
     GlobalLastId=lastIdFromServer;
     console.log("ER",globalContacts,globalTasks,GlobalLastId)
   </script>
-
+   <!-- backend -->
 
   <script src="board.js"></script>
   <script src="board.html.js"></script>

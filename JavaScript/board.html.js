@@ -1,3 +1,5 @@
+// Autor: Michelle
+
 //Hier sind alle HTML Teile die Js beinhalten
 
 function returnOpenPopup() {

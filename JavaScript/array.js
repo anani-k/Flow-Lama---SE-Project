@@ -1,3 +1,5 @@
+// Autor: Michelle
+
 // array.js
 //Array von dem alle anderen dateien sich ihre infos holen
 

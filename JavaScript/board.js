@@ -1,3 +1,5 @@
+// Autor: Michelle
+
 // Array enthält infos über die daten die später im Board vom Benutzer eingetragen werden.
 //  Gerade sind im Array Test daten(Zum Stylen etc.), sollen später entfernt werden. Erst dann sind von anfangan keine Karten vorhanden.
 let tasks = [];
@@ -45,7 +47,7 @@ function findIndexById(id) {
       return i;
     }
   }
-    return false
+  return false;
 }
 
 //Überprüft die reingegebene Priorität und returned das passende SVG
@@ -112,8 +114,8 @@ function returnContactIcon(i) {
         content.innerHTML += /*html*/ `
     <!-- nimmt die ersten beiden buchstaben des Vor- und Nachnamen -->
       <div style="background-color: ${
-            contacts[findIndexById(userID)].color
-        };">${contacts[findIndexById(userID)].initials}</div>`;
+        contacts[findIndexById(userID)].color
+      };">${contacts[findIndexById(userID)].initials}</div>`;
       }
     }
 
@@ -124,8 +126,8 @@ function returnContactIcon(i) {
       if (findIndexById(userID) !== false) {
         content.innerHTML += /*html*/ `
       <div style="background-color: ${
-            contacts[findIndexById(userID)].color
-        };">${contacts[findIndexById(userID)].initials}</div>`;
+        contacts[findIndexById(userID)].color
+      };">${contacts[findIndexById(userID)].initials}</div>`;
       }
     }
     content.innerHTML += /*html*/ `
@@ -594,7 +596,6 @@ function logFormInputs(event) {
   globalTasks = tasks;
   this.generateCard();
   this.closePopup();
-
 }
 
 //Funktion setzt, beim drücken des Clear Buttons die Inhalte zurück
@@ -687,7 +688,6 @@ function editFormInputs(event, i) {
   globalTasks = tasks;
   this.generateCard();
   this.closePopup();
-
 }
 
 function toggleDropdownAssignedToEdit() {
