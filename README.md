@@ -21,8 +21,9 @@ Getting Started:
 
   1. Klone das Repository: https://github.com/anani-k/Flow-Lama---SE-Project
   2. Installiere die Abhängigkeiten: npm install
-  3. Anwendung ausführen: node app.js
-  4. Öffne einen Webbrowser und gehe auf: http://localhost:3000
+  3. gegebenenfalls Module reparieren (Schwierigkeiten zwischen Windows und MacOS): npm rebuild
+  4. Anwendung ausführen: node app.js
+  5. Öffne einen Webbrowser und gehe auf: http://localhost:3000
 
 
 Ordner-Struktur:
